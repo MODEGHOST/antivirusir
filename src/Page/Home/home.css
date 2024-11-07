@@ -1,0 +1,162 @@
+/*** Carousel Hero Header Start ***/
+
+.carousel-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-indicators {
+    display: none;
+}
+
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+    width: 0;
+}
+
+.carousel .carousel-control-prev .carousel-control-prev-icon,
+.carousel .carousel-control-next .carousel-control-next-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 25px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bs-primary);
+    transition: 0.5s;
+}
+
+.carousel .carousel-control-prev .carousel-control-prev-icon {
+    left: 0;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.carousel .carousel-control-next .carousel-control-next-icon {
+    right: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.carousel .carousel-control-prev .carousel-control-prev-icon:hover,
+.carousel .carousel-control-next .carousel-control-next-icon:hover {
+    background: var(--bs-secondary);
+}
+
+.carousel .carousel-inner .carousel-item {
+    position: relative;
+}
+
+.carousel .carousel-inner .carousel-item .carousel-caption-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+}
+
+.carousel-caption-1-content {
+    text-align: end;
+    padding-right: 100px;
+}
+
+.carousel-caption-1-content .carousel-caption-1-content-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.carousel .carousel-inner .carousel-item .carousel-caption-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+}
+
+.carousel-caption-2-content {
+    text-align: start;
+    padding-left: 100px;
+}
+
+.carousel-caption-2-content .carousel-caption-2-content-btn {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Boxsharecard Positioning */
+.box-card-container {
+    position: absolute;
+    bottom: 180px; /* ระยะห่างจากด้านล่าง */
+    left: 50px;   /* ระยะห่างจากด้านซ้าย */
+    z-index: 10;  /* ให้อยู่ด้านหน้า */
+}
+.carousel .carousel-inner .carousel-item img {
+    height: 850px;
+    object-fit: cover;
+}
+
+/*** Responsive Carousel ***/
+@media (max-width: 992px) {
+    .carousel .carousel-inner .carousel-item {
+        height: 700px;
+        margin-top: -100px;
+    }
+
+    .carousel .carousel-inner .carousel-item img {
+        height: 700px;
+        object-fit: cover;
+    }
+
+    .carousel .carousel-inner .carousel-item .carousel-caption-1 {
+        max-width: 100% !important;
+        justify-content: center;
+    }
+
+    .carousel-caption-1-content {
+        padding: 0 20px !important;
+        text-align: center !important;
+    }
+
+    .carousel-caption-1-content .carousel-caption-1-content-btn {
+        justify-content: center;
+    }
+
+    .carousel .carousel-inner .carousel-item .carousel-caption-2 {
+        max-width: 100% !important;
+        justify-content: center;
+    }
+
+    .carousel-caption-2-content {
+        padding: 0 20px !important;
+        text-align: center !important;
+    }
+
+    .carousel-caption-2-content .carousel-caption-2-content-btn {
+        justify-content: center;
+    }
+
+    .carousel .carousel-control-prev .carousel-control-prev-icon,
+    .carousel .carousel-control-next .carousel-control-next-icon {
+        display: none;
+    }
+
+    .box-card-container {
+        left: 10px;   /* ปรับระยะห่างจากด้านซ้ายเมื่อหน้าจอเล็กลง */
+        bottom: 10px; /* ปรับระยะห่างจากด้านล่างเมื่อหน้าจอเล็กลง */
+    }
+    
+}
+/*** Carousel Hero Header End ***/
