@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Tradecard.js.css'; // สไตล์ของ BoxCard จะอยู่ในไฟล์นี้
+import './Tradecard.css'; // สไตล์ของ BoxCard จะอยู่ในไฟล์นี้
 
 function BoxCard({  realPrice = 39.42, change, changePercent, volume, updatedAt }) {
   const [price, setPrice] = useState(39.42); // กำหนดราคาเริ่มต้นเป็น 39.42

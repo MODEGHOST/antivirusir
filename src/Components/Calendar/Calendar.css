@@ -1,0 +1,72 @@
+.calendar-container {
+    background-color: #007bff; /* สีพื้นหลัง */
+    color: white; /* สีข้อความ */
+    border-radius: 15px; /* มุมโค้ง */
+    padding: 20px; /* การเว้นวรรคภายใน */
+    width: 00px; /* กว้าง */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* เงา */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between; /* ให้มีพื้นที่ระหว่าง */
+    align-items: center; /* จัดกลางในแนวตั้ง */
+    margin-bottom: 15px; /* การเว้นวรรคด้านล่าง */
+}
+
+.nav-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 วันในหนึ่งสัปดาห์ */
+    gap: 5px; /* ระยะห่างระหว่างช่อง */
+}
+
+.calendar-cell {
+    background-color: rgba(255, 255, 255, 0.2); /* สีพื้นหลังช่อง */
+    padding: 15px;
+    text-align: center; /* จัดกลางข้อความ */
+    border-radius: 8px; /* มุมโค้ง */
+    transition: background-color 0.3s ease; /* การเปลี่ยนแปลงพื้นหลัง */
+}
+
+.calendar-cell:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* สีพื้นหลังเมื่อชี้เมาส์ */
+}
+
+.has-event {
+    background-color: #e84141; /* สีพื้นหลังสำหรับวันมีเหตุการณ์ */
+}
+
+
+.event-item {
+    background-color: rgba(255, 255, 255, 0.2); /* สีพื้นหลังสำหรับเหตุการณ์ */
+    padding: 10px;
+    border-radius: 8px; /* มุมโค้ง */
+    margin: 5px 0; /* การเว้นวรรคด้านบนและด้านล่าง */
+}
+
+.event-date {
+    font-weight: bold; /* ตัวหนาสำหรับวันที่ */
+}
+
+.event-title {
+    display: block; /* แสดงในบรรทัดใหม่ */
+    margin-top: 5px; /* การเว้นวรรคด้านบน */
+}
+
+
+.calendar-container {
+    background-color: #007bff; /* สีพื้นหลัง */
+    color: white; /* สีข้อความ */
+    border-radius: 15px; /* มุมโค้ง */
+    padding: 20px; /* การเว้นวรรคภายใน */
+    width: 100%; /* เปลี่ยนเป็น 100% เพื่อให้เต็มที่ */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* เงา */
+}

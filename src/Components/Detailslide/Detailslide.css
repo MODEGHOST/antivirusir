@@ -1,0 +1,37 @@
+.flippable-image-container {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .flippable-image-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .flippable-image-container:hover .flippable-image-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flippable-image-front,
+  .flippable-image-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+  }
+  
+  .flippable-image-back {
+    transform: rotateY(180deg);
+    background: #2d2d8b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

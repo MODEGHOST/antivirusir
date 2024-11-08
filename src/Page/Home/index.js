@@ -1,12 +1,16 @@
 import React from 'react'
 import Tradecard from '../../Components/TradeCard/Tradecard'
+import DetailSlide from '../../Components/Detailslide/Detailslide'
+import Calendar from '../../Components/Calendar/Calendar'
 import './home.css'
+
 
 
 function index() {
   return (
     <div>
       <div>
+{/* ส่วนที่1 */}
         <div className="carousel-header">
             <div id="carouselId" className="carousel slide" data-bs-ride="carousel">
                 <ol className="carousel-indicators">
@@ -70,7 +74,7 @@ function index() {
                 </button>
             </div>
         </div>
-
+{/* ส่วนที่2 */}
         <div className="container-fluid feature bg-light py-5">
     <div className="container py-5">
       <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
@@ -87,8 +91,8 @@ function index() {
                 className="img-fluid" 
                 // style={{ borderRadius: '50%', width: '80px', height: '80px' }}  กรอกรอบวง
             />
-        </div>
-            <a href="#" className="h4 mb-3">ข่าวหุ้น</a>
+          </div>
+            <a href="#" className="h4 mb-3">ข่าวหุ้น วันที่</a>
             <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero repellat deleniti necessitatibus</p>
             <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
           </div>
@@ -120,60 +124,63 @@ function index() {
       </div>
     </div>
         </div>
-
-        <div className="container-fluid about overflow-hidden py-5">
-    <div className="container py-5">
-      <div className="row g-5">
-        <div className="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
-          <div className="about-img rounded h-100">
-            <img src="img/about.jpg" className="img-fluid rounded h-100 w-100" style={{objectFit: 'cover'}} alt />
-            <div className="about-exp"><span>20 Years Experiance</span></div>
+{/* ส่วนที่3 */}
+<div className="container-fluid about overflow-hidden py-5">
+      <div className="container py-5">
+        <div className="row g-5">
+          <div className="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+            
+              {/* Replace the img tag with DetailSlide component */}
+              <DetailSlide selectedTitle="แบบ 56-1" />
+            
           </div>
-        </div>
-        <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
-          <div className="about-item">
-            <h4 className="text-primary text-uppercase">About Us</h4>
-            <h1 className="display-3 mb-3">We Deliver The Quality Water.</h1>
-            <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum quidem quas totam nostrum! Maxime rerum voluptatem sed, facilis unde a aperiam nulla voluptatibus excepturi ipsam iusto consequuntur
-            </p>
-            <div className="bg-light rounded p-4 mb-4">
-              <div className="row">
-                <div className="col-12">
-                  <div className="d-flex">
-                    <div className="pe-4">
-                      <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}><i className="fas fa-tint text-white fa-2x" /></div>
-                    </div>
-                    <div className>
-                      <a href="#" className="h4 d-inline-block mb-3">Satisfied Customer</a>
-                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-light rounded p-4 mb-4">
-              <div className="row">
-                <div className="col-12">
-                  <div className="d-flex">
-                    <div className="pe-4">
-                      <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}><i className="fas fa-faucet text-white fa-2x" /></div>
-                    </div>
-                    <div className>
-                      <a href="#" className="h4 d-inline-block mb-3">Standard Product</a>
-                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+          <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+            <div className="about-item">
+              <h4 className="text-primary text-uppercase">เอกสาร ดาวน์โหลด</h4>
+              <h1 className="display-3 mb-3">ข้อความ</h1>
+              <p className="mb-4">รายละเอียด</p>
+              <div className="bg-light rounded p-4 mb-4">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="d-flex">
+                      <div className="pe-4">
+                        <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}>
+                          <i className="fas fa-tint text-white fa-2x" />
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" className="h4 d-inline-block mb-3">Satisfied Customer</a>
+                        <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="bg-light rounded p-4 mb-4">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="d-flex">
+                      <div className="pe-4">
+                        <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}>
+                          <i className="fas fa-faucet text-white fa-2x" />
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" className="h4 d-inline-block mb-3">Standard Product</a>
+                        <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a href="#" className="btn btn-secondary rounded-pill py-3 px-5">Read More</a>
             </div>
-            <a href="#" className="btn btn-secondary rounded-pill py-3 px-5">Read More</a>
           </div>
         </div>
       </div>
     </div>
-        </div>
-
-        <div className="container-fluid counter py-5">
+{/* ส่วนที่4 */}
+        {/* <div className="container-fluid counter py-5">
     <div className="container py-5">
       <div className="row g-5">
         <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
@@ -226,163 +233,164 @@ function index() {
         </div>
       </div>
     </div>
+        </div> */}
+{/* ส่วนที่5 */}
+<div className="container-fluid service bg-light overflow-hidden py-5">
+      <div className="container py-5">
+        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{ maxWidth: 800 }}>
+          {/* <h4 className="text-uppercase text-primary">Our Service</h4> */}
+          <h1 className="display-3 text-capitalize mb-3">ปฏิทินกิจกรรม</h1>
         </div>
-
-        <div className="container-fluid service bg-light overflow-hidden py-5">
-    <div className="container py-5">
-      <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-        <h4 className="text-uppercase text-primary">Our Service</h4>
-        <h1 className="display-3 text-capitalize mb-3">Protect Your Family with Best Water</h1>
-      </div>
-      <div className="row gx-0 gy-4 align-items-center">
-        <div className="col-lg-6 col-xl-4 wow fadeInLeft" data-wow-delay="0.2s">
-          <div className="service-item rounded p-4 mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="service-content text-end">
-                    <a href="#" className="h4 d-inline-block mb-3">Residential Waters</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+        <div className="row gx-0 gy-4 align-items-center">
+          <div className="col-lg-6 col-xl-4 wow fadeInLeft" data-wow-delay="0.2s">
+            <div className="service-item rounded p-4 mb-4">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="service-content text-end">
+                      <a href="#" className="h4 d-inline-block mb-3">Residential Waters</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
+                    <div className="ps-4">
+                      <div className="service-btn"><i className="fas fa-hand-holding-water text-white fa-2x" /></div>
+                    </div>
                   </div>
-                  <div className="ps-4">
-                    <div className="service-btn"><i className="fas fa-hand-holding-water text-white fa-2x" /></div>
+                </div>
+              </div>
+            </div>
+            <div className="service-item rounded p-4 mb-4">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="service-content text-end">
+                      <a href="#" className="h4 d-inline-block mb-3">Commercial Waters</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
+                    <div className="ps-4">
+                      <div className="service-btn"><i className="fas fa-dumpster-fire text-white fa-2x" /></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="service-item rounded p-4 mb-0">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="service-content text-end">
+                      <a href="#" className="h4 d-inline-block mb-3">Filtration Plants</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
+                    <div className="ps-4">
+                      <div className="service-btn"><i className="fas fa-filter text-white fa-2x" /></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="service-item rounded p-4 mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="service-content text-end">
-                    <a href="#" className="h4 d-inline-block mb-3">Commercial Waters</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                  </div>
-                  <div className="ps-4">
-                    <div className="service-btn"><i className="fas fa-dumpster-fire text-white fa-2x" /></div>
+          <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+            <div className="bg-transparent">
+              <Calendar /> {/* แทนที่ img ด้วยปฏิทิน */}
+            </div>
+          </div>
+          <div className="col-lg-6 col-xl-4 wow fadeInRight" data-wow-delay="0.2s">
+            <div className="service-item rounded p-4 mb-4">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="pe-4">
+                      <div className="service-btn"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
+                    </div>
+                    <div className="service-content">
+                      <a href="#" className="h4 d-inline-block mb-3">Water Softening</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="service-item rounded p-4 mb-0">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="service-content text-end">
-                    <a href="#" className="h4 d-inline-block mb-3">Filtration Plants</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                  </div>
-                  <div className="ps-4">
-                    <div className="service-btn"><i className="fas fa-filter text-white fa-2x" /></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
-          <div className="bg-transparent">
-            <img src="img/water.png" className="img-fluid w-100" alt />
-          </div>
-        </div>
-        <div className="col-lg-6 col-xl-4 wow fadeInRight" data-wow-delay="0.2s">
-          <div className="service-item rounded p-4 mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="pe-4">
-                    <div className="service-btn"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
-                  </div>
-                  <div className="service-content">
-                    <a href="#" className="h4 d-inline-block mb-3">Water Softening</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+            <div className="service-item rounded p-4 mb-4">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="pe-4">
+                      <div className="service-btn"><i className="fas fa-recycle text-white fa-2x" /></div>
+                    </div>
+                    <div className="service-content">
+                      <a href="#" className="h4 d-inline-block mb-3">Market Research</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="service-item rounded p-4 mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="pe-4">
-                    <div className="service-btn"><i className="fas fa-recycle text-white fa-2x" /></div>
-                  </div>
-                  <div className="service-content">
-                    <a href="#" className="h4 d-inline-block mb-3">Market Research</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="service-item rounded p-4 mb-0">
-            <div className="row">
-              <div className="col-12">
-                <div className="d-flex">
-                  <div className="pe-4">
-                    <div className="service-btn"><i className="fas fa-project-diagram text-white fa-2x" /></div>
-                  </div>
-                  <div className="service-content">
-                    <a href="#" className="h4 d-inline-block mb-3">Project Planning</a>
-                    <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+            <div className="service-item rounded p-4 mb-0">
+              <div className="row">
+                <div className="col-12">
+                  <div className="d-flex">
+                    <div className="pe-4">
+                      <div className="service-btn"><i className="fas fa-project-diagram text-white fa-2x" /></div>
+                    </div>
+                    <div className="service-content">
+                      <a href="#" className="h4 d-inline-block mb-3">Project Planning</a>
+                      <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-        </div>
-
-        <div className="container-fluid product py-5">
-    <div className="container py-5">
-      <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-        <h4 className="text-uppercase text-primary">Our Products</h4>
-        <h1 className="display-3 text-capitalize mb-3">We Deliver Best Quality Bottle Packs.</h1>
-      </div>
-      <div className="row g-4 justify-content-center">
-        <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
-          <div className="product-item">
-            <img src="img/product-3.png" className="img-fluid w-100 rounded-top" alt="Image" />
-            <div className="product-content bg-light text-center rounded-bottom p-4">
-              <p>2L 1 Bottle</p>
-              <a href="#" className="h4 d-inline-block mb-3">Mineral Water Bottle</a>
-              <p className="fs-4 text-primary mb-3">$35:00</p>
-              <a href="#" className="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
-          <div className="product-item">
-            <img src="img/product-2.png" className="img-fluid w-100 rounded-top" alt="Image" />
-            <div className="product-content bg-light text-center rounded-bottom p-4">
-              <p>4L 2 Bottles</p>
-              <a href="#" className="h4 d-inline-block mb-3">RO Water Bottle</a>
-              <p className="fs-4 text-primary mb-3">$70:00</p>
-              <a href="#" className="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-          <div className="product-item">
-            <img src="img/product-1.png" className="img-fluid w-100 rounded-top" alt="Image" />
-            <div className="product-content bg-light text-center rounded-bottom p-4">
-              <p>6L 3 Bottles</p>
-              <a href="#" className="h4 d-inline-block mb-3">UV Water Bottle</a>
-              <p className="fs-4 text-primary mb-3">$100:00</p>
-              <a href="#" className="btn btn-secondary rounded-pill py-2 px-4">Read More</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+{/* ส่วนที่6 */}
+<div className="container-fluid product py-5">
+    <div className="container py-5">
+        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
+            <h4 className="text-uppercase text-primary">Our Products</h4>
+            <h1 className="display-3 text-capitalize mb-3">รายชื่อนักวิเคราะห์</h1>
         </div>
+        <div className="row g-4 justify-content-center">
+            <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div className="product-item d-flex align-items-center text-center">
+                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
+                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 1" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                    </div>
+                    <div className="product-details">
+                        <h5 className="text-dark">นักลงทุนชนะ100%</h5>
+                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
+                    </div>
+                </div>
+            </div>
+            <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div className="product-item d-flex align-items-center text-center">
+                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
+                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 2" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                    </div>
+                    <div className="product-details">
+                        <h5 className="text-dark">นักลงทุนชนะ80%</h5>
+                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
+                    </div>
+                </div>
+            </div>
+            <div className="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div className="product-item d-flex align-items-center text-center">
+                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
+                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 3" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                    </div>
+                    <div className="product-details">
+                        <h5 className="text-dark">นักลงทุนชนะ70%</h5>
+                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <div className="container-fluid blog pb-5">
+{/* ส่วนที่7 */}
+        {/* <div className="container-fluid blog pb-5">
     <div className="container pb-5">
       <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
         <h4 className="text-uppercase text-primary">Our Blog</h4>
@@ -430,189 +438,55 @@ function index() {
         </div>
       </div>
     </div>
+        </div> */}
+{/* ส่วนที่8 */}
+<div className="container-fluid team pb-5">
+    <div className="container pb-5">
+        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
+            <h4 className="text-uppercase text-primary">Our Team</h4>
+            <h1 className="display-3 text-capitalize mb-3">มาตราฐานบริษัท</h1>
         </div>
+        <div className="row g-4 justify-content-center">
+            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <img src={`${process.env.PUBLIC_URL}/assest/img/CAC.png`} className="img-fluid rounded-circle" alt="Image" style={{width: '150px', height: '150px', objectFit: 'cover'}} />
+            </div>
+            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <img src={`${process.env.PUBLIC_URL}/assest/img/ukas_9001.png`} className="img-fluid " alt="Image" style={{ objectFit: 'cover'}} />
+            </div>
+            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <img src={`${process.env.PUBLIC_URL}/assest/img/ukas_14001.png`} className="img-fluid " alt="Image" style={{objectFit: 'cover'}} />
+            </div>
+            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <img src={`${process.env.PUBLIC_URL}/assest/img/URS_CER.png`} className="img-fluid " alt="Image" style={{ objectFit: 'cover'}} />
+            </div>
+        </div>
+    </div>
+</div>
 
-        <div className="container-fluid team pb-5">
+{/* ส่วนที่9 */}
+<div className="container-fluid contact pb-5">
     <div className="container pb-5">
-      <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-        <h4 className="text-uppercase text-primary">Our Team</h4>
-        <h1 className="display-3 text-capitalize mb-3">What is Really seo &amp; How Can I Use It?</h1>
-      </div>
-      <div className="row g-4">
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-          <div className="team-item p-4">
-            <div className="team-inner rounded">
-              <div className="team-img">
-                <img src="img/team-1.jpg" className="img-fluid rounded-top w-100" alt="Image" />
-                <div className="team-share">
-                  <a className="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href><i className="fas fa-share-alt" /></a>
-                </div>
-                <div className="team-icon rounded-pill py-2 px-2">
-                  <a className="btn btn-secondary btn-sm-square rounded-pill mx-1" href><i className="fab fa-facebook-f" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-twitter" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-linkedin-in" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-instagram" /></a>
-                </div>
-              </div>
-              <div className="bg-light rounded-bottom text-center py-4">
-                <h4 className="mb-3">Hard Branots</h4>
-                <p className="mb-0">CEO &amp; Founder</p>
-              </div>
-            </div>
-          </div>
+        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
+            <h4 className="text-uppercase text-primary">Contact Us</h4>
         </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-          <div className="team-item p-4">
-            <div className="team-inner rounded">
-              <div className="team-img">
-                <img src="img/team-2.jpg" className="img-fluid rounded-top w-100" alt="Image" />
-                <div className="team-share">
-                  <a className="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href><i className="fas fa-share-alt" /></a>
+        <div className="row">
+            <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div className="map" style={{height: '400px', borderRadius: '10px', overflow: 'hidden'}}>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799013665!2d100.3045126!3d13.6988784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e295f844ebe5bf%3A0xc56d7fbaa1c9acf5!2sThairung%20Union%20Car!5e0!3m2!1sen!2sth!4v1699836854521!5m2!1sen!2sth&z=16" 
+                        width="100%" 
+                        height="400" 
+                        style={{border: 0}} 
+                        allowFullScreen="" 
+                        aria-hidden="false" 
+                        tabIndex="0">
+                    </iframe>
                 </div>
-                <div className="team-icon rounded-pill py-2 px-2">
-                  <a className="btn btn-secondary btn-sm-square rounded-pill mx-1" href><i className="fab fa-facebook-f" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-twitter" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-linkedin-in" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-instagram" /></a>
-                </div>
-              </div>
-              <div className="bg-light rounded-bottom text-center py-4">
-                <h4 className="mb-3">Hard Branots</h4>
-                <p className="mb-0">CEO &amp; Founder</p>
-              </div>
             </div>
-          </div>
         </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-          <div className="team-item p-4">
-            <div className="team-inner rounded">
-              <div className="team-img">
-                <img src="img/team-3.jpg" className="img-fluid rounded-top w-100" alt="Image" />
-                <div className="team-share">
-                  <a className="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href><i className="fas fa-share-alt" /></a>
-                </div>
-                <div className="team-icon rounded-pill py-2 px-2">
-                  <a className="btn btn-secondary btn-sm-square rounded-pill mx-1" href><i className="fab fa-facebook-f" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-twitter" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-linkedin-in" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-instagram" /></a>
-                </div>
-              </div>
-              <div className="bg-light rounded-bottom text-center py-4">
-                <h4 className="mb-3">Hard Branots</h4>
-                <p className="mb-0">CEO &amp; Founder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-          <div className="team-item p-4">
-            <div className="team-inner rounded">
-              <div className="team-img">
-                <img src="img/team-4.jpg" className="img-fluid rounded-top w-100" alt="Image" />
-                <div className="team-share">
-                  <a className="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href><i className="fas fa-share-alt" /></a>
-                </div>
-                <div className="team-icon rounded-pill py-2 px-2">
-                  <a className="btn btn-secondary btn-sm-square rounded-pill mx-1" href><i className="fab fa-facebook-f" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-twitter" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-linkedin-in" /></a>
-                  <a className="btn btn-secondary btn-sm-square rounded-pill me-1" href><i className="fab fa-instagram" /></a>
-                </div>
-              </div>
-              <div className="bg-light rounded-bottom text-center py-4">
-                <h4 className="mb-3">Hard Branots</h4>
-                <p className="mb-0">CEO &amp; Founder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-        </div>
- 
-        <div className="container-fluid testimonial pb-5">
-    <div className="container pb-5">
-      <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-        <h4 className="text-uppercase text-primary">Testimonials</h4>
-        <h1 className="display-3 text-capitalize mb-3">Our clients reviews.</h1>
-      </div>
-      <div className="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.3s">
-        <div className="testimonial-item text-center p-4">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt pariatur officiis quis molestias, sit iure sunt voluptatibus accusantium laboriosam dolore.
-          </p>
-          <div className="d-flex justify-content-center mb-4">
-            <img src="img/testimonial-1.jpg" className="img-fluid border border-4 border-primary" style={{width: 100, height: 100, borderRadius: 50}} alt />
-          </div>
-          <div className="d-block">
-            <h4 className="text-dark">Client Name</h4>
-            <p className="m-0 pb-3">Profession</p>
-            <div className="d-flex justify-content-center text-secondary">
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-            </div>
-          </div>
-        </div>
-        <div className="testimonial-item text-center p-4">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt pariatur officiis quis molestias, sit iure sunt voluptatibus accusantium laboriosam dolore.
-          </p>
-          <div className="d-flex justify-content-center mb-4">
-            <img src="img/testimonial-2.jpg" className="img-fluid border border-4 border-primary" style={{width: 100, height: 100, borderRadius: 50}} alt />
-          </div>
-          <div className="d-block">
-            <h4 className="text-dark">Client Name</h4>
-            <p className="m-0 pb-3">Profession</p>
-            <div className="d-flex justify-content-center text-secondary">
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-            </div>
-          </div>
-        </div>
-        <div className="testimonial-item text-center p-4">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt pariatur officiis quis molestias, sit iure sunt voluptatibus accusantium laboriosam dolore.
-          </p>
-          <div className="d-flex justify-content-center mb-4">
-            <img src="img/testimonial-3.jpg" className="img-fluid border border-4 border-primary" style={{width: 100, height: 100, borderRadius: 50}} alt />
-          </div>
-          <div className="d-block">
-            <h4 className="text-dark">Client Name</h4>
-            <p className="m-0 pb-3">Profession</p>
-            <div className="d-flex justify-content-center text-secondary">
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-            </div>
-          </div>
-        </div>
-        <div className="testimonial-item text-center p-4">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt pariatur officiis quis molestias, sit iure sunt voluptatibus accusantium laboriosam dolore.
-          </p>
-          <div className="d-flex justify-content-center mb-4">
-            <img src="img/testimonial-3.jpg" className="img-fluid border border-4 border-primary" style={{width: 100, height: 100, borderRadius: 50}} alt />
-          </div>
-          <div className="d-block">
-            <h4 className="text-dark">Client Name</h4>
-            <p className="m-0 pb-3">Profession</p>
-            <div className="d-flex justify-content-center text-secondary">
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-              <i className="fas fa-star" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-        </div>
+</div>
+
     </div>
 </div>
   )
