@@ -1,69 +1,83 @@
 .box-card {
-    background-color: #1A1A2E; /* สีน้ำเงินอ่อน */
-    color: white; /* สีข้อความ */
-    border-radius: 15px; /* มุมโค้ง */
-    padding: 20px; /* การเว้นวรรคภายใน */
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* เงา */
-    width: 350px; /* กว้าง */
+    background-color: #1A1A2E;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    width: 350px;
     display: flex;
-    flex-direction: column; /* จัดเรียงในแนวตั้ง */
-    margin: 10px; /* การเว้นวรรครอบๆ */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* เพิ่มการเปลี่ยนแปลง */
+    flex-direction: column;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .box-card:hover {
-    transform: scale(1.05); /* ขยายขนาดเมื่อชี้เมาส์ */
-    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5); /* เงาที่เข้มขึ้นเมื่อชี้เมาส์ */
+    transform: scale(1.05);
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);
 }
-
 
 .box-card-header {
     display: flex;
-    justify-content: space-between; /* ให้มีพื้นที่ระหว่างชื่อหุ้นและราคา */
-    align-items: center; /* จัดกลางในแนวตั้ง */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .box-card-footer {
-    margin-top: auto; 
-    font-size: 0.9rem; 
-    text-align: right; 
+    margin-top: auto;
+    font-size: 0.9rem;
+    text-align: right;
 }
 
 .header-row {
-    display: flex; 
-    justify-content: space-between; 
-    width: 100%; 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .price {
-    font-size: 2rem; 
-    font-weight: bold; 
-    margin-top: 0px; 
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .change-info {
-    margin-top: 10px; 
-    display: flex; /* ใช้ flexbox ในการจัดเรียง */
-    justify-content: space-between; /* จัดให้มีพื้นที่ระหว่าง */
-    width: 100%; /* ให้พื้นที่เต็มที่ */
-    font-size: 1.2rem; /* ขนาดฟอนต์สำหรับการเปลี่ยนแปลง เพิ่มขนาดให้เด่นขึ้น */
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.2rem;
 }
 
 .change {
-    font-size: 1.2rem; /* ขนาดฟอนต์สำหรับการเปลี่ยนแปลง เพิ่มขนาดให้เด่นขึ้น */
+    font-size: 1.2rem;
 }
 
 .positive {
-    color: #28a745; /* สีเขียวสำหรับการเปลี่ยนแปลงที่เพิ่มขึ้น */
+    color: #28a745;
 }
 
 .negative {
-    color: #dc3545; /* สีแดงสำหรับการเปลี่ยนแปลงที่ลดลง */
+    color: #dc3545;
 }
 
 .volume-info {
-    margin-top: 10px; /* การเว้นวรรคด้านบน */
-    display: flex; /* ใช้ flexbox ในการจัดเรียง */
-    justify-content: space-between; /* จัดให้มีพื้นที่ระหว่าง */
-    width: 100%; /* ให้พื้นที่เต็มที่ */
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .box-card {
+        width: 100%; /* Make the card full-width on smaller screens */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .price {
+        font-size: 1.5rem; /* Reduce the font size of price */
+    }
+
+    .change-info, .volume-info {
+        flex-direction: column; /* Stack the change and volume info vertically */
+    }
 }

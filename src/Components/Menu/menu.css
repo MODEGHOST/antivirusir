@@ -1,0 +1,154 @@
+.navbar-custom {
+    background: linear-gradient(to right, #5836f1, #1ef7f7); /* Gradient สี */
+    padding: 5px 10px; /* ลด padding เพื่อลดขนาดของ navbar */
+    max-width: 400px; /* กำหนดความกว้างสูงสุดของ navbar */
+    position: fixed; /* ทำให้ navbar ติดขอบ */
+    right: 40px; /* จัดตำแหน่งให้ navbar อยู่ชิดขวา */
+    top: 0; /* อยู่ที่ด้านบนสุด */
+    z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
+    width: 100%; /* เพิ่ม width เป็น 100% เพื่อให้ navbar ยืดขยายจนถึงขอบขวา */
+    margin-top: 50px;
+    border-radius: 230px;
+  }
+  
+  .navbar-container {
+    width: 100%; /* ใช้ความกว้างเต็มที่ */
+    max-width: 400px; /* กำหนดความกว้างสูงสุดของ navbar */
+    margin: 0; /* ไม่ให้มี margin */
+    padding: 0; /* ไม่มี padding */
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* จัดให้ช่องค้นหาหรือปุ่มอยู่ทางขวา */
+  }
+  
+  .search-input {
+    width: 200px; /* ขยายช่องค้นหา */
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่างช่องค้นหาและปุ่ม */
+    border-radius: 40px;
+  }
+  
+  .search-button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+  }
+  
+  .language-btn, .menu-btn {
+    color: white;
+    margin-left: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+  
+  .language-btn:hover, .menu-btn:hover {
+    color: #ddd;
+    text-decoration: underline;
+  }
+  
+  /* เมนูย่อย */
+  .menu-dropdown {
+    background: url(../../../public/assest/img/nakrong.png);
+    background-size: cover;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 1500px;
+    height: 700px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+    z-index: 1; /* ลดค่า z-index */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    visibility: hidden; /* เปลี่ยนเป็น 'hidden' เมื่อเมนูปิด */
+    opacity: 0; /* ซ่อนเมนูเมื่อปิด */
+    transition: visibility 0s, opacity 0.3s ease; /* เพิ่มการเลื่อนการเปลี่ยนแปลง */
+  }
+  
+  .menu-dropdown.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  
+  .menu-dropdown::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* เพิ่มสีทึบให้กับพื้นหลังเพื่อทำให้ตัวหนังสือเด่น */
+    border-radius: 8px;
+    z-index: -1; /* เพื่อให้เลเยอร์นี้อยู่ด้านหลังของข้อความ */
+  }
+  
+  .menu-column {
+    flex: 1; /* ให้แต่ละคอลัมน์ใช้พื้นที่เท่ากัน */
+    padding: 0 20px;
+  }
+  
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-dropdown ul li {
+    padding: 10px 20px;
+  }
+  
+  .menu-column ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    font-weight: bold; /* ทำให้ข้อความหนาขึ้น */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* เพิ่มเงาให้ข้อความเพื่อให้เด่น */
+  }  
+  .menu-btn {
+    color: white;
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+  
+  .menu-btn:hover {
+    color: #ddd;
+    text-decoration: none;
+  }
+  
+  /* สำหรับมือถือ */
+  @media (max-width: 768px) {
+    .menu-dropdown {
+      flex-direction: column; /* ปรับแนวให้เมนูย่อยในแนวตั้งสำหรับมือถือ */
+    }
+  
+    .menu-column {
+      padding: 0 10px;
+    }
+    
+    .menu-dropdown ul li {
+      padding: 5px 0;
+    }
+  }
+  
+  
+  @media (max-width: 768px) {
+    .search-input {
+      width: 150px; /* ลดขนาดช่องค้นหาบนมือถือ */
+    }
+  
+    .navbar-custom {
+      padding: 5px 10px; /* ปรับ padding ให้เหมาะสมบนมือถือ */
+    }
+  
+    .search-form {
+      justify-content: flex-start; /* จัดให้ช่องค้นหาหรือปุ่มอยู่ด้านซ้ายบนมือถือ */
+    }
+  }
+  
