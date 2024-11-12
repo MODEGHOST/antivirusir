@@ -13,8 +13,8 @@ function index() {
       <div>
         
 {/* ส่วนที่1 */}
-< Menu />
-        <div className="carousel-header">
+{/* < Menu /> */}
+        <div className="carousel-header ">
             <div id="carouselId" className="carousel slide" data-bs-ride="carousel">
                 <ol className="carousel-indicators">
                     <li data-bs-target="#carouselId" data-bs-slide-to="0" className="active"></li>

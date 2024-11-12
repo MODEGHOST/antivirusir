@@ -1,0 +1,14 @@
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.sticky-service {
+    position: sticky;
+    top: 0; /* ปรับค่านี้ได้ตามต้องการ */
+    z-index: -3; /* ทำให้มันอยู่เหนือส่วนก่อนหน้า */
+  }
+
+
+  
