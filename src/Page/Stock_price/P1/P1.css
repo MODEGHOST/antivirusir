@@ -1,0 +1,9 @@
+.sticky-service {
+    position: sticky;
+    top: 0; /* ปรับค่านี้ได้ตามต้องการ */
+    z-index: -1; /* ทำให้มันอยู่เหนือส่วนก่อนหน้า */
+  }
+
+  .Table-1{
+    background-color: rgb(255, 255, 255);
+  }

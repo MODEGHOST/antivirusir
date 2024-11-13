@@ -12,7 +12,7 @@ const CustomMenu = () => {
   const toggleMenu = () => setMenuOpen(prevMenuOpen => !prevMenuOpen); // แก้ไขให้การสลับสถานะทำงานได้อย่างถูกต้อง
 
   return (
-    <Navbar expand="lg" className="navbar-custom wow fadeInUp" data-wow-delay="0.2s">
+    <Navbar expand="lg" className="navbar-custom" >
       <Container className="navbar-container"> {/* กำหนดขนาดของ Container */}
       <Navbar.Brand className="brand-container">
       <Link to="/" className="text-white">
@@ -52,8 +52,8 @@ const CustomMenu = () => {
                 <a className="text-white d-block py-2 px-3 ">ข้อมูลทางการเงิน</a>
                 <ul className="list-unstyled">
                   <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">ข้อมูลสำคัญทางการเงิน</Link></li>
-                  <li><Link to="/Financial_information_2" className="text-white d-block py-1 px-3">ข้อมูลสำคัญทางการเงิน</Link></li>
-                  <li><Link to="/Financial_information_2" className="text-white d-block py-1 px-3">คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</Link></li>
+                  <li><Link to="/Financial_information_2" className="text-white d-block py-1 px-3">งบการเงิน</Link></li>
+                  <li><Link to="/Financial_information_3" className="text-white d-block py-1 px-3">คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</Link></li>
                 </ul>
               </li>
               <li>

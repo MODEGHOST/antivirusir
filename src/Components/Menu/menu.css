@@ -1,15 +1,11 @@
 .navbar-custom {
-    background: linear-gradient(to right, #5836f1, #1ef7f7); /* Gradient สี */
-    padding: 5px 10px; /* ลด padding เพื่อลดขนาดของ navbar */
-    max-width: 400px; /* กำหนดความกว้างสูงสุดของ navbar */
-    position: fixed; /* ทำให้ navbar ติดขอบ */
-    right: 40px; /* จัดตำแหน่งให้ navbar อยู่ชิดขวา */
-    top: 0; /* อยู่ที่ด้านบนสุด */
-    z-index: 1000; /* ให้อยู่เหนือทุกอย่าง */
-    width: 100%; /* เพิ่ม width เป็น 100% เพื่อให้ navbar ยืดขยายจนถึงขอบขวา */
-    margin-top: 50px;
-    border-radius: 230px;
-  }
+  background: linear-gradient(to right, #5836f1, #1ef7f7); /* กำหนดสีพื้นหลัง */
+  padding: 10px 20px; /* เพิ่ม padding เพื่อให้ดูไม่แออัด */
+  position: relative; /* ใช้ relative แทน fixed */
+  top: 0; /* กำหนดตำแหน่งให้อยู่บนสุด */
+  z-index: 1000; /* ให้ Navbar อยู่ข้างบน */
+  width: 100%; /* ให้มันขยายเต็มหน้าจอ */
+}
   
   .navbar-container {
     width: 100%; /* ใช้ความกว้างเต็มที่ */
@@ -151,4 +147,3 @@
       justify-content: flex-start; /* จัดให้ช่องค้นหาหรือปุ่มอยู่ด้านซ้ายบนมือถือ */
     }
   }
-  

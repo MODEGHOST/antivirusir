@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
-import './P2.css';
+import './P3.css';
 import Menu from '../../../Components/Menu/menu';
 
 function Index() {
@@ -95,7 +95,7 @@ function Index() {
         <div className="container-fluid py-5 sticky-service" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/t.png)`, backgroundSize: 'cover', backgroundPosition: 'center',height: '45vh' }}>
           <div className="container py-5">
             <div className="text-center mx-auto pb-5" style={{ maxWidth: 800 }}>
-              <h1 className="display-3 text-capitalize mb-3" style={{ color: 'white', marginTop: '60px' }}>งบการเงิน</h1>
+              <h1 className="display-3 text-capitalize mb-3" style={{ color: 'white', marginTop: '60px' }}>คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</h1>
             </div>
           </div>
         </div>

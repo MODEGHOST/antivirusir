@@ -9,9 +9,9 @@ function Index() {
     setActiveTable(table);
   };
   return (
-    <div>
+
       <div>
-        {/* <Menu /> */}
+     <Menu />
 
         {/* Hero Section */}
         <div className="container-fluid py-5 sticky-service" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/t.png)`, backgroundSize: 'cover', backgroundPosition: 'center',height: '45vh' }}>
@@ -312,7 +312,7 @@ function Index() {
   </div>
   </div>
 
-  </div>
+
   )
 }
 
