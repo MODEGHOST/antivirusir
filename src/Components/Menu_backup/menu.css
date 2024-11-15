@@ -2,7 +2,7 @@
   background: linear-gradient(to right, #5836f1, #1ef7f7); /* กำหนดสีพื้นหลัง */
   padding: 10px 20px; /* เพิ่ม padding เพื่อให้ดูไม่แออัด */
   position: relative; /* ใช้ relative แทน fixed */
-  top: -1; /* กำหนดตำแหน่งให้อยู่บนสุด */
+  top: 0; /* กำหนดตำแหน่งให้อยู่บนสุด */
   z-index: 1000; /* ให้ Navbar อยู่ข้างบน */
   width: 100%; /* ให้มันขยายเต็มหน้าจอ */
 }

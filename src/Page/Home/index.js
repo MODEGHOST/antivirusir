@@ -80,7 +80,6 @@ function index() {
         <div className="container-fluid feature bg-light py-5">
           <div className="container py-5">
             <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-              <h4 className="text-uppercase text-primary">Our Feature</h4>
               <h1 className="display-3 text-capitalize mb-3">ข่าวแจ้งตลาดหลักทรัพย์</h1>
             </div>
             <div className="row g-4">
@@ -294,14 +293,14 @@ function index() {
 
 
 {/* ส่วนที่9 */}
-<div className="container-fluid contact pb-5">
+<div className="container-fluid contact pb-1">
     <div className="container pb-5">
         <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
             <h4 className="text-uppercase text-primary">Contact Us</h4>
         </div>
         <div className="row">
             <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div className="map" style={{height: '400px', borderRadius: '10px', overflow: 'hidden'}}>
+                <div className="map" style={{height: '300px', borderRadius: '10px', overflow: 'hidden'}}>
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799013665!2d100.3045126!3d13.6988784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e295f844ebe5bf%3A0xc56d7fbaa1c9acf5!2sThairung%20Union%20Car!5e0!3m2!1sen!2sth!4v1699836854521!5m2!1sen!2sth&z=16" 
                         width="100%" 
@@ -313,10 +312,43 @@ function index() {
                     </iframe>
                 </div>
             </div>
+            <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
+      <div className="contact-info" style={{ padding: '20px' }}>
+        <p style={{ textAlign: 'center'}}><strong>บริษัท ไทยรุ่งยูเนี่ยนคาร์ จำกัด (มหาชน)</strong></p>
+        <p style={{ textAlign: 'center'}}>304 ถ.มาเจริญ แขวงหนองค้างพลู เขตหนองแขม กรุงเทพฯ 10160</p>
+        <div className="d-flex justify-content-between">
+          <img 
+            src={`${process.env.PUBLIC_URL}/assest/img/CAC.png`} 
+            alt="Image 1" 
+            style={{ width: '100px', height: '80px', objectFit: 'contain' }} 
+          />
+          <img 
+            src={`${process.env.PUBLIC_URL}/assest/img/ukas_9001.png`} 
+            alt="Image 2" 
+            style={{ width: '100px', height: '80px', objectFit: 'contain' }} 
+          />
+          <img 
+            src={`${process.env.PUBLIC_URL}/assest/img/ukas_14001.png`} 
+            alt="Image 3" 
+            style={{ width: '100px', height: '80px', objectFit: 'contain' }} 
+          />
+          <img 
+            src={`${process.env.PUBLIC_URL}/assest/img/URS_CER.png`} 
+            style={{ width: '100px', height: '80px', objectFit: 'contain' }} 
+          />
+        </div>
+        <br></br>
+    <p style={{ textAlign: 'center', color: 'gray', fontSize: '16px' }}>
+      นโยบายการคุ้มครองข้อมูลส่วนบุคคล
+    </p>
+    <p style={{ textAlign: 'center' }}>
+      © สงวนลิขสิทธิ์ 2562 บริษัท ไทยรุ่งยูเนี่ยนคาร์ จำกัด (มหาชน)
+    </p>
+      </div>
+    </div>
         </div>
     </div>
 </div>
-
     </div>
   )
 }

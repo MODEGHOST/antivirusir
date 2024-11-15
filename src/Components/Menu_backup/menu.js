@@ -61,13 +61,13 @@ const CustomMenu = () => {
                 <ul className="list-unstyled">
                   <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">กราฟราคาหลักทรัพย์</Link></li>
                   <li><Link to="/PriceDataP1" className="text-white d-block py-1 px-3">ราคาหลักทรัพย์ย้อนหลัง</Link></li>
-                  <li><Link to="/PriceDataP2" className="text-white d-block py-1 px-3">เครื่องคำนวณการลงทุน</Link></li>
+                  <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">เครื่องคำนวณการลงทุน</Link></li>
                 </ul>
               </li>
               <li>
                 <a  className="text-white d-block py-2 px-3">เอกสารเผยแพร่</a>
                 <ul className="list-unstyled">
-                  <li><Link to="/One_Report1" className="text-white d-block py-1 px-3">แบบ 56-1 One Report</Link></li>
+                  <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">แบบ 56-1 One Report</Link></li>
                 </ul>
               </li>
             </ul>
