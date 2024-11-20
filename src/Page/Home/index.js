@@ -10,7 +10,7 @@ import './home.css'
 function index() {
   return (
     <div>
-        
+
 {/* ส่วนที่1 */}
 < Menu />
         <div className="carousel-header ">

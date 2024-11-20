@@ -1,0 +1,28 @@
+.sticky-service {
+    position: sticky;
+    top: 0; /* ปรับค่านี้ได้ตามต้องการ */
+    z-index: -3; /* ทำให้มันอยู่เหนือส่วนก่อนหน้า */
+  }
+
+  /* เพิ่ม border-radius ให้ตาราง */
+/* เพิ่ม border-radius และเงา */
+.data-item {
+    transition: all 0.3s ease; /* เพิ่มความนุ่มนวล */
+  }
+  
+  /* เพิ่มการ hover */
+  .data-item:hover {
+    background-color: #e9ecef; /* เปลี่ยนสีพื้นหลัง */
+    transform: scale(1.02); /* ขยายขนาดเล็กน้อย */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+    border-color: #007bff; /* เปลี่ยนสีกรอบ */
+  }
+  
+
+  .container-white {
+    background-color: #ffffff; /* พื้นหลังสีขาว */
+    border-radius: 10px; /* มุมมน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+    padding: 20px; /* ระยะห่างภายใน */
+  }
+  

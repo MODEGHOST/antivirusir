@@ -7,6 +7,12 @@ import Financial_information1 from './Page/Financial_infor/P1/index';
 import Financial_information2 from './Page/Financial_infor/P2/index';
 import Financial_information3 from './Page/Financial_infor/P3/index';
 import One_report1 from './Page/One_report/index';
+import Marketmny from './Page/Roomnews/P1/index';
+import NewsPublish from './Page/Roomnews/P2/index';
+import Analyst from './Page/Analyst/P1/index';
+import Showvideo from './Page/showvideo/P1/index';
+import Governance from './Page/Governance/P1/index'
+import Connak from './Page/Connak/P1/index'
 
 
 function App() {
@@ -20,6 +26,12 @@ function App() {
         <Route path="/Financial_information_2" element={<Financial_information2 />} />
         <Route path="/Financial_information_3" element={<Financial_information3 />} />
         <Route path="/One_report1" element={<One_report1 />} />
+        <Route path="/Marketmny" element={<Marketmny />} />
+        <Route path="/NewsPublish" element={<NewsPublish />} />
+        <Route path="/Analyst" element={<Analyst />} />
+        <Route path="/Showvideo" element={<Showvideo />} />
+        <Route path="/Governance" element={<Governance/>} />
+        <Route path="/Connak" element={<Connak />} />
       </Routes>
     </Router>
   );

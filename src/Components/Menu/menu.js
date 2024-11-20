@@ -78,7 +78,7 @@ const CustomMenu = () => {
               <li>
                 <a  className="text-white d-block py-2 px-3">การกำกับดูแลกิจการ</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">การกำกับดูแลกิจการ</a></li>
+                  <li><Link to="/Governance" className="text-white d-block py-1 px-3">การกำกับดูแลกิจการ</Link></li>
                   <li><a href="#" className="text-white d-block py-1 px-3">คู่มือการกำกับดูแลกิจการฯ</a></li>
                   <li><a href="#" className="text-white d-block py-1 px-3">ข้อบังคับของบริษัท</a></li>
                 </ul>
@@ -86,9 +86,8 @@ const CustomMenu = () => {
               <li>
                 <a  className="text-white d-block py-2 px-3">ห้องข่าว</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</a></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</a></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">หัวข้อย่อย 3</a></li>
+                  <li><Link to="/Marketmny" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</Link></li>
+                  <li><Link to="/NewsPublish" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</Link></li>
                 </ul>
               </li>
               <li>
@@ -107,19 +106,19 @@ const CustomMenu = () => {
               <li>
                 <a  className="text-white d-block py-2 px-3">ข้อมูลนักวิเคราะห์</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">ติดต่อนักวิเคราะห์</a></li>
+                  <li><Link to="/Analyst" className="text-white d-block py-1 px-3">บทวิเคราะห์หลักทรัพย์</Link></li>
                 </ul>
               </li>
               <li>
                 <a  className="text-white d-block py-2 px-3">กิจกรรมและเอกสารนำเสนอ</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">ภาพวีดีโอบริษัท</a></li>
+                  <li><Link to="/Showvideo" className="text-white d-block py-1 px-3">ภาพและวิดีโอบริษัท</Link></li>
                 </ul>
               </li>
               <li>
-                <a  className="text-white d-block py-2 px-3">สอบถามข้อมูลนักลงทุน</a>
+                  <a  className="text-white d-block py-2 px-3">สอบถามข้อมูลนักลงทุน</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</a></li>
+                  <li><Link to="/Connak" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</Link></li>
                   <li><a href="#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</a></li>
                 </ul>
               </li>

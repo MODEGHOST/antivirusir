@@ -7,7 +7,7 @@ function index() {
     <div>
           <Menu />
         {/* Hero Section */}
-        <div className="container-fluid py-5 sticky-service" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/G.png)`, backgroundSize: 'cover', backgroundPosition: 'center',height: '45vh' }}>
+        <div className="container-fluid py-5 sticky-service" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/15.png)`, backgroundSize: 'cover', backgroundPosition: 'center',height: '45vh' }}>
           <div className="container py-5">
             <div className="text-center mx-auto pb-5" style={{ maxWidth: 800 }}>
               <h1 className="display-3 text-capitalize mb-3" style={{ color: 'white', marginTop: '60px' }}>ราคาหลักทรัพย์ย้อนหลัง</h1>
