@@ -79,8 +79,8 @@ const CustomMenu = () => {
                 <a  className="text-white d-block py-2 px-3">การกำกับดูแลกิจการ</a>
                 <ul className="list-unstyled">
                   <li><Link to="/Governance" className="text-white d-block py-1 px-3">การกำกับดูแลกิจการ</Link></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">คู่มือการกำกับดูแลกิจการฯ</a></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">ข้อบังคับของบริษัท</a></li>
+                  <li><Link to="/Governance1" className="text-white d-block py-1 px-3">คู่มือการกำกับดูแลกิจการฯ & ข้อบังคับของบริษัท</Link></li>
+                  <li><Link to="/Governance2" className="text-white d-block py-1 px-3">การไม่จ่ายค่าอํานวยความสะดวก และ การไม่ว่าจ้างพนักงานรัฐ</Link></li>
                 </ul>
               </li>
               <li>

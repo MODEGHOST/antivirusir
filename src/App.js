@@ -12,6 +12,8 @@ import NewsPublish from './Page/Roomnews/P2/index';
 import Analyst from './Page/Analyst/P1/index';
 import Showvideo from './Page/showvideo/P1/index';
 import Governance from './Page/Governance/P1/index'
+import Governance1 from './Page/Governance/P2/index'
+import Governance2 from './Page/Governance/P3/index'
 import Connak from './Page/Connak/P1/index'
 
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/Analyst" element={<Analyst />} />
         <Route path="/Showvideo" element={<Showvideo />} />
         <Route path="/Governance" element={<Governance/>} />
+        <Route path="/Governance1" element={<Governance1/>} />
+        <Route path="/Governance2" element={<Governance2/>} />
         <Route path="/Connak" element={<Connak />} />
       </Routes>
     </Router>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Menu from '../../../Components/Menu/menu';
-import './ืnewpb.css';
+import './newpb.css';
 
 function Index() {
   // ตัวอย่างข้อมูลที่แสดงผล
@@ -42,7 +42,7 @@ function Index() {
               className="display-3 text-capitalize mb-3"
               style={{ color: 'white', marginTop: '60px' }}
             >
-              ข่าวแจ้งตลาดหลักทรัพย์
+              ข่าวจากสื่อสิ่งพิมพ์
             </h1>
           </div>
         </div>
