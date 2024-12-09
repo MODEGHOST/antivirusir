@@ -15,6 +15,11 @@ import Governance from './Page/Governance/P1/index'
 import Governance1 from './Page/Governance/P2/index'
 import Governance2 from './Page/Governance/P3/index'
 import Connak from './Page/Connak/P1/index'
+import Shareholder from './Page/shareholders/P1/index'
+import HolderStructure from './Page/shareholders/P2/index';
+import Holdermeeting from './Page/shareholders/P3/index';
+import GLine from './Page/Stock_price/P3/index'
+
 
 
 function App() {
@@ -36,6 +41,10 @@ function App() {
         <Route path="/Governance1" element={<Governance1/>} />
         <Route path="/Governance2" element={<Governance2/>} />
         <Route path="/Connak" element={<Connak />} />
+        <Route path="/Shareholder" element={<Shareholder />} />
+        <Route path="/holder_Structure" element={<HolderStructure />} />
+        <Route path="/holder_meeting" element={<Holdermeeting />} />
+        <Route path="/GLine" element={<GLine />} />
       </Routes>
     </Router>
   );

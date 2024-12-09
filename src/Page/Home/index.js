@@ -4,13 +4,31 @@ import DetailSlide from '../../Components/Detailslide/Detailslide'
 import Calendar from '../../Components/Calendar/Calendar'
 import Menu from '../../Components/Menu/menu'
 import './home.css'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
-function index() {
+function Index() {
+  const [news, setNews] = useState([]); // สำหรับข้อมูลข่าว
+
+  useEffect(() => {
+    // ดึงข้อมูลข่าวจาก API
+    axios
+      .get('http://localhost:8000/api/news') // URL ของ API ที่ Laravel ให้บริการ
+      .then((response) => {
+        // เรียงลำดับข้อมูลตามวันที่และเลือก 4 ข่าวล่าสุด
+        const sortedNews = response.data
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, 4); // เลือกเฉพาะ 4 รายการแรก
+        setNews(sortedNews); // เก็บข้อมูลใน state
+      })
+      .catch((error) => {
+        console.error('Error fetching news:', error);
+      });
+  }, []);
   return (
     <div>
-
 {/* ส่วนที่1 */}
 < Menu />
         <div className="carousel-header ">
@@ -22,7 +40,7 @@ function index() {
                 <div className="carousel-inner" role="listbox">
                     {/* Slide 1 with Boxsharecard */}
                     <div className="carousel-item active">
-                    <video 
+                    {/* <video 
                         autoPlay 
                         loop 
                         muted 
@@ -31,8 +49,8 @@ function index() {
                     >
                         <source src={`${process.env.PUBLIC_URL}/assest/video/nakrt.mp4`} type="video/mp4" />
                         Your browser does not support the video tag.
-                    </video>
-
+                    </video> */}
+                        <img src={`${process.env.PUBLIC_URL}/assest/img/11.jpeg`} className="img-fluid w-100" alt="Image" style={{ objectFit: 'cover', height: '100vh' }} />
 
                         {/* <img src={`${process.env.PUBLIC_URL}/img/DJI.jpg`} className="img-fluid w-100" alt="Image" /> */}
                         <div className="carousel-caption-1">
@@ -75,56 +93,76 @@ function index() {
                 </button>
             </div>
         </div>
-        
 {/* ส่วนที่2 */}
-        <div className="container-fluid feature bg-light py-5">
-          <div className="container py-5">
-            <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-              <h1 className="display-3 text-capitalize mb-3">ข่าวแจ้งตลาดหลักทรัพย์</h1>
+<div className="container-fluid feature bg-light py-5">
+  <div className="container py-5">
+    <div
+      className="text-center mx-auto pb-5 wow fadeInUp"
+      data-wow-delay="0.2s"
+      style={{ maxWidth: 800 }}
+    >
+      <h1 className="display-3 text-capitalize mb-3">ข่าวแจ้งตลาดหลักทรัพย์</h1>
+    </div>
+    <div className="row g-4">
+      {news.length > 0 ? (
+        news.map((news, index) => (
+          <div
+            key={index}
+            className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
+            data-wow-delay={`${0.2 + index * 0.2}s`}
+          >
+            <div
+              className="feature-item p-4 text-center"
+              style={{
+                width: "300px", // กำหนดความกว้าง
+                height: "300px", // กำหนดความสูง
+                margin: "0 auto", // จัดกึ่งกลาง
+                backgroundColor: "#fff", // สีพื้นหลัง
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // เงา
+                borderRadius: "10px", // มุมโค้ง
+                display: "flex", // ใช้ Flexbox
+                flexDirection: "column", // จัดเรียงแนวตั้ง
+              }}
+            >
+              <div className="mb-3">
+                <a
+                  href={`http://localhost:8000${news.pdf_url}`} // ใช้ URL PDF จาก API
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={`${process.env.PUBLIC_URL}/assest/img/pdf.png`} // ไอคอนสำหรับ PDF
+                    alt="ดาวน์โหลดไฟล์"
+                    className="img-fluid"
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </a>
+              </div>
+              <h4 className="mb-3">{news.title}</h4> {/* แสดงหัวข้อข่าว */}
+              <h5
+                className="mb-3"
+                style={{
+                  marginTop: "auto", // ดันให้วันที่ไปชิดด้านล่าง
+                }}
+              >
+                {new Date(news.created_at).toLocaleDateString("th-TH", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
+              </h5>
             </div>
-            <div className="row g-4">
-                <div className=" col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                <div className="feature-item p-4">
-                  <div className="feature-icon mb-3">
-                <img 
-                    src={`${process.env.PUBLIC_URL}/assest/gif/news.gif`} 
-                    alt="News Animation" 
-                    className="img-fluid" 
-                // style={{ borderRadius: '50%', width: '80px', height: '80px' }}  กรอกรอบวง
-            />
           </div>
-            <a href="#" className="h4 mb-3">ข่าวหุ้น วันที่</a>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero repellat deleniti necessitatibus</p>
-            <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-          <div className="feature-item p-4">
-            <div className="feature-icon mb-3"><i className="fas fa-filter text-white fa-3x" /></div>
-            <a href="#" className="h4 mb-3">5 Steps Filtration</a>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero repellat deleniti necessitatibus</p>
-            <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-          <div className="feature-item p-4">
-            <div className="feature-icon mb-3"><i className="fas fa-recycle text-white fa-3x" /></div>
-            <a href="#" className="h4 mb-3">Composition</a>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero repellat deleniti necessitatibus</p>
-            <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-          <div className="feature-item p-4">
-            <div className="feature-icon mb-3"><i className="fas fa-microscope text-white fa-3x" /></div>
-            <a href="#" className="h4 mb-3">Lab Control</a>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero repellat deleniti necessitatibus</p>
-            <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-          </div>
-        </div>
-      </div>
-          </div>
-        </div>      
+        ))
+      ) : (
+        <p className="text-center">กำลังโหลดข้อมูล...</p>
+      )}
+    </div>
+  </div>
+</div>
+
+
+  
 {/* ส่วนที่3 */}
 <div className="container-fluid about overflow-hidden py-5">
       <div className="container py-5">
@@ -180,6 +218,47 @@ function index() {
         </div>
       </div>
     </div>
+    {/* ส่วนที่4 */}
+    <div className="container-fluid feature bg-light py-5">
+          <div className="container py-5">
+            <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
+              <h1 className="display-3 text-capitalize mb-3">สอบถามข้อมูลนักลงทุน</h1>
+            </div>
+            <div className="row g-4">
+                <div className=" col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                  <div className="feature-item p-4">
+                    <div className="feature-icon mb-3">
+                      <img 
+                          src={`${process.env.PUBLIC_URL}/assest/gif/news.gif`} 
+                          alt="News Animation" 
+                          className="img-fluid" 
+                      // style={{ borderRadius: '50%', width: '80px', height: '80px' }}  กรอกรอบวง
+                      />
+                  </div>
+                    <a href="#" className="h4 mb-3">Investor Kits</a>
+                    <p className="mb-3">วันที่</p>
+                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
+                  </div>
+                </div>
+                <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                  <div className="feature-item p-4">
+                    <div className="feature-icon mb-3"><i className="fas fa-filter text-white fa-3x" /></div>
+                    <a href="#" className="h4 mb-3">ติดต่อนักลงทุนสัมพันธ์</a>
+                    <p className="mb-3">วันที่</p>
+                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
+                  </div>
+                </div>
+                <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                  <div className="feature-item p-4">
+                    <div className="feature-icon mb-3"><i className="fas fa-recycle text-white fa-3x" /></div>
+                    <a href="#" className="h4 mb-3">อีเมล์รับข่าวสาร</a>
+                    <p className="mb-3">วันที่</p>
+                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
 {/* ส่วนที่5 */}
 <div className="container-fluid service bg-light overflow-hidden py-5">
       <div className="container py-5">
@@ -190,7 +269,7 @@ function index() {
           <div className="col-lg-6 calendar-wrapper wow fadeInUp" data-wow-delay="0.3s">
             <Calendar />
           </div>
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.2s">
               <div className="d-flex">
                 <div className="service-btn me-3"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
@@ -218,12 +297,12 @@ function index() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
 {/* ส่วนที่6 */}
-<div className="container-fluid product py-5">
+{/* <div className="container-fluid product py-5">
     <div className="container py-5">
         <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
             <h4 className="text-uppercase text-primary">Our Products</h4>
@@ -265,7 +344,52 @@ function index() {
             </div>
         </div>
     </div>
-</div>
+</div> */}
+
+
+{/* ส่วนที่5 สำรอง */}
+{/* <div className="container-fluid service bg-light overflow-hidden py-5">
+      <div className="container py-5">
+        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{ maxWidth: 800 }}>
+          <h1 className="display-3 text-capitalize mb-3">ปฏิทินกิจกรรม</h1>
+        </div>
+        <div className="row align-items-center">
+          <div className="col-lg-6 calendar-wrapper wow fadeInUp" data-wow-delay="0.3s">
+            <Calendar />
+          </div>
+          <div className="col-lg-6">
+            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.2s">
+              <div className="d-flex">
+                <div className="service-btn me-3"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
+                <div>
+                  <h4 className="mb-1">Water Softening</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                </div>
+              </div>
+            </div>
+            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.4s">
+              <div className="d-flex">
+                <div className="service-btn me-3"><i className="fas fa-recycle text-white fa-2x" /></div>
+                <div>
+                  <h4 className="mb-1">Market Research</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                </div>
+              </div>
+            </div>
+            <div className="service-item rounded p-4 wow fadeInRight" data-wow-delay="0.6s">
+              <div className="d-flex">
+                <div className="service-btn me-3"><i className="fas fa-project-diagram text-white fa-2x" /></div>
+                <div>
+                  <h4 className="mb-1">Project Planning</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> */}
+
 
 {/* ส่วนที่8 */}
 {/* <div className="container-fluid team pb-5">
@@ -353,4 +477,4 @@ function index() {
   )
 }
 
-export default index
+export default Index

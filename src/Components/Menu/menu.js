@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Form, Button, Collapse } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
-import { FaHome } from 'react-icons/fa'
+import { FaHome } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaFlag } from 'react-icons/fa';
 
@@ -59,7 +59,7 @@ const CustomMenu = () => {
               <li>
                 <a  className="text-white d-block py-2 px-3">ข้อมูลราคาหลักทรัพย์</a>
                 <ul className="list-unstyled">
-                  <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">กราฟราคาหลักทรัพย์</Link></li>
+                  <li><Link to="/GLine" className="text-white d-block py-1 px-3">กราฟราคาหลักทรัพย์</Link></li>
                   <li><Link to="/PriceDataP1" className="text-white d-block py-1 px-3">ราคาหลักทรัพย์ย้อนหลัง</Link></li>
                   <li><Link to="/PriceDataP2" className="text-white d-block py-1 px-3">เครื่องคำนวณการลงทุน</Link></li>
                 </ul>
@@ -93,9 +93,9 @@ const CustomMenu = () => {
               <li>
                 <a  className="text-white d-block py-2 px-3">ข้อมูลสำหรับผู้ถือหุ้น</a>
                 <ul className="list-unstyled">
-                  <li><a href="#" className="text-white d-block py-1 px-3">ข้อมูลพื้นฐานการลงทุน</a></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">โครงสร้างผู้ถือหุ้น</a></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">การประชุมผู้ถือหุ้น</a></li>
+                  <li><Link to="/shareholder" className="text-white d-block py-1 px-3">ข้อมูลพื้นฐานการลงทุน</Link></li>
+                  <li><Link to="/holder_Structure" className="text-white d-block py-1 px-3">โครงสร้างผู้ถือหุ้น</Link></li>
+                  <li><Link to="/holder_meeting" className="text-white d-block py-1 px-3">การประชุมผู้ถือหุ้น</Link></li>
                 </ul>
               </li>
             </ul>
@@ -119,7 +119,7 @@ const CustomMenu = () => {
                   <a  className="text-white d-block py-2 px-3">สอบถามข้อมูลนักลงทุน</a>
                 <ul className="list-unstyled">
                   <li><Link to="/Connak" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</Link></li>
-                  <li><a href="#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</a></li>
+                  <li><Link to="/#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</Link></li>
                 </ul>
               </li>
             </ul>

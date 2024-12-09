@@ -1,62 +1,126 @@
 /* Calendar Container */
 .calendar-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    width: 1000px;
+    margin: 0 auto;
+    border-radius: 15px;
+  }
+  
+  /* Calendar Section */
+  .calendar-section {
     background-color: #007bff;
     color: white;
     border-radius: 15px;
     padding: 20px;
-    width: 100%; /* Full width for responsiveness */
+    height: 600px;
+    width: 800px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Event Section */
+  .event-section {
+    background-color: #007bff;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 600px; /* ขยายความสูง */
+    width: 800px; /* ปรับความกว้างตามต้องการ */
+    margin-left: 20px; /* เพิ่มระยะห่างด้านซ้าย */
 }
-
-.calendar-header {
+  
+  /* Calendar Header */
+  .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
-}
-
-.nav-button {
+  }
+  
+  .nav-button {
     background: transparent;
     border: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-.calendar-grid {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .nav-button:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Calendar Grid */
+  .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days in a week */
-    gap: 5px;
-}
-
-.calendar-cell {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .calendar-cell {
     background-color: rgba(255, 255, 255, 0.2);
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.calendar-cell:hover {
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    height: 60px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .calendar-cell:hover {
     background-color: rgba(255, 255, 255, 0.5);
-}
-
-.has-event {
+    transform: translateY(-3px);
+  }
+  
+  .calendar-cell.has-event {
     background-color: #e84141;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .calendar-header {
-        flex-direction: column; /* Stack the header elements vertically */
-        align-items: flex-start;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .day-header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+  
+  /* Event Items */
+  .event-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-item:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .calendar-container {
+      flex-direction: column;
     }
-    
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr); /* Maintain 7 columns */
+  
+    .calendar-section,
+    .event-section {
+      width: 100%;
     }
-    
+  
+    .event-section {
+      max-height: 300px;
+    }
+  
     .calendar-cell {
-        padding: 10px; /* Less padding for smaller screens */
+      height: 50px;
     }
-}
+  }

@@ -1,48 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import './Tradecard.css'; // สไตล์ของ BoxCard จะอยู่ในไฟล์นี้
+import './Tradecard.css';
+import axios from 'axios';
 
-function BoxCard({  realPrice = 39.42, change, changePercent, volume, updatedAt }) {
-  const [price, setPrice] = useState(39.42); // กำหนดราคาเริ่มต้นเป็น 39.42
+function BoxCard() {
+  const [priceData, setPriceData] = useState(null);
+  const [loading, setLoading] = useState(true); // สำหรับสถานะการโหลด
+  const [displayPrice, setDisplayPrice] = useState(null); // สำหรับแสดงผลระหว่างสุ่ม
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // สุ่มราคา 0-100 ก่อนที่จะหยุดที่ราคาจริง
-      setPrice(prevPrice => Math.random() * 100);
+    // ดึงข้อมูลล่าสุดจาก API
+    axios
+      .get('http://localhost:8000/api/stock-prices/latest') // เปลี่ยน URL ตาม API ของคุณ
+      .then((response) => {
+        if (response.data.status === 200) {
+          setPriceData(response.data.data); // เก็บข้อมูลใน state
+          startRandomEffect(response.data.data.previous_close_price); // เริ่มสุ่มตัวเลข
+        }
+        setLoading(false); // เปลี่ยนสถานะเป็นโหลดเสร็จ
+      })
+      .catch((error) => {
+        console.error('Error fetching the latest stock price:', error);
+        setLoading(false); // เปลี่ยนสถานะเป็นโหลดเสร็จ
+      });
+  }, []);
+
+  // ฟังก์ชันสุ่มตัวเลข
+  const startRandomEffect = (realPrice) => {
+    let intervalId = setInterval(() => {
+      setDisplayPrice((Math.random() * 100).toFixed(2)); // สุ่มตัวเลขในช่วง 0-100
     }, 100); // อัปเดตทุก 100ms
 
-    // หยุดการอัปเดตเมื่อถึงราคาจริง
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      setPrice(realPrice); // ตั้งราคาเป็นราคาจริง
-    }, 3000); // หยุดหลังจาก 3 วินาที
+    // หยุดการสุ่มหลัง 6 วินาทีและตั้งค่าจริง
+    setTimeout(() => {
+      clearInterval(intervalId);
+      setDisplayPrice(realPrice); // แสดงค่าจริง
+    }, 2000);
+  };
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout); // เคลียร์ timeout เมื่อ component ถูก unmounted
-    };
-  }, [realPrice]);
+  if (loading) {
+    return <div>กำลังโหลดข้อมูล...</div>;
+  }
+
+  if (!priceData) {
+    return <div>ไม่พบข้อมูล</div>;
+  }
 
   return (
     <div className="box-card">
       <div className="box-card-header">
         <div className="header-row">
           <h2>TRU</h2>
-          <span className="price">{price.toFixed(2)}</span> {/* แสดงราคาแบบมีทศนิยม 2 ตำแหน่ง */}
+          <span className="price">{displayPrice}</span> {/* ใช้ราคาแสดงระหว่างสุ่ม */}
         </div>
       </div>
       <div className="change-info">
         <span>เปลี่ยนแปลง</span>
-        <span className={`change ${change > 0 ? 'positive' : 'negative'}`}>
-          {change} ({changePercent})
+        <span
+          className={`change ${priceData.change > 0 ? 'positive' : 'negative'}`}
+        >
+          {priceData.change} ({priceData.changepercent}%)
         </span>
       </div>
       <div className="volume-info">
         <span>ปริมาณการซื้อขาย (หุ้น)</span>
-        <span>{volume} บาท</span>
+        <span>{priceData.trading_value} บาท</span>
       </div>
-      <br></br>
+      <br />
       <div className="box-card-footer">
-        <span>ปรับปรุงเมื่อ: {updatedAt}</span>
+        <span>ปรับปรุงเมื่อ: {priceData.date}</span>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Menu from '../../../Components/Menu/menu';
 import './P1.css';
+import axios from 'axios';
 
 function Index() {
   const [activeTable, setActiveTable] = useState('table1'); // State สำหรับเลือกตารางที่แสดง
