@@ -15,12 +15,14 @@ function Index() {
   // ฟังก์ชันดึงข้อมูลจาก API
   const fetchCardData = async (year) => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/finan-states/${year}`); // เรียก API โดยใช้ปีที่เลือก
-      setCardData(response.data); // ตั้งค่าข้อมูลการ์ด
+      const response = await axios.get(`http://localhost:8000/api/finan-states/${year}`);
+      console.log(response.data); // ตรวจสอบข้อมูลที่ดึงมา
+      setCardData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   // ดึงข้อมูลครั้งแรกเมื่อโหลดหน้า หรือเมื่อปีที่เลือกเปลี่ยน
   useEffect(() => {
@@ -101,19 +103,18 @@ function Index() {
           {cardData.length > 0 ? (
             cardData.map((card, index) => (
               <div key={index} className="col-md-6 mb-4">
-                <div className="card shadow-lg border-light rounded-3" style={{ width: '80%', height: '350px' }}>
+                <div className="card shadow-lg border-light rounded-3" style={{ width: '70%', height: '350px' }}>
                   <div className="row no-gutters">
                     <div className="col-md-6">
-                      <img
-                        src={`${process.env.PUBLIC_URL}/assest/img/${card.image_path}`}
-                        alt={card.title}
-                        className="card-img-left"
-                        style={{
-                          width: '200px',
-                          height: '200px',
-                          objectFit: 'cover'
-                        }}
-                      />
+                    <img
+                      src={card.image_path} // ใช้ URL ที่ได้จาก API
+                      alt={card.title}
+                      style={{
+                        width: '300px',
+                        height: '200px',
+                        objectFit: 'cover',
+                      }}
+                    />
                     </div>
                     <div className="col-md-6">
                       <div className="card-body">
@@ -128,7 +129,7 @@ function Index() {
                   </div>
                   <div className="card-footer text-center">
                     <img
-                      src={`${process.env.PUBLIC_URL}/assest/img/${card.qr_code_path}`}
+                      src={card.qr_code_path} 
                       alt="QR Code"
                       style={{ width: '100px', height: '100px' }}
                     />

@@ -1,149 +1,200 @@
-.navbar-custom {
-  background: linear-gradient(to right, #5836f1, #1ef7f7); /* กำหนดสีพื้นหลัง */
-  padding: 10px 20px; /* เพิ่ม padding เพื่อให้ดูไม่แออัด */
-  position: relative; /* ใช้ relative แทน fixed */
-  top: -1; /* กำหนดตำแหน่งให้อยู่บนสุด */
-  z-index: 1000; /* ให้ Navbar อยู่ข้างบน */
-  width: 100%; /* ให้มันขยายเต็มหน้าจอ */
+/* CSS สำหรับ Navbar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
+body {
+  font-family: Arial, sans-serif;
+}
+nav {
+  background-color: #2c2c2c;
+  color: white;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style: none; /* เอาจุดใน ul ออก */
+  margin: 0;
+  padding: 0;
+}
+.navbar-container > li {
+  position: relative;
+}
+.navbar-container a {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 18px;
+  display: block; /* ทำให้ a เต็มพื้นที่ li */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.navbar-container a:hover {
+  background-color: #575757;
+  color: #ffd700;
+  border-radius: 5px;
+}
+.nav-center {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffd700;
+  margin: 0 50px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* ให้เริ่มใต้เมนูหลักทันที */
+  left: 0;
+  background-color: #333;
+  min-width: 200px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  z-index: 1001;
+
+  /* ปรับพื้นที่โซน Hover ของ Dropdown */
+  padding-top: 10px; /* ระยะขยายระหว่างเมนูหลักกับ Dropdown */
+}
+
+.dropdown {
+  position: relative;
+  padding-bottom: 4px; /* เพิ่มระยะห่างใต้เมนูหลัก */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #575757; /* สีพื้นหลังเมื่อ Hover */
+  color: #ffd700 !important; /* บังคับให้ตัวหนังสือเป็นสีเหลือง */
+}
+
+
+.dropdown-menu li a:hover {
+  background-color: #575757; /* เปลี่ยนสีพื้นหลังเมื่อ Hover */
+  color: #ffd700; /* เปลี่ยนสีตัวหนังสือเป็นสีเหลืองเมื่อ Hover */
+}
+
+
+/* แสดงเมนูเมื่อ Hover */
+.dropdown:hover .dropdown-menu {
+  background-color: #333;
+  display: block;
+}
+
+
+.nav-center a {
+  font-size: 20px;
+  cursor: pointer; /* เปลี่ยนเมาส์เป็น Pointer */
+  color: #ffd700; /* คงสีเหลือง */
+  text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+  background: none; /* เอาพื้นหลังออก */
+}
+
+.nav-center a:hover,
+.nav-center a:focus {
+  background: none !important; /* ปิดพื้นหลัง Hover */
+  color: #ffd700 !important; /* คงสีตัวอักษรเดิม */
+  transition: none; /* ปิดเอฟเฟกต์การเปลี่ยนแปลง */
+}
+
+
+.nav-center {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffd700; /* สีพื้นฐานเป็นสีเหลือง */
+  margin: 0 50px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+
+  /* ทำให้ไฟวิ่งผ่านข้อความ */
+  background: linear-gradient(90deg, 
+    #ffd700, 
+    #cec5c5, 
+    #ffd700
+  );
+  background-size: 200% 100%; /* ขยายขนาดเอฟเฟกต์ให้วิ่งได้ */
+  -webkit-background-clip: text; /* ใช้ background เฉพาะตัวอักษร */
+  -webkit-text-fill-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+  animation: textWave 2s infinite linear; /* เรียกใช้ Animation */
+}
+
+@keyframes textWave {
+  from {
+    background-position: 200% 0; /* ไฟเริ่มจากด้านขวา */
+  }
+  to {
+    background-position: -200% 0; /* ไฟวิ่งไปด้านซ้าย */
+  }
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
   .navbar-container {
-    width: 100%; /* ใช้ความกว้างเต็มที่ */
-    max-width: 400px; /* กำหนดความกว้างสูงสุดของ navbar */
-    margin: 0; /* ไม่ให้มี margin */
-    padding: 0; /* ไม่มี padding */
+    gap: 10px; /* ลดระยะห่างระหว่างเมนู */
   }
-  
-  .search-form {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* จัดให้ช่องค้นหาหรือปุ่มอยู่ทางขวา */
+
+  .navbar-container a {
+    font-size: 10px; /* ลดขนาดตัวอักษร */
+    padding: 8px 10px; /* ลด Padding */
   }
-  
-  .search-input {
-    width: 200px; /* ขยายช่องค้นหา */
-    margin-right: 10px; /* เพิ่มระยะห่างระหว่างช่องค้นหาและปุ่ม */
-    border-radius: 40px;
+
+  .nav-center {
+    font-size: 18px; /* ปรับขนาดให้เล็กลง */
+    margin: 0 20px;
   }
-  
-  .search-button {
-    background-color: #fff;
-    color: #000;
-    border: none;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 5px 0; /* ลด Padding ของ Navbar */
   }
-  
-  .language-btn, .menu-btn {
-    color: white;
-    margin-left: 5px;
-    padding: 5px 10px;
+
+  .navbar-container {
+    flex-direction: column; /* เรียงเมนูแนวตั้ง */
+    gap: 5px;
+  }
+
+  .navbar-container > li {
+    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+  }
+
+  .dropdown-menu {
+    position: static; /* ทำให้ Dropdown อยู่ติดกับเมนูหลัก */
+    display: none; /* ซ่อนเมนูย่อยไว้ก่อน */
+    background-color: #2c2c2c; /* สีเดียวกับ Navbar */
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block; /* แสดงเมนูย่อยเมื่อ Hover */
+  }
+
+  .nav-center {
     font-size: 16px;
+    margin: 10px 0;
   }
-  
-  .language-btn:hover, .menu-btn:hover {
-    color: #ddd;
-    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .navbar-container a {
+    font-size: 12px; /* ลดขนาดฟอนต์ลงอีก */
+    padding: 5px 8px;
   }
-  
-  /* เมนูย่อย */
-  .menu-dropdown {
-    background: url(../../../public/assest/img/nakrong.png);
-    background-size: cover;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 1500px;
-    height: 700px;
-    border-radius: 8px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-    z-index: 1; /* ลดค่า z-index */
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    visibility: hidden; /* เปลี่ยนเป็น 'hidden' เมื่อเมนูปิด */
-    opacity: 0; /* ซ่อนเมนูเมื่อปิด */
-    transition: visibility 0s, opacity 0.3s ease; /* เพิ่มการเลื่อนการเปลี่ยนแปลง */
+
+  .nav-center {
+    font-size: 14px; /* ขนาดตัวหนังสือเล็กลง */
   }
-  
-  .menu-dropdown.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  
-  .menu-dropdown::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* เพิ่มสีทึบให้กับพื้นหลังเพื่อทำให้ตัวหนังสือเด่น */
-    border-radius: 8px;
-    z-index: -1; /* เพื่อให้เลเยอร์นี้อยู่ด้านหลังของข้อความ */
-  }
-  
-  .menu-column {
-    flex: 1; /* ให้แต่ละคอลัมน์ใช้พื้นที่เท่ากัน */
-    padding: 0 20px;
-  }
-  
-  .menu-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu-dropdown ul li {
-    padding: 10px 20px;
-  }
-  
-  .menu-column ul li a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    transition: background-color 0.3s ease;
-    padding: 10px 20px;
-    font-weight: bold; /* ทำให้ข้อความหนาขึ้น */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* เพิ่มเงาให้ข้อความเพื่อให้เด่น */
-  }  
-  .menu-btn {
-    color: white;
-    padding: 8px 12px;
-    font-size: 16px;
-  }
-  
-  .menu-btn:hover {
-    color: #ddd;
-    text-decoration: none;
-  }
-  
-  /* สำหรับมือถือ */
-  @media (max-width: 768px) {
-    .menu-dropdown {
-      flex-direction: column; /* ปรับแนวให้เมนูย่อยในแนวตั้งสำหรับมือถือ */
-    }
-  
-    .menu-column {
-      padding: 0 10px;
-    }
-    
-    .menu-dropdown ul li {
-      padding: 5px 0;
-    }
-  }
-  
-  
-  @media (max-width: 768px) {
-    .search-input {
-      width: 150px; /* ลดขนาดช่องค้นหาบนมือถือ */
-    }
-  
-    .navbar-custom {
-      padding: 5px 10px; /* ปรับ padding ให้เหมาะสมบนมือถือ */
-    }
-  
-    .search-form {
-      justify-content: flex-start; /* จัดให้ช่องค้นหาหรือปุ่มอยู่ด้านซ้ายบนมือถือ */
-    }
-  }
+}

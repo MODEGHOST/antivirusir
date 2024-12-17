@@ -77,7 +77,7 @@ function Index() {
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
-          <div className="col-md-4" style={{ width: '15%' }}>>
+          <div className="col-md-4" style={{ width: '15%' }}>
             <label htmlFor="end-date" className="form-label">
               วันที่สิ้นสุด:
             </label>

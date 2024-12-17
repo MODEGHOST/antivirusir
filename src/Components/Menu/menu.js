@@ -1,133 +1,106 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container, Form, Button, Collapse } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
-import { FaHome } from 'react-icons/fa';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { FaFlag } from 'react-icons/fa';
 
-const CustomMenu = () => {
-  const [menuOpen, setMenuOpen] = useState(false); // ใช้เพื่อควบคุมการแสดงเมนู
-  const toggleMenu = () => setMenuOpen(prevMenuOpen => !prevMenuOpen); // แก้ไขให้การสลับสถานะทำงานได้อย่างถูกต้อง
+const CustomNavbar = () => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const toggleDropdown = (index) => {
+    setOpenDropdown((prev) => (prev === index ? null : index));
+  };
 
   return (
-    <Navbar expand="lg" className="navbar-custom" >
-      <Container className="navbar-container"> {/* กำหนดขนาดของ Container */}
-      <Navbar.Brand className="brand-container">
-      <Link to="/" className="text-white">
-        <FaHome size={24} /> {/* แสดงไอคอนบ้าน */}
-      </Link>
-      </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
-          <Nav className="ms-auto">
-            <Form className="d-flex search-form">
-              <Form.Control
-                type="search"
-                placeholder="ค้นหา"
-                className="search-input"
-                aria-label="Search"
-              />
-            </Form>
-          </Nav>
-          <div className="d-flex ms-auto">
-            <Button variant="link" className="language-btn">
-            <FaFlag /> ไทย {/* หรือแสดง "EN" ขึ้นอยู่กับการเลือก */}
-            </Button>
-            <Button variant="link" className="menu-btn" onClick={toggleMenu}>
-            <GiHamburgerMenu size={24} /> {/* ไอคอน hamburger */}
-            </Button>
-          </div>
-        </Navbar.Collapse>
-      </Container>
+    <nav className="navbar-custom">
+      <ul className="navbar-container">
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(1)} onMouseLeave={() => toggleDropdown(1)}>
+          <a>ข้อมูลทางการเงิน</a>
+          {openDropdown === 1 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">ข้อมูลสำคัญทางการเงิน</Link></li>
+              <li><Link to="/Financial_information_2" className="text-white d-block py-1 px-3">งบการเงิน</Link></li>
+              <li><Link to="/Financial_information_3" className="text-white d-block py-1 px-3">คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</Link></li>
+            </ul>
+          )}
+        </li>
 
-      {/* เมนูที่เลื่อนลง */}
-      <Collapse in={menuOpen}>
-        <div className="menu-dropdown d-flex flex-wrap p-3 bg-image">
-          {/* ฝั่งซ้าย */}
-          <div className="menu-column flex-fill p-3">
-            <ul className="list-unstyled">
-              <li>
-                <a className="text-white d-block py-2 px-3 ">ข้อมูลทางการเงิน</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Financial_information_1" className="text-white d-block py-1 px-3">ข้อมูลสำคัญทางการเงิน</Link></li>
-                  <li><Link to="/Financial_information_2" className="text-white d-block py-1 px-3">งบการเงิน</Link></li>
-                  <li><Link to="/Financial_information_3" className="text-white d-block py-1 px-3">คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</Link></li>
-                </ul>
-              </li>
-              <li>
-                <a  className="text-white d-block py-2 px-3">ข้อมูลราคาหลักทรัพย์</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/GLine" className="text-white d-block py-1 px-3">กราฟราคาหลักทรัพย์</Link></li>
-                  <li><Link to="/PriceDataP1" className="text-white d-block py-1 px-3">ราคาหลักทรัพย์ย้อนหลัง</Link></li>
-                  <li><Link to="/PriceDataP2" className="text-white d-block py-1 px-3">เครื่องคำนวณการลงทุน</Link></li>
-                </ul>
-              </li>
-              <li>
-                <a  className="text-white d-block py-2 px-3">เอกสารเผยแพร่</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/One_Report1" className="text-white d-block py-1 px-3">แบบ 56-1 One Report</Link></li>
-                </ul>
-              </li>
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(2)} onMouseLeave={() => toggleDropdown(2)}>
+          <a>ข้อมูลราคาหลักทรัพย์</a>
+          {openDropdown === 2 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/GLine" className="text-white d-block py-1 px-3">กราฟราคาหลักทรัพย์</Link></li>
+              <li><Link to="/PriceDataP1" className="text-white d-block py-1 px-3">ราคาหลักทรัพย์ย้อนหลัง</Link></li>
+              <li><Link to="/PriceDataP2" className="text-white d-block py-1 px-3">เครื่องคำนวณการลงทุน</Link></li>
             </ul>
-          </div>
-          {/* กลาง */}
-          <div className="menu-column flex-fill p-3">
-            <ul className="list-unstyled">
-              <li>
-                <a  className="text-white d-block py-2 px-3">การกำกับดูแลกิจการ</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Governance" className="text-white d-block py-1 px-3">การกำกับดูแลกิจการ</Link></li>
-                  <li><Link to="/Governance1" className="text-white d-block py-1 px-3">คู่มือการกำกับดูแลกิจการฯ & ข้อบังคับของบริษัท</Link></li>
-                  <li><Link to="/Governance2" className="text-white d-block py-1 px-3">การไม่จ่ายค่าอํานวยความสะดวก และ การไม่ว่าจ้างพนักงานรัฐ</Link></li>
-                </ul>
-              </li>
-              <li>
-                <a  className="text-white d-block py-2 px-3">ห้องข่าว</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Marketmny" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</Link></li>
-                  <li><Link to="/NewsPublish" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</Link></li>
-                </ul>
-              </li>
-              <li>
-                <a  className="text-white d-block py-2 px-3">ข้อมูลสำหรับผู้ถือหุ้น</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/shareholder" className="text-white d-block py-1 px-3">ข้อมูลพื้นฐานการลงทุน</Link></li>
-                  <li><Link to="/holder_Structure" className="text-white d-block py-1 px-3">โครงสร้างผู้ถือหุ้น</Link></li>
-                  <li><Link to="/holder_meeting" className="text-white d-block py-1 px-3">การประชุมผู้ถือหุ้น</Link></li>
-                </ul>
-              </li>
+          )}
+        </li>
+
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(3)} onMouseLeave={() => toggleDropdown(3)}>
+          <a>การกำกับดูแลกิจการ</a>
+          {openDropdown === 3 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Governance" className="text-white d-block py-1 px-3">การกำกับดูแลกิจการ</Link></li>
+              <li><Link to="/Governance1" className="text-white d-block py-1 px-3">คู่มือการกำกับดูแลกิจการฯ & ข้อบังคับของบริษัท</Link></li>
+              <li><Link to="/Governance2" className="text-white d-block py-1 px-3">การไม่จ่ายค่าอํานวยความสะดวก และ การไม่ว่าจ้างพนักงานรัฐ</Link></li>
             </ul>
-          </div>
-          {/* ฝั่งขวา */}
-          <div className="menu-column flex-fill p-3">
-            <ul className="list-unstyled">
-              <li>
-                <a  className="text-white d-block py-2 px-3">ข้อมูลนักวิเคราะห์</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Analyst" className="text-white d-block py-1 px-3">บทวิเคราะห์หลักทรัพย์</Link></li>
-                </ul>
-              </li>
-              <li>
-                <a  className="text-white d-block py-2 px-3">กิจกรรมและเอกสารนำเสนอ</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Showvideo" className="text-white d-block py-1 px-3">ภาพและวิดีโอบริษัท</Link></li>
-                </ul>
-              </li>
-              <li>
-                  <a  className="text-white d-block py-2 px-3">สอบถามข้อมูลนักลงทุน</a>
-                <ul className="list-unstyled">
-                  <li><Link to="/Connak" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</Link></li>
-                  <li><Link to="/#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</Link></li>
-                </ul>
-              </li>
+          )}
+        </li>
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(8)} onMouseLeave={() => toggleDropdown(8)}>
+          <a>ห้องข่าว</a>
+          {openDropdown === 8 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Marketmny" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</Link></li>
+              <li><li><Link to="/NewsPublish" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</Link></li></li>
             </ul>
-          </div>
-        </div>
-      </Collapse>
-    </Navbar>
+          )}
+        </li>
+
+        <li className="nav-center">
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            THAIRUNG IR
+          </Link>
+        </li>
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(4)} onMouseLeave={() => toggleDropdown(4)}>
+          <a>ห้องข่าว</a>
+          {openDropdown === 4 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Marketmny" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</Link></li>
+              <li><Link to="/NewsPublish" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</Link></li>
+            </ul>
+          )}
+        </li>
+
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(5)} onMouseLeave={() => toggleDropdown(5)}>
+          <a>ข้อมูลสำหรับผู้ถือหุ้น</a>
+          {openDropdown === 5 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/shareholder" className="text-white d-block py-1 px-3">ข้อมูลพื้นฐานการลงทุน</Link></li>
+              <li><Link to="/holder_Structure" className="text-white d-block py-1 px-3">โครงสร้างผู้ถือหุ้น</Link></li>
+              <li><Link to="/holder_meeting" className="text-white d-block py-1 px-3">การประชุมผู้ถือหุ้น</Link></li>
+            </ul>
+          )}
+        </li>
+
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(6)} onMouseLeave={() => toggleDropdown(6)}>
+          <a>สอบถามข้อมูลนักลงทุน</a>
+          {openDropdown === 6 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Connak" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</Link></li>
+              <li><Link to="/#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</Link></li>
+            </ul>
+          )}
+        </li>
+        {/* ข้อมูลนักวิเคราะห์ */}
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(7)} onMouseLeave={() => toggleDropdown(7)}>
+          <a>ข้อมูลนักวิเคราะห์</a>
+          {openDropdown === 7 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Analyst" className="text-white d-block py-1 px-3">บทวิเคราะห์หลักทรัพย์</Link></li>
+            </ul>
+          )}
+        </li>
+      </ul>
+    </nav>
   );
 };
 
-export default CustomMenu;
+export default CustomNavbar;

@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Menu from "../../../Components/Menu/menu";
 import "./share1.css";
 
-function index() {
+function Index() {
+  const [shareholders, setShareholders] = useState([]);
+
+  useEffect(() => {
+    // ดึงข้อมูลจาก API
+    axios
+      .get("http://localhost:8000/api/holders") // URL ของ API
+      .then((response) => {
+        setShareholders(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div>
       <Menu />
@@ -49,72 +64,29 @@ function index() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>ดร.ปราเสนี เหลืองโชติ</td>
-                  <td>140,955,087</td>
-                  <td>20.96%</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>นายวุฒิชัย เหลืองโชติ</td>
-                  <td>108,123,227</td>
-                  <td>16.07%</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>นางสาวเก้าใจ เหลืองโชติ</td>
-                  <td>104,650,741</td>
-                  <td>15.56%</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>นายสมพงษ์ เหลืองโชติ</td>
-                  <td>72,420,907</td>
-                  <td>10.77%</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>BANK OF SINGAPORE LIMITED</td>
-                  <td>30,283,341</td>
-                  <td>4.50%</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>นายพัฒนศร เหลืองโชติ</td>
-                  <td>28,512,562</td>
-                  <td>4.24%</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>นายกรชวุฒิ เหลืองโชติ</td>
-                  <td>20,724,528</td>
-                  <td>3.08%</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>นายจวิศวร์ เหลืองโชติ</td>
-                  <td>18,280,760</td>
-                  <td>2.72%</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>บริษัทหลักทรัพย์ ฟิลลิป จำกัด</td>
-                  <td>11,880,000</td>
-                  <td>1.77%</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>นายสาวอุไรวรรณ แซ่แต้</td>
-                  <td>11,000,000</td>
-                  <td>1.64%</td>
-                </tr>
+                {shareholders.map((shareholder, index) => (
+                  <tr key={shareholder.id}>
+                    <td>{index + 1}</td>
+                    <td>{shareholder.holder_name}</td>
+                    <td>{shareholder.shares_count.toLocaleString()}</td>
+                    <td>{shareholder.share_percentage}%</td>
+                  </tr>
+                ))}
               </tbody>
               <tfoot>
                 <tr className="table-warning">
                   <td colSpan="2" className="text-end fw-bold">รวม</td>
-                  <td>546,831,153</td>
-                  <td>81.30%</td>
+                  <td>
+                    {shareholders
+                      .reduce((sum, item) => sum + (item.shares_count || 0), 0)
+                      .toLocaleString()}
+                  </td>
+                  <td>
+                    {shareholders
+                      .reduce((sum, item) => sum + (parseFloat(item.share_percentage) || 0), 0)
+                      .toFixed(2)}
+                    %
+                  </td>
                 </tr>
               </tfoot>
             </table>
@@ -125,4 +97,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

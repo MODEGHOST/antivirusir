@@ -1,85 +1,54 @@
-import React from "react";
-import Menu from "../../../Components/Menu/menu";
-import "./anal.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Menu from '../../../Components/Menu/menu';
+import './anal.css';
 
 function Index() {
-  // ตัวอย่างข้อมูลที่แสดงผล
-  const data = [
-    {
-      company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-      date: "24 ก.พ. 2559",
-      download: "ดาวน์โหลด (1.9 MB)",
-    },
-    {
-      company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-      date: "13 พ.ย. 2558",
-      download: "ดาวน์โหลด (1.44 MB)",
-    },
-    {
-      company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-      date: "13 ส.ค. 2558",
-      download: "ดาวน์โหลด (592 KB)",
-    },
-    {
-      company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-      date: "13 ส.ค. 2557",
-      download: "ดาวน์โหลด (1749 KB)",
-    },
-    {
-      company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-      date: "26 ก.พ. 2558",
-      download: "ดาวน์โหลด (632 KB)",
-    },
-    {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "13 ส.ค. 2558",
-        download: "ดาวน์โหลด (592 KB)",
-      },
-      {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "13 ส.ค. 2557",
-        download: "ดาวน์โหลด (1749 KB)",
-      },
-      {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "26 ก.พ. 2558",
-        download: "ดาวน์โหลด (632 KB)",
-      },
-      {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "13 ส.ค. 2558",
-        download: "ดาวน์โหลด (592 KB)",
-      },
-      {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "13 ส.ค. 2557",
-        download: "ดาวน์โหลด (1749 KB)",
-      },
-      {
-        company: "Maybank Kim Eng Securities (Thailand) Public Company Limited",
-        date: "26 ก.พ. 2558",
-        download: "ดาวน์โหลด (632 KB)",
-      },
-  ];
+  const [data, setData] = useState([]); // เก็บข้อมูลที่ดึงจาก API
+  const [searchTerm, setSearchTerm] = useState(''); // เก็บค่าการค้นหา
+  const [loading, setLoading] = useState(true); // แสดงสถานะการโหลดข้อมูล
 
+  // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/api/analysis') // แก้ไข URL ตาม API ของคุณ
+      .then((response) => {
+        setData(response.data); // บันทึกข้อมูลใน State
+        setLoading(false); // ปิดสถานะการโหลด
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false); // ปิดสถานะการโหลดในกรณีมีข้อผิดพลาด
+      });
+  }, []);
+
+  // กรองข้อมูลที่ตรงกับการค้นหา
+  const filteredData = data
+  .filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.date.includes(searchTerm)
+  )
+  .sort((a, b) => new Date(b.date) - new Date(a.date)); 
   return (
     <div>
       <Menu />
+      
       {/* Hero Section */}
       <div
         className="container-fluid py-5 sticky-service"
         style={{
           backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "45vh",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          height: '45vh',
         }}
       >
         <div className="container py-5">
           <div className="text-center mx-auto pb-5" style={{ maxWidth: 800 }}>
             <h1
               className="display-3 text-capitalize mb-3"
-              style={{ color: "white", marginTop: "60px" }}
+              style={{ color: 'white', marginTop: '60px' }}
             >
               บทวิเคราะห์หลักทรัพย์
             </h1>
@@ -89,75 +58,78 @@ function Index() {
 
       {/* Content Section */}
       <div
-  className="container-fluid py-4"
-  style={{
-    backgroundColor: "#ffffff", // พื้นหลังสีขาว
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // เพิ่มเงา
-  }}
->
-  <div className="container">
-    <div className="search-section mb-4">
-      <input
-        type="text"
-        placeholder="ค้นหา"
-        className="form-control"
-        style={{ display: "inline-block", width: "300px", marginRight: "10px" }}
-      />
-      <select
-        className="form-select"
+        className="container-fluid py-5"
         style={{
-          width: "100px",
-          display: "inline-block",
-          marginLeft: "auto",
-          float: "right",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <option value="2567">2567</option>
-        <option value="2566">2566</option>
-      </select>
-    </div>
+        <div className="container">
+          <div className="search-section mb-4 d-flex justify-content-between">
+            {/* กล่องค้นหา */}
+            <input
+              type="text"
+              placeholder="ค้นหา"
+              className="form-control"
+              style={{ width: "300px" }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
-    {/* Header Section */}
-    <div className="d-flex justify-content-between align-items-center fw-bold text-primary mb-3 mt-4">
-      <div style={{ flex: 3 }}>บริษัทหลักทรัพย์</div>
-      <div style={{ flex: 1, textAlign: "center" }}>วันที่</div>
-      <div style={{ flex: 1, textAlign: "center" }}>ดาวน์โหลด</div>
-    </div>
+          {/* แสดงสถานะการโหลด */}
+          {loading && (
+            <div className="text-center py-5">
+              <p>กำลังโหลดข้อมูล...</p>
+            </div>
+          )}
 
-    <div className="data-list">
-      {data.map((item, index) => (
-        <div
-          key={index}
-          className="data-item d-flex justify-content-between align-items-center"
-          style={{
-            cursor: "pointer",
-            padding: "10px",
-            borderRadius: "10px",
-            border: "1px solid #ddd",
-            marginBottom: "10px",
-            backgroundColor: "#f9f9f9",
-          }}
-        >
-          <div style={{ flex: 3 }}>{item.company}</div>
-          <div style={{ flex: 1, textAlign: "center" }}>{item.date}</div>
-          <a
-            href="#"
-            className="text-primary"
-            style={{
-              flex: 1,
-              textAlign: "center",
-              fontWeight: "bold",
-              textDecoration: "none",
-            }}
-          >
-            {item.download}
-          </a>
+          {/* รายการข้อมูล */}
+          {!loading && (
+            <div className="data-list">
+              {filteredData.map((item, index) => {
+                // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
+                const pdfUrl = item.pdf_url.startsWith('http')
+                  ? item.pdf_url
+                  : `http://localhost:8000${item.pdf_url}`;
+
+                return (
+                  <div
+                    key={index}
+                    className="data-item d-flex justify-content-between align-items-center"
+                    onClick={() =>
+                      window.open(pdfUrl, "_blank", "noopener noreferrer")
+                    }
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      border: "1px solid #ddd",
+                      marginBottom: "10px",
+                      backgroundColor: "#f9f9f9",
+                    }}
+                  >
+                    <div>
+                      <span className="date text-primary">{item.date}</span>
+                      <p className="mb-0">{item.title}</p>
+                    </div>
+                    <button className="btn btn-outline-primary">
+                      <i className="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                );
+              })}
+
+              {/* หากไม่มีข้อมูล */}
+              {filteredData.length === 0 && (
+                <div className="text-center py-3">
+                  <p>ไม่พบข้อมูลที่ตรงกับการค้นหา</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      ))}
-    </div>
-  </div>
-</div>
-
+      </div>
     </div>
   );
 }
