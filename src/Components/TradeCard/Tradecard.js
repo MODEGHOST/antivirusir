@@ -10,7 +10,7 @@ function BoxCard() {
   useEffect(() => {
     // ดึงข้อมูลล่าสุดจาก API
     axios
-      .get('http://localhost:8000/api/stock-prices/latest') // เปลี่ยน URL ตาม API ของคุณ
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/stock-prices/latest') // เปลี่ยน URL ตาม API ของคุณ
       .then((response) => {
         if (response.data.status === 200) {
           setPriceData(response.data.data); // เก็บข้อมูลใน state

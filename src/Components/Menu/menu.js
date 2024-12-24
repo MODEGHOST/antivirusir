@@ -53,18 +53,16 @@ const CustomNavbar = () => {
             </ul>
           )}
         </li>
-
         <li className="nav-center">
           <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             THAIRUNG IR
           </Link>
         </li>
         <li className="dropdown" onMouseEnter={() => toggleDropdown(4)} onMouseLeave={() => toggleDropdown(4)}>
-          <a>ห้องข่าว</a>
+          <a>เอกสารเผยแพร่</a>
           {openDropdown === 4 && (
             <ul className="dropdown-menu">
-              <li><Link to="/Marketmny" className="text-white d-block py-1 px-3">ข่าวแจ้งตลาดหลักทรัพย์</Link></li>
-              <li><Link to="/NewsPublish" className="text-white d-block py-1 px-3">ข่าวจากสื่อสิ่งพิมพ์</Link></li>
+              <li><Link to="/Onereport" className="text-white d-block py-1 px-3">เอกสาร One-Report</Link></li>
             </ul>
           )}
         </li>

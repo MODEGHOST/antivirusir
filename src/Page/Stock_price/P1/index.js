@@ -10,32 +10,34 @@ function Index() {
   const [endDate, setEndDate] = useState('');
 
   useEffect(() => {
-    // ใช้ axios ในการดึงข้อมูลจาก API
     axios
-      .get('http://localhost:8000/api/stock-prices') // เปลี่ยน URL ให้ตรงกับ API ที่ตั้งค่าไว้ใน Laravel
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/stock-prices') 
       .then((response) => {
-        setStockPrices(response.data); // เก็บข้อมูลใน state
-        setFilteredPrices(response.data); // ตั้งค่าเริ่มต้นเป็นข้อมูลทั้งหมด
+        const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setStockPrices(sortedData); 
+        setFilteredPrices(sortedData);
       })
       .catch((error) => {
         console.error('Error fetching stock prices:', error); // แสดง error ในกรณีดึงข้อมูลไม่สำเร็จ
       });
   }, []);
-
+  
   const handleFilter = () => {
     if (startDate && endDate) {
       const filtered = stockPrices.filter((price) => {
         const priceDate = new Date(price.date);
         const start = new Date(startDate);
         const end = new Date(endDate);
-
+  
         return priceDate >= start && priceDate <= end;
       });
-      setFilteredPrices(filtered);
+      const sortedFiltered = filtered.sort((a, b) => new Date(b.date) - new Date(a.date)); // เรียงลำดับจากใหม่ไปเก่า
+      setFilteredPrices(sortedFiltered);
     } else {
       setFilteredPrices(stockPrices); // หากไม่ได้เลือกช่วงเวลา ให้แสดงข้อมูลทั้งหมด
     }
   };
+  
 
   return (
     <div>
@@ -123,7 +125,13 @@ function Index() {
                           <td>{price.low_price}</td>
                           <td>{price.previous_close_price}</td>
                           <td>{price.change}</td>
-                          <td>{price.changepercent}</td>
+                          <td
+                            style={{
+                              color: price.changepercent > 0 ? 'blue' : price.changepercent < 0 ? 'red' : 'black',
+                            }}
+                          >
+                            {price.changepercent}
+                          </td>
                           <td>{price.trading_value}</td>
                         </tr>
                       ))

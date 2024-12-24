@@ -24,7 +24,7 @@ function Index() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/stock-prices') // URL API Laravel
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/stock-prices') // URL API Laravel
       .then((response) => setStockPrices(response.data)) // เก็บข้อมูลจาก API
       .catch((error) => console.error('Error fetching stock prices:', error));
   }, []);

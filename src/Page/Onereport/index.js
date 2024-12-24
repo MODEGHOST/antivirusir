@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Menu from '../../../Components/Menu/menu';
-import './anal.css';
+import Menu from '../../Components/Menu/menu';
+import './P1.css';
 
 function Index() {
   const [data, setData] = useState([]); // เก็บข้อมูลที่ดึงจาก API
@@ -11,7 +11,7 @@ function Index() {
   // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
   useEffect(() => {
     axios
-      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public') // แก้ไข URL ตาม API ของคุณ
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/doc_read') // แก้ไข URL ตาม API ของคุณ
       .then((response) => {
         setData(response.data); // บันทึกข้อมูลใน State
         setLoading(false); // ปิดสถานะการโหลด
@@ -50,7 +50,7 @@ function Index() {
               className="display-3 text-capitalize mb-3"
               style={{ color: 'white', marginTop: '60px' }}
             >
-              บทวิเคราะห์หลักทรัพย์
+              เอกสาร One-Report
             </h1>
           </div>
         </div>
@@ -89,9 +89,9 @@ function Index() {
             <div className="data-list">
               {filteredData.map((item, index) => {
                 // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
-                const pdfUrl = item.pdf_url.startsWith('http')
-                  ? item.pdf_url
-                  : `http://129.200.6.52/laravel_auth_jwt_api_omd/public${item.pdf_url}`;
+                const pdfUrl = item.file_path.startsWith('http')
+                  ? item.file_path
+                  : `http://129.200.6.52/laravel_auth_jwt_api_omd/public${item.file_path}`;
 
                 return (
                   <div

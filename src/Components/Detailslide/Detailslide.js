@@ -15,7 +15,7 @@ function DetailSlide({ selectedTitle }) {
   useEffect(() => {
     // เรียก API เพื่อดึงข้อมูล doc_read
     axios
-      .get('http://localhost:8000/api/doc_read')
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/doc_read')
       .then((response) => {
         setFinancialReports(response.data); // เซตข้อมูลจาก API
       })
@@ -86,15 +86,15 @@ function DetailSlide({ selectedTitle }) {
                 <div className="flippable-image-front">
                   {/* รูปภาพจะถูกแสดงที่นี่ */}
                   <img
-                    src={`http://localhost:8000/storage/${report.file_path}`}
-                    alt={report.title}
-                    style={{ borderRadius: '10px', width: '200px', height: '200px' }}
+                    src={`${process.env.PUBLIC_URL}/assest/img/1.png`}
+                    alt= 'img'
+                    style={{ borderRadius: '10px', width: '360px', height: '200px' }}
                   />
                 </div>
                 <div className="flippable-image-back">
                   {/* ถ้าต้องการแสดงลิงก์ดาวน์โหลด */}
                   <a
-                    href={`http://localhost:8000/storage/${report.file_path}`}
+                    href={`http://129.200.6.52/laravel_auth_jwt_api_omd/public/storage/${report.file_path}`}
                     download
                     style={{ color: '#fff', fontSize: '1.2rem', textDecoration: 'none' }}
                   >
@@ -120,7 +120,7 @@ function DetailSlide({ selectedTitle }) {
                 }}
               >
                 <img
-                  src={`http://localhost:8000/storage/${report.qr_code_path}`}
+                  src={`http://129.200.6.52/laravel_auth_jwt_api_omd/public/storage/${report.qr_code_path}`}
                   alt="QR Code"
                   style={{ width: '100px', height: '100px' }}
                 />

@@ -11,7 +11,7 @@ function Index() {
   // ใช้ useEffect เพื่อดึงข้อมูลจาก API
   useEffect(() => {
  
-    axios.get("http://localhost:8000/api/manuals")
+    axios.get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/manuals")
 
       // ใช้ URL ของ API จริง
       .then((response) => {
@@ -78,7 +78,7 @@ function Index() {
                     <div
                       className="flip-card-front"
                       style={{
-                        backgroundImage: `url(http://localhost:8000${manual.front_image_url})`, // ใช้ URL ของรูปภาพจาก API
+                        backgroundImage: `url(http://129.200.6.52/laravel_auth_jwt_api_omd/public${manual.front_image_url})`, // ใช้ URL ของรูปภาพจาก API
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         borderRadius: "10px",

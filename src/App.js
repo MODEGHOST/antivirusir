@@ -6,7 +6,7 @@ import PriceData_P2 from './Page/Stock_price/P2/index';
 import Financial_information1 from './Page/Financial_infor/P1/index';
 import Financial_information2 from './Page/Financial_infor/P2/index';
 import Financial_information3 from './Page/Financial_infor/P3/index';
-import One_report1 from './Page/One_report/index';
+import One_report1 from './Page/Onereport/index';
 import Marketmny from './Page/Roomnews/P1/index';
 import NewsPublish from './Page/Roomnews/P2/index';
 import Analyst from './Page/Analyst/P1/index';
@@ -19,6 +19,7 @@ import Shareholder from './Page/shareholders/P1/index'
 import HolderStructure from './Page/shareholders/P2/index';
 import Holdermeeting from './Page/shareholders/P3/index';
 import GLine from './Page/Stock_price/P3/index'
+import Onereport from './Page/Onereport/index'
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/holder_Structure" element={<HolderStructure />} />
         <Route path="/holder_meeting" element={<Holdermeeting />} />
         <Route path="/GLine" element={<GLine />} />
+        <Route path="/Onereport" element={<Onereport />} />
       </Routes>
     </Router>
   );

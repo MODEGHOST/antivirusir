@@ -8,14 +8,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-
 function Index() {
   const [news, setNews] = useState([]); // สำหรับข้อมูลข่าว
 
   useEffect(() => {
     // ดึงข้อมูลข่าวจาก API
     axios
-      .get('http://localhost:8000/api/news') // URL ของ API ที่ Laravel ให้บริการ
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/news') // URL ของ API ที่ Laravel ให้บริการ
       .then((response) => {
         // เรียงลำดับข้อมูลตามวันที่และเลือก 4 ข่าวล่าสุด
         const sortedNews = response.data
@@ -126,7 +125,7 @@ function Index() {
             >
               <div className="mb-3">
                 <a
-                  href={`http://localhost:8000${news.pdf_url}`} // ใช้ URL PDF จาก API
+                  href={`http://129.200.6.52/laravel_auth_jwt_api_omd/public${news.pdf_url}`} // ใช้ URL PDF จาก API
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -175,51 +174,15 @@ function Index() {
           </div>
           <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
             <div className="about-item">
-              <h4 className="text-primary text-uppercase">เอกสาร ดาวน์โหลด</h4>
-              <h1 className="display-3 mb-3">ข้อความ</h1>
-              <p className="mb-4">รายละเอียด</p>
-              <div className="bg-light rounded p-4 mb-4">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="d-flex">
-                      <div className="pe-4">
-                        <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}>
-                          <i className="fas fa-tint text-white fa-2x" />
-                        </div>
-                      </div>
-                      <div>
-                        <a href="#" className="h4 d-inline-block mb-3">Satisfied Customer</a>
-                        <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-light rounded p-4 mb-4">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="d-flex">
-                      <div className="pe-4">
-                        <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{width: 80, height: 80}}>
-                          <i className="fas fa-faucet text-white fa-2x" />
-                        </div>
-                      </div>
-                      <div>
-                        <a href="#" className="h4 d-inline-block mb-3">Standard Product</a>
-                        <p className="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a href="#" className="btn btn-secondary rounded-pill py-3 px-5">Read More</a>
+              <h4 className="text-primary text-uppercase">เอกสาร One Report</h4>
+              <a href="#" className="btn btn-secondary rounded-pill py-3 px-5">MORE</a>
             </div>
           </div>
         </div>
       </div>
     </div>
     {/* ส่วนที่4 */}
-    <div className="container-fluid feature bg-light py-5">
+    {/* <div className="container-fluid feature bg-light py-5">
           <div className="container py-5">
             <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
               <h1 className="display-3 text-capitalize mb-3">สอบถามข้อมูลนักลงทุน</h1>
@@ -258,7 +221,7 @@ function Index() {
               </div>
             </div>
           </div>
-        </div> 
+        </div>  */}
 {/* ส่วนที่5 */}
 <div className="container-fluid service bg-light overflow-hidden py-5">
       <div className="container py-5">

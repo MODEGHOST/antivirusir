@@ -11,7 +11,7 @@ function Index() {
   // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/news') // แก้ไข URL ตาม API ของคุณ
+      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/news') // แก้ไข URL ตาม API ของคุณ
       .then((response) => {
         setData(response.data); // บันทึกข้อมูลใน State
         setLoading(false); // ปิดสถานะการโหลด
@@ -91,7 +91,7 @@ function Index() {
                 // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
                 const pdfUrl = item.pdf_url.startsWith('http')
                   ? item.pdf_url
-                  : `http://localhost:8000${item.pdf_url}`;
+                  : `http://129.200.6.52/laravel_auth_jwt_api_omd/public${item.pdf_url}`;
 
                 return (
                   <div
