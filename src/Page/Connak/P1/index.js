@@ -54,7 +54,7 @@ function index() {
                   </div>
                 </div>
               </div>
-                <form>
+                {/* <form>
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label className="form-label">ชื่อ - สกุล:</label>
@@ -190,7 +190,7 @@ function index() {
                       ส่งข้อมูล
                     </button>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
           </div>

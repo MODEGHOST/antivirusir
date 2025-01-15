@@ -12,7 +12,7 @@ function Index() {
   // ฟังก์ชันดึงข้อมูลจาก API
   const fetchCardData = async () => {
     try {
-      const response = await axios.get(`http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/detailgenerations`);
+      const response = await axios.get(process.env.REACT_APP_API_KEY+"/api/detailgenerations");
       console.log(response.data); // ตรวจสอบข้อมูลที่ดึงมา
       // จัดเรียงข้อมูลตามปีล่าสุดลงไป
       const sortedData = response.data.sort((a, b) => b.year - a.year);

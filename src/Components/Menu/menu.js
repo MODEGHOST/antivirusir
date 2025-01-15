@@ -54,10 +54,23 @@ const CustomNavbar = () => {
           )}
         </li>
         <li className="nav-center">
-          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            THAIRUNG IR
-          </Link>
-        </li>
+  <Link
+    to="/"
+    onClick={() => {
+      // เลื่อนหน้าไปด้านบน
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(
+        "ยินดีต้อนรับเข้าสู่เว็บ นักลงทุนสัมพันธ์ครับ"
+      );
+      utterance.lang = "th-TH";
+      utterance.rate = 0.7; 
+      synth.speak(utterance);
+    }}
+  >
+    THAIRUNG IR
+  </Link>
+</li>
         <li className="dropdown" onMouseEnter={() => toggleDropdown(4)} onMouseLeave={() => toggleDropdown(4)}>
           <a>เอกสารเผยแพร่</a>
           {openDropdown === 4 && (
@@ -66,7 +79,15 @@ const CustomNavbar = () => {
             </ul>
           )}
         </li>
-
+{/* เอกสารนำเสนอ */}
+        <li className="dropdown" onMouseEnter={() => toggleDropdown(7)} onMouseLeave={() => toggleDropdown(7)}>
+          <a>เอกสารนำเสนอ</a>
+          {openDropdown === 7 && (
+            <ul className="dropdown-menu">
+              <li><Link to="/Analyst" className="text-white d-block py-1 px-3">เอกสารนำเสนอ</Link></li>
+            </ul>
+          )}
+        </li>
         <li className="dropdown" onMouseEnter={() => toggleDropdown(5)} onMouseLeave={() => toggleDropdown(5)}>
           <a>ข้อมูลสำหรับผู้ถือหุ้น</a>
           {openDropdown === 5 && (
@@ -74,6 +95,7 @@ const CustomNavbar = () => {
               <li><Link to="/shareholder" className="text-white d-block py-1 px-3">ข้อมูลพื้นฐานการลงทุน</Link></li>
               <li><Link to="/holder_Structure" className="text-white d-block py-1 px-3">โครงสร้างผู้ถือหุ้น</Link></li>
               <li><Link to="/holder_meeting" className="text-white d-block py-1 px-3">การประชุมผู้ถือหุ้น</Link></li>
+              <li><Link to="/PolicyPayment" className="text-white d-block py-1 px-3">นโยบายและการจ่ายเงินปันผล</Link></li>
             </ul>
           )}
         </li>
@@ -84,15 +106,6 @@ const CustomNavbar = () => {
             <ul className="dropdown-menu">
               <li><Link to="/Connak" className="text-white d-block py-1 px-3">ติดต่อนักลงทุนสัมพันธ์</Link></li>
               <li><Link to="/#" className="text-white d-block py-1 px-3">อีเมล์รับข่าวสาร</Link></li>
-            </ul>
-          )}
-        </li>
-        {/* ข้อมูลนักวิเคราะห์ */}
-        <li className="dropdown" onMouseEnter={() => toggleDropdown(7)} onMouseLeave={() => toggleDropdown(7)}>
-          <a>ข้อมูลนักวิเคราะห์</a>
-          {openDropdown === 7 && (
-            <ul className="dropdown-menu">
-              <li><Link to="/Analyst" className="text-white d-block py-1 px-3">บทวิเคราะห์หลักทรัพย์</Link></li>
             </ul>
           )}
         </li>

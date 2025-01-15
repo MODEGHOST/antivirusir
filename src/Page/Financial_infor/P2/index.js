@@ -12,7 +12,7 @@ function Index() {
   // ฟังก์ชันดึงข้อมูลจาก API
   const fetchCardData = async () => {
     try {
-      const response = await axios.get(`http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/finan-states`);
+      const response = await axios.get(process.env.REACT_APP_API_KEY + "/api/finan-states");
       console.log(response.data); // ตรวจสอบข้อมูลที่ดึงมา
       // จัดเรียงข้อมูลตามปีล่าสุดลงไป
       const sortedData = response.data.sort((a, b) => b.year - a.year);
@@ -117,7 +117,7 @@ function Index() {
                     <div className="d-flex justify-content-center">
                 {/* ปุ่มดาวน์โหลดไฟล์ */}
                     <a
-                      href={`http://129.200.6.52/laravel_auth_jwt_api_omd/public${card.pdf_url}`}
+                      href={`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${card.pdf_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-secondary mx-2"

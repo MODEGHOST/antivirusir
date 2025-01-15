@@ -10,21 +10,43 @@ import axios from 'axios';
 
 function Index() {
   const [news, setNews] = useState([]); // สำหรับข้อมูลข่าว
+  const [latestDate, setLatestDate] = useState(null);
+  const [financialReport, setFinancialReport] = useState([]);
 
   useEffect(() => {
     // ดึงข้อมูลข่าวจาก API
     axios
-      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/news') // URL ของ API ที่ Laravel ให้บริการ
-      .then((response) => {
-        // เรียงลำดับข้อมูลตามวันที่และเลือก 4 ข่าวล่าสุด
-        const sortedNews = response.data
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-          .slice(0, 4); // เลือกเฉพาะ 4 รายการแรก
-        setNews(sortedNews); // เก็บข้อมูลใน state
-      })
-      .catch((error) => {
-        console.error('Error fetching news:', error);
-      });
+  .get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/news") // URL ของ API
+  .then((response) => {
+    // เรียงลำดับข้อมูลตาม created_at
+    const sortedNews = response.data.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+
+    // เลือกข้อมูลวันที่ล่าสุด (รายการแรกหลังเรียง)
+    const latestDate = sortedNews[0]?.created_at;
+
+    // เลือกเฉพาะ 4 ข่าวล่าสุด
+    const latestNews = sortedNews.slice(0, 4);
+
+    // เก็บข้อมูลใน state
+    setNews(latestNews); // ข่าวล่าสุด 4 รายการ
+    setLatestDate(latestDate); // วันที่ล่าสุด
+  })
+  .catch((error) => {
+    console.error("Error fetching news:", error);
+  });
+      axios
+    .get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/finan-states") // URL ของ API งบการเงิน
+    .then((response) => {
+      const latestReport = response.data.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at) // เรียงตาม created_at
+      )[0]; // เลือกเฉพาะรายการล่าสุด
+      setFinancialReport(latestReport); // เก็บข้อมูลล่าสุดใน state
+    })
+    .catch((error) => {
+      console.error("Error fetching financial report:", error);
+    });
   }, []);
   return (
     <div>
@@ -144,7 +166,7 @@ function Index() {
                   marginTop: "auto", // ดันให้วันที่ไปชิดด้านล่าง
                 }}
               >
-                {new Date(news.created_at).toLocaleDateString("th-TH", {
+                {new Date(news.date).toLocaleDateString("th-TH", {
                   year: "numeric",
                   month: "2-digit",
                   day: "2-digit",
@@ -173,55 +195,83 @@ function Index() {
             
           </div>
           <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
-            <div className="about-item">
-              <h4 className="text-primary text-uppercase">เอกสาร One Report</h4>
-              <a href="#" className="btn btn-secondary rounded-pill py-3 px-5">MORE</a>
-            </div>
-          </div>
+  <div className="about-item">
+    <h4 className="text-primary text-uppercase" style={{ textAlign: "center" }}>Investor Kits</h4>
+
+    {/* แสดงงบการเงินล่าสุด (เรียงตาม created_at) */}
+    <h4 className="text-primary text-uppercase mt-4">งบการเงิน</h4>
+    {financialReport && (
+      <div
+        className="data-item d-flex justify-content-between align-items-center"
+        onClick={() =>
+          window.open(financialReport.pdf_url, "_blank", "noopener noreferrer")
+        }
+        style={{
+          cursor: "pointer",
+          padding: "10px",
+          borderRadius: "10px",
+          border: "1px solid #ddd",
+          marginBottom: "10px",
+          backgroundColor: "#f9f9f9",
+        }}
+      >
+        <div>
+          <span className="date text-primary">
+            {new Date(financialReport.created_at).toLocaleDateString("th-TH", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+          </span>
+          <p className="mb-0">{financialReport.title}</p>
+        </div>
+        <button className="btn btn-outline-primary">
+          <i className="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    )}
+
+    {/* แสดงข่าวแจ้งตลาดหลักทรัพย์ล่าสุด (เรียงตาม date) */}
+    <h4 className="text-primary text-uppercase mt-4">ข่าวแจ้งตลาดหลักทรัพย์</h4>
+    {news.length > 0 && (
+  <div
+    className="data-item d-flex justify-content-between align-items-center"
+    onClick={() => {
+      const pdfUrl = `http://129.200.6.52/laravel_auth_jwt_api_omd/public${news[0].pdf_url}`; // ใช้ news[0] สำหรับรายการแรก
+      console.log("Opening PDF URL:", pdfUrl); // ตรวจสอบ URL
+      window.open(pdfUrl, "_blank", "noopener noreferrer");
+    }}
+    style={{
+      cursor: "pointer",
+      padding: "10px",
+      borderRadius: "10px",
+      border: "1px solid #ddd",
+      marginBottom: "10px",
+      backgroundColor: "#f9f9f9",
+    }}
+  >
+    <div>
+      <span className="date text-primary">
+        {new Date(news[0].created_at).toLocaleDateString("th-TH", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })}
+      </span>
+      <p className="mb-0">{news[0].title}</p>
+    </div>
+    <button className="btn btn-outline-primary">
+      <i className="fas fa-arrow-right"></i>
+    </button>
+  </div>
+)}
+  </div>
+</div>
+
         </div>
       </div>
     </div>
-    {/* ส่วนที่4 */}
-    {/* <div className="container-fluid feature bg-light py-5">
-          <div className="container py-5">
-            <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-              <h1 className="display-3 text-capitalize mb-3">สอบถามข้อมูลนักลงทุน</h1>
-            </div>
-            <div className="row g-4">
-                <div className=" col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                  <div className="feature-item p-4">
-                    <div className="feature-icon mb-3">
-                      <img 
-                          src={`${process.env.PUBLIC_URL}/assest/gif/news.gif`} 
-                          alt="News Animation" 
-                          className="img-fluid" 
-                      // style={{ borderRadius: '50%', width: '80px', height: '80px' }}  กรอกรอบวง
-                      />
-                  </div>
-                    <a href="#" className="h4 mb-3">Investor Kits</a>
-                    <p className="mb-3">วันที่</p>
-                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                  <div className="feature-item p-4">
-                    <div className="feature-icon mb-3"><i className="fas fa-filter text-white fa-3x" /></div>
-                    <a href="#" className="h4 mb-3">ติดต่อนักลงทุนสัมพันธ์</a>
-                    <p className="mb-3">วันที่</p>
-                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                  <div className="feature-item p-4">
-                    <div className="feature-icon mb-3"><i className="fas fa-recycle text-white fa-3x" /></div>
-                    <a href="#" className="h4 mb-3">อีเมล์รับข่าวสาร</a>
-                    <p className="mb-3">วันที่</p>
-                    <a href="#" className="btn text-secondary">Read More <i className="fa fa-angle-right" /></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>  */}
+    
 {/* ส่วนที่5 */}
 <div className="container-fluid service bg-light overflow-hidden py-5">
       <div className="container py-5">
@@ -232,152 +282,9 @@ function Index() {
           <div className="col-lg-6 calendar-wrapper wow fadeInUp" data-wow-delay="0.3s">
             <Calendar />
           </div>
-          {/* <div className="col-lg-6">
-            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.2s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Water Softening</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.4s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-recycle text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Market Research</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-            <div className="service-item rounded p-4 wow fadeInRight" data-wow-delay="0.6s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-project-diagram text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Project Planning</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
-{/* ส่วนที่6 */}
-{/* <div className="container-fluid product py-5">
-    <div className="container py-5">
-        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{maxWidth: 800}}>
-            <h4 className="text-uppercase text-primary">Our Products</h4>
-            <h1 className="display-3 text-capitalize mb-3">รายชื่อนักวิเคราะห์</h1>
-        </div>
-        <div className="row g-4 justify-content-center">
-            <div className="col-lg-4 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
-                <div className="product-item d-flex align-items-center text-center">
-                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
-                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 1" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-                    </div>
-                    <div className="product-details">
-                        <h5 className="text-dark">นักลงทุนชนะ100%</h5>
-                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
-                <div className="product-item d-flex align-items-center text-center">
-                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
-                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 2" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-                    </div>
-                    <div className="product-details">
-                        <h5 className="text-dark">นักลงทุนชนะ80%</h5>
-                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-                <div className="product-item d-flex align-items-center text-center">
-                    <div className="avatar" style={{width: '150px', height: '150px', borderRadius: '50%', overflow: 'hidden', marginRight: '20px'}}>
-                        <img src={`${process.env.PUBLIC_URL}/assest/img/AVA.jpg`} alt="Avatar 3" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-                    </div>
-                    <div className="product-details">
-                        <h5 className="text-dark">นักลงทุนชนะ70%</h5>
-                        <p className="text-secondary">ลงทุนไม่เคยพลาด</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> */}
-
-
-{/* ส่วนที่5 สำรอง */}
-{/* <div className="container-fluid service bg-light overflow-hidden py-5">
-      <div className="container py-5">
-        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{ maxWidth: 800 }}>
-          <h1 className="display-3 text-capitalize mb-3">ปฏิทินกิจกรรม</h1>
-        </div>
-        <div className="row align-items-center">
-          <div className="col-lg-6 calendar-wrapper wow fadeInUp" data-wow-delay="0.3s">
-            <Calendar />
-          </div>
-          <div className="col-lg-6">
-            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.2s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-assistive-listening-systems text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Water Softening</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-            <div className="service-item rounded p-4 mb-4 wow fadeInRight" data-wow-delay="0.4s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-recycle text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Market Research</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-            <div className="service-item rounded p-4 wow fadeInRight" data-wow-delay="0.6s">
-              <div className="d-flex">
-                <div className="service-btn me-3"><i className="fas fa-project-diagram text-white fa-2x" /></div>
-                <div>
-                  <h4 className="mb-1">Project Planning</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas provident maiores quisquam.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> */}
-
-
-{/* ส่วนที่8 */}
-{/* <div className="container-fluid team pb-5">
-    <div className="container pb-5">
-        <div className="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style={{ maxWidth: 800 }}>
-            <h4 className="text-uppercase text-primary">Our Team</h4>
-            <h1 className="display-3 text-capitalize mb-3">มาตราฐานบริษัท</h1>
-        </div>
-        <div className="row g-4 justify-content-center">
-            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                <img src={`${process.env.PUBLIC_URL}/assest/img/CAC.png`} className="img-fluid rounded-circle team-image" alt="Image" />
-            </div>
-            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                <img src={`${process.env.PUBLIC_URL}/assest/img/ukas_9001.png`} className="img-fluid team-image" alt="Image" />
-            </div>
-            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                <img src={`${process.env.PUBLIC_URL}/assest/img/ukas_14001.png`} className="img-fluid team-image" alt="Image" />
-            </div>
-            <div className="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-                <img src={`${process.env.PUBLIC_URL}/assest/img/URS_CER.png`} className="img-fluid team-image" alt="Image" />
-            </div>
-        </div>
-    </div>
-</div> */}
-
 
 {/* ส่วนที่9 */}
 <div className="container-fluid contact pb-1">

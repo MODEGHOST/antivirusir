@@ -20,6 +20,7 @@ import HolderStructure from './Page/shareholders/P2/index';
 import Holdermeeting from './Page/shareholders/P3/index';
 import GLine from './Page/Stock_price/P3/index'
 import Onereport from './Page/Onereport/index'
+import PolicyPayment from './Page/shareholders/P4/index'
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/holder_meeting" element={<Holdermeeting />} />
         <Route path="/GLine" element={<GLine />} />
         <Route path="/Onereport" element={<Onereport />} />
+        <Route path="/PolicyPayment" element={<PolicyPayment />} />
       </Routes>
     </Router>
   );

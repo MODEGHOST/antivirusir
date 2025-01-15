@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* ตัวอย่างการปรับแต่งเพิ่มเติม */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 700; /* คุณสามารถปรับน้ำหนักตัวอักษรได้ เช่น 300, 400, 500 */
+}
+
+p, a, span, li {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 400; /* ค่า default น้ำหนักฟอนต์ */
+}
+
+button, input, textarea {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 500;
 }

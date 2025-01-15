@@ -8,27 +8,45 @@ function Index() {
   const [reportData, setReportData] = useState([]);
   const [activeTable, setActiveTable] = useState('table1'); // State สำหรับเลือกตารางที่แสดง
   const [loading, setLoading] = useState(true); // สถานะการโหลดข้อมูล
+  const [proposeagendaData, setProposeagendaData] = useState([]); // เก็บข้อมูล proposeagenda
 
-  // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
+  // ดึงข้อมูลเมื่อ Component ถูก Mount
   useEffect(() => {
-    axios
-      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/meetinguser')
-      .then((response) => {
-        setData(response.data); // บันทึกข้อมูลใน State
-        setLoading(false); // ปิดสถานะการโหลด
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setLoading(false); // ปิดสถานะการโหลดเมื่อมีข้อผิดพลาด
-      });
-  }, []);
+    if (activeTable === 'table1') {
+      axios
+        .get('http://localhost:8000/api/proposeagenda') // ดึงข้อมูล proposeagenda
+        .then((response) => {
+          setProposeagendaData(response.data); // บันทึกข้อมูลใน State
+          setLoading(false); // ปิดสถานะการโหลด
+        })
+        .catch((error) => {
+          console.error('Error fetching proposeagenda data:', error);
+          setLoading(false);
+        });
+    }
+  }, [activeTable]);
+
+  useEffect(() => {
+    if (activeTable === 'table2') {
+      axios
+        .get(process.env.REACT_APP_API_KEY + '/api/meetinguser')
+        .then((response) => {
+          setData(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching meetinguser data:', error);
+          setLoading(false);
+        });
+    }
+  }, [activeTable]);
 
   useEffect(() => {
     if (activeTable === 'table3') {
       axios
-        .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/reportmtuser')
+        .get(process.env.REACT_APP_API_KEY + '/api/reportmtuser')
         .then((response) => {
-          setReportData(response.data); // บันทึกข้อมูลใน State
+          setReportData(response.data);
         })
         .catch((error) => {
           console.error('Error fetching reportmtuser data:', error);
@@ -73,6 +91,7 @@ function Index() {
           className="btn-group mb-4 wow wow fadeInLeft"
           data-wow-delay="0.2s"
           role="group"
+          style={{marginLeft: '5%'}}
         >
           <button
             type="button"
@@ -99,62 +118,60 @@ function Index() {
         </div>
 
         <div className="container py-5">
-          {activeTable === 'table1' && (
-            <div className="row">
-              <div className="col-lg-6 col-md-12">
-                <div className="flip-card" style={{ width: '500px', height: '350px' }}>
-                  <div className="flip-card-inner">
-                    <div
-                      className="flip-card-front"
-                      style={{
-                        backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/5.jpg)`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        borderRadius: '10px',
-                        color: 'white',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                      }}
-                    >
-                      <p style={{ fontSize: '30px' }}>คู่มือการกำกับดูแลกิจการ</p>
-                    </div>
-                    <div className="flip-card-back">
-                      <a href="#">
-                        <i className="fa fa-download"></i> ดาวน์โหลด
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6 col-md-12">
-                <div className="flip-card" style={{ width: '500px', height: '350px' }}>
-                  <div className="flip-card-inner">
-                    <div
-                      className="flip-card-front"
-                      style={{
-                        backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/14.png)`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        borderRadius: '10px',
-                        color: 'white',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                      }}
-                    >
-                      <p style={{ fontSize: '30px' }}>ข้อบังคับของบริษัท</p>
-                    </div>
-                    <div className="flip-card-back">
-                      <a href="#">
-                        <i className="fa fa-download"></i> ดาวน์โหลด
-                      </a>
+        {activeTable === 'table1' && (
+            <div className="container py-5">
+              <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                {loading ? (
+                  <div>Loading...</div>
+                ) : proposeagendaData.length === 1 ? (
+                  <div className="col-lg-6 col-md-12">
+                    <div className="flip-card">
+                      <div className="flip-card-inner">
+                        <div className="flip-card-front" style={{ backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '10px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                          <p style={{ fontSize: '30px', margin: 0 }}>{proposeagendaData[0].title}</p>
+                        </div>
+                        <div className="flip-card-back" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '20px', height: '100%' }}>
+                          <div style={{ marginBottom: 'auto', textAlign: 'center' }}>
+                            <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{proposeagendaData[0].title}</p>
+                          </div>
+                          <div style={{ textAlign: 'center' }}>
+                            <a href={`http://localhost:8000${proposeagendaData[0].pdf_url}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: '#808080', color: 'white', padding: '10px 20px', borderRadius: '20px', textDecoration: 'none', fontSize: '16px', fontWeight: 'bold', display: 'inline-block' }}>
+                              <i className="fa fa-download"></i> ดาวน์โหลด
+                            </a>
+                          </div>
+                          <div style={{ marginTop: 'auto', fontSize: '14px', color: 'gray', textAlign: 'center' }}>
+                            วันที่เผยแพร่: {proposeagendaData[0].date}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  proposeagendaData.map((agenda) => (
+                    <div className="col-lg-6 col-md-12" key={agenda.id}>
+                      <div className="flip-card">
+                        <div className="flip-card-inner">
+                          <div className="flip-card-front" style={{ backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '10px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                            <p style={{ fontSize: '30px', margin: 0 }}>{agenda.title}</p>
+                          </div>
+                          <div className="flip-card-back" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '20px', height: '100%' }}>
+                            <div style={{ marginBottom: 'auto', textAlign: 'center' }}>
+                              <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{agenda.title}</p>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                              <a href={`http://localhost:8000${agenda.pdf_url}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: '#808080', color: 'white', padding: '10px 20px', borderRadius: '20px', textDecoration: 'none', fontSize: '16px', fontWeight: 'bold', display: 'inline-block' }}>
+                                <i className="fa fa-download"></i> ดาวน์โหลด
+                              </a>
+                            </div>
+                            <div style={{ marginTop: 'auto', fontSize: '14px', color: 'gray', textAlign: 'center' }}>
+                              วันที่เผยแพร่: {agenda.date}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           )}
@@ -169,7 +186,7 @@ function Index() {
                     key={item.id} // ใช้ `id` เป็น key สำหรับแต่ละรายการ
                     className="data-item d-flex justify-content-between align-items-center"
                     onClick={() =>
-                      window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/public${item.pdf_file}`, "_blank", "noopener noreferrer")
+                      window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
                     } // เปิดลิงก์ไปยังไฟล์ PDF
                     style={{
                       cursor: "pointer",
@@ -203,7 +220,7 @@ function Index() {
                    key={item.id} // ใช้ `id` เป็น key สำหรับแต่ละรายการ
                    className="data-item d-flex justify-content-between align-items-center"
                    onClick={() =>
-                     window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/public${item.pdf_file}`, "_blank", "noopener noreferrer")
+                     window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
                    } // เปิดลิงก์ไปยังไฟล์ PDF
                    style={{
                      cursor: "pointer",

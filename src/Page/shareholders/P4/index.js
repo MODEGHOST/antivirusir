@@ -1,56 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Menu from '../../../Components/Menu/menu';
-import './anal.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Menu from "../../../Components/Menu/menu";
+import "./P4.css";
 
 function Index() {
   const [data, setData] = useState([]); // เก็บข้อมูลที่ดึงจาก API
-  const [searchTerm, setSearchTerm] = useState(''); // เก็บค่าการค้นหา
+  const [searchTerm, setSearchTerm] = useState(""); // เก็บค่าการค้นหา
   const [loading, setLoading] = useState(true); // แสดงสถานะการโหลดข้อมูล
 
   // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
   useEffect(() => {
-    axios  
-      .get(process.env.REACT_APP_API_KEY + "/api/analysis") // แก้ไข URL ตาม API ของคุณ
+    axios
+      .get("http://localhost:8000/api/policypayment") // แก้ไข URL ตาม API ของคุณ
       .then((response) => {
         setData(response.data); // บันทึกข้อมูลใน State
         setLoading(false); // ปิดสถานะการโหลด
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false); // ปิดสถานะการโหลดในกรณีมีข้อผิดพลาด
       });
   }, []);
 
   // กรองข้อมูลที่ตรงกับการค้นหา
   const filteredData = data
-  .filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.date.includes(searchTerm)
-  )
-  .sort((a, b) => new Date(b.date) - new Date(a.date)); 
+    .filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.date.includes(searchTerm)
+    )
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
     <div>
       <Menu />
-      
+
       {/* Hero Section */}
       <div
         className="container-fluid py-5 sticky-service"
         style={{
           backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          height: '45vh',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "45vh",
         }}
       >
         <div className="container py-5">
           <div className="text-center mx-auto pb-5" style={{ maxWidth: 800 }}>
             <h1
               className="display-3 text-capitalize mb-3"
-              style={{ color: 'white', marginTop: '60px' }}
+              style={{ color: "white", marginTop: "60px" }}
             >
-              เอกสารนำเสนอ
+              นโยบายและการจ่ายเงินปันผล
             </h1>
           </div>
         </div>
@@ -65,8 +66,18 @@ function Index() {
         }}
       >
         <div className="container">
-          <div className="search-section mb-4 d-flex justify-content-between">
-            {/* กล่องค้นหา */}
+          {/* เพิ่มข้อความที่ต้องการ */}
+          <div className="policy-info mb-4">
+            <h3>นโยบายและประวัติการจ่ายเงินปันผลของ TRU</h3>
+            <p>
+              นโยบายการจ่ายเงินปันผลของบริษัทฯ<br />
+              บริษัทมีนโยบายในการจ่ายเงินปันผล ในอัตราประมาณร้อยละ 40 ของกำไรสุทธิหลังหักภาษีในแต่ละปีของงบการเงินรวม
+              โดยจ่ายในปีถัดไป อย่างไรก็ตามการพิจารณาจ่ายเงินปันผลดังกล่าวจะขึ้นอยู่กับกระแสเงินสดและภาระการลงทุนของบริษัทและบริษัทในเครือ
+              รวมถึงความจำเป็นและเหมาะสมอื่น ๆ ในอนาคต
+            </p>
+          </div>
+
+          {/* <div className="search-section mb-4 d-flex justify-content-between">
             <input
               type="text"
               placeholder="ค้นหา"
@@ -75,7 +86,7 @@ function Index() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
+          </div> */}
 
           {/* แสดงสถานะการโหลด */}
           {loading && (
@@ -89,7 +100,7 @@ function Index() {
             <div className="data-list">
               {filteredData.map((item, index) => {
                 // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
-                const pdfUrl = item.pdf_url.startsWith('http')
+                const pdfUrl = item.pdf_url.startsWith("http")
                   ? item.pdf_url
                   : `http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_url}`;
 

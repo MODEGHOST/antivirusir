@@ -11,7 +11,7 @@ function Index() {
 
   useEffect(() => {
     axios
-      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/stock-prices') 
+      .get(process.env.REACT_APP_API_KEY+"/api/stock-prices") 
       .then((response) => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setStockPrices(sortedData); 

@@ -9,7 +9,7 @@ function Index() {
   useEffect(() => {
     // ดึงข้อมูลจาก API
     axios
-      .get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/holders") // URL ของ API
+      .get(process.env.REACT_APP_API_KEY+"/api/holders") // URL ของ API
       .then((response) => {
         setShareholders(response.data);
       })
