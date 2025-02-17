@@ -8,8 +8,8 @@ body {
   font-family: Arial, sans-serif;
 }
 nav {
-  background-color: #2c2c2c;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -105,15 +105,15 @@ nav {
 .nav-center a:hover,
 .nav-center a:focus {
   background: none !important; /* ปิดพื้นหลัง Hover */
-  color: #ffd700 !important; /* คงสีตัวอักษรเดิม */
+  color: #020485 !important; /* คงสีตัวอักษรเดิม */
   transition: none; /* ปิดเอฟเฟกต์การเปลี่ยนแปลง */
 }
 
 
 .nav-center {
-  font-size: 20px;
-  font-weight: bold;
-  color: #ffd700; /* สีพื้นฐานเป็นสีเหลือง */
+  font-size: 25px;
+  font-weight: strong;
+  color: #1404a5; /* สีพื้นฐานเป็นสีเหลือง */
   margin: 0 50px;
   cursor: pointer;
   position: relative;
@@ -121,11 +121,11 @@ nav {
 
   /* ทำให้ไฟวิ่งผ่านข้อความ */
   background: linear-gradient(90deg, 
-    #ffd700, 
-    #cec5c5, 
-    #ffd700
+    #081b7a, 
+    #514d6d, 
+    #090b89
   );
-  background-size: 200% 100%; /* ขยายขนาดเอฟเฟกต์ให้วิ่งได้ */
+  background-size: 300% 200%; /* ขยายขนาดเอฟเฟกต์ให้วิ่งได้ */
   -webkit-background-clip: text; /* ใช้ background เฉพาะตัวอักษร */
   -webkit-text-fill-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
   animation: textWave 2s infinite linear; /* เรียกใช้ Animation */
@@ -148,7 +148,37 @@ nav {
   }
 
   .navbar-container a {
-    font-size: 10px; /* ลดขนาดตัวอักษร */
+    font-size: 8px; /* ลดขนาดตัวอักษร */
+    padding: 8px 10px; /* ลด Padding */
+  }
+
+  .nav-center {
+    font-size: 18px; /* ปรับขนาดให้เล็กลง */
+    margin: 0 20px;
+  }
+}
+@media (max-width: 1280px) {
+  .navbar-container {
+    gap: 10px; /* ลดระยะห่างระหว่างเมนู */
+  }
+
+  .navbar-container a {
+    font-size: 13px; /* ลดขนาดตัวอักษร */
+    padding: 8px 10px; /* ลด Padding */
+  }
+
+  .nav-center {
+    font-size: 18px; /* ปรับขนาดให้เล็กลง */
+    margin: 0 20px;
+  }
+}
+@media (max-width: 820px) {
+  .navbar-container {
+    gap: 10px; /* ลดระยะห่างระหว่างเมนู */
+  }
+
+  .navbar-container a {
+    font-size: 7px; /* ลดขนาดตัวอักษร */
     padding: 8px 10px; /* ลด Padding */
   }
 
@@ -160,22 +190,24 @@ nav {
 
 @media (max-width: 768px) {
   nav {
-    padding: 5px 0; /* ลด Padding ของ Navbar */
+    padding: 10px;
   }
 
   .navbar-container {
-    flex-direction: column; /* เรียงเมนูแนวตั้ง */
+    flex-direction: column; /* เปลี่ยนเมนูเป็นแนวตั้ง */
+    align-items: flex-start;
     gap: 5px;
   }
 
   .navbar-container > li {
-    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+    width: 100%; /* ขยายเต็มความกว้าง */
+    text-align: left;
   }
 
   .dropdown-menu {
-    position: static; /* ทำให้ Dropdown อยู่ติดกับเมนูหลัก */
-    display: none; /* ซ่อนเมนูย่อยไว้ก่อน */
-    background-color: #2c2c2c; /* สีเดียวกับ Navbar */
+    position: static; /* เมนูย่อยติดกับเมนูหลัก */
+    width: 100%; /* ขยายเต็มความกว้าง */
+    background-color: #2c2c2c;
   }
 
   .dropdown:hover .dropdown-menu {
@@ -183,7 +215,8 @@ nav {
   }
 
   .nav-center {
-    font-size: 16px;
+    text-align: center;
+    font-size: 18px;
     margin: 10px 0;
   }
 }
@@ -196,5 +229,35 @@ nav {
 
   .nav-center {
     font-size: 14px; /* ขนาดตัวหนังสือเล็กลง */
+  }
+}
+.hamburger-menu {
+  display: none; /* ซ่อน Hamburger Menu */
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    display: none; /* ซ่อนเมนูปกติ */
+  }
+
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  .navbar-container {
+    display: none; /* ซ่อนเมนูปกติ */
+  }
+
+  .hamburger-menu.active + .navbar-container {
+    display: flex; /* แสดงเมนูเมื่อคลิก */
+    flex-direction: column;
   }
 }

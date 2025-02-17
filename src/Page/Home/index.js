@@ -6,52 +6,117 @@ import Menu from '../../Components/Menu/menu'
 import './home.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import StockPricesSlide from '../../Components/Stockpricesslide'
 
 
 function Index() {
   const [news, setNews] = useState([]); // สำหรับข้อมูลข่าว
-  const [latestDate, setLatestDate] = useState(null);
-  const [financialReport, setFinancialReport] = useState([]);
+  const [latestDate, setLatestDate] = useState(null); // วันที่ล่าสุดของข่าว
+  const [financialReport, setFinancialReport] = useState([]); // รายงานการเงิน
+  const [latestCard, setLatestCard] = useState(null); // ข้อมูลล่าสุดจาก detailgenerations
+  const [latestAnalysis, setLatestAnalysis] = useState(null); // ข้อมูลล่าสุดจาก analysis
+  const [latestReport, setLatestReport] = useState(null);
 
   useEffect(() => {
     // ดึงข้อมูลข่าวจาก API
     axios
-  .get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/news") // URL ของ API
-  .then((response) => {
-    // เรียงลำดับข้อมูลตาม created_at
-    const sortedNews = response.data.sort(
-      (a, b) => new Date(b.created_at) - new Date(a.created_at)
-    );
+      .get(process.env.REACT_APP_API_KEY + "/api/news") // URL ของ API
+      .then((response) => {
+        // เรียงลำดับข้อมูลตาม created_at
+        const sortedNews = response.data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
 
-    // เลือกข้อมูลวันที่ล่าสุด (รายการแรกหลังเรียง)
-    const latestDate = sortedNews[0]?.created_at;
+        // เลือกข้อมูลวันที่ล่าสุด (รายการแรกหลังเรียง)
+        const latestDate = sortedNews[0]?.created_at;
 
-    // เลือกเฉพาะ 4 ข่าวล่าสุด
-    const latestNews = sortedNews.slice(0, 4);
+        // เลือกเฉพาะ 4 ข่าวล่าสุด
+        const latestNews = sortedNews.slice(0, 4);
 
-    // เก็บข้อมูลใน state
-    setNews(latestNews); // ข่าวล่าสุด 4 รายการ
-    setLatestDate(latestDate); // วันที่ล่าสุด
-  })
-  .catch((error) => {
-    console.error("Error fetching news:", error);
-  });
+        // เก็บข้อมูลใน state
+        setNews(latestNews); // ข่าวล่าสุด 4 รายการ
+        setLatestDate(latestDate); // วันที่ล่าสุด
+      })
+      .catch((error) => {
+        console.error("Error fetching news:", error);
+      });
+
+    // ดึงข้อมูลงบการเงินจาก API
+    axios
+      .get(process.env.REACT_APP_API_KEY + "/api/finan-states") // URL ของ API งบการเงิน
+      .then((response) => {
+        const latestReport = response.data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at) // เรียงตาม created_at
+        )[0]; // เลือกเฉพาะรายการล่าสุด
+        setFinancialReport(latestReport); // เก็บข้อมูลล่าสุดใน state
+      })
+      .catch((error) => {
+        console.error("Error fetching financial report:", error);
+      });
+      // ดึงข้อมูล analysis จาก API
       axios
-    .get("http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/finan-states") // URL ของ API งบการเงิน
-    .then((response) => {
-      const latestReport = response.data.sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at) // เรียงตาม created_at
-      )[0]; // เลือกเฉพาะรายการล่าสุด
-      setFinancialReport(latestReport); // เก็บข้อมูลล่าสุดใน state
-    })
-    .catch((error) => {
-      console.error("Error fetching financial report:", error);
-    });
+      .get(`${process.env.REACT_APP_API_KEY}/api/analysis`)
+      .then((response) => {
+        const latestAnalysisData = response.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        )[0]; // เลือกรายการล่าสุด
+        setLatestAnalysis(latestAnalysisData); // เก็บข้อมูลล่าสุดใน state
+      })
+      .catch((error) => {
+        console.error("Error fetching analysis:", error);
+      });
+
+    // ดึงข้อมูล detailgenerations จาก API
+    axios
+      .get(process.env.REACT_APP_API_KEY+"/api/detailgenerations") // URL ของ API
+      .then((response) => {
+        const latestDetail = response.data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at) // เรียงตาม created_at
+        )[0]; // เลือกเฉพาะรายการล่าสุด
+        setLatestCard(latestDetail); // เก็บข้อมูลล่าสุดใน state
+      })
+      .catch((error) => {
+        console.error("Error fetching detail generations:", error);
+      });
+      
+      axios
+      .get(process.env.REACT_APP_API_KEY+"/api/doc_read")// URL ของ API ที่แก้ไข
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          // จัดเรียงข้อมูลตาม created_at และดึงรายการล่าสุด
+          const latestDetail = response.data.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          )[0];
+          setLatestReport(latestDetail); // เก็บข้อมูลล่าสุดใน state
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching docread:", error);
+      });
   }, []);
   return (
     <div>
 {/* ส่วนที่1 */}
 < Menu />
+<div 
+  style={{
+    position: "fixed",  // ทำให้ลอยอยู่ด้านบน
+    top: "0.1px",        // ระยะห่างจากขอบบน
+    left: "40px",       // ระยะห่างจากขอบซ้าย
+    zIndex: "9999",     // ให้แน่ใจว่าอยู่เหนือองค์ประกอบอื่น
+    padding: "10px",    // ระยะห่างภายใน
+  }}
+>
+  <img 
+    src={`${process.env.PUBLIC_URL}/assest/img/Thairung-Logo.jpg`} 
+    alt="Image"
+    style={{
+      height: "50px", // ปรับขนาดโลโก้
+      width: "auto",
+    }}
+  />
+</div>
+
         <div className="carousel-header ">
             <div id="carouselId" className="carousel slide" data-bs-ride="carousel">
                 <ol className="carousel-indicators">
@@ -76,12 +141,15 @@ function Index() {
                         {/* <img src={`${process.env.PUBLIC_URL}/img/DJI.jpg`} className="img-fluid w-100" alt="Image" /> */}
                         <div className="carousel-caption-1">
                             <div className="carousel-caption-1-content" style={{ maxWidth: '900px' }}>
-                                <h4 className="text-white text-uppercase fw-bold mb-4">THAIRUNG UNION CAR</h4>
+                                <h4 className="text-white text-uppercase fw-bold mb-4">THAI RUNG UNION CAR PCL</h4>
                                 <h1 className="display-2 text-capitalize text-white mb-4">นักลงทุนสัมพันธ์</h1>
                             </div>
                         </div>
-                        <div className="box-card-container">
+                        {/* <div className="box-card-container">
                             <Tradecard title="ตัวอย่างหุ้น" change={5} changePercent="1.5%" volume="1000" updatedAt="วันนี้" />
+                        </div> */}
+                        <div className="slider-container">
+                          <StockPricesSlide />
                         </div>
                     </div>
 
@@ -114,6 +182,165 @@ function Index() {
                 </button>
             </div>
         </div>
+{/* ส่วนที่3 */}
+<div className="container-fluid about overflow-hidden py-5">|
+      <div className="container py-5">
+        <div className="row g-5">
+        <div className="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+        <img src={`${process.env.PUBLIC_URL}/assest/img/werty.png`} className="img-fluid w-30" alt="Image" style={{  height: '30vh' }} />
+</div>
+
+          <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+  <div className="about-item">
+    <h4 className="text-primary text-uppercase" style={{ textAlign: "center" }}>Investor Kits</h4>
+
+    {/* แสดงงบการเงินล่าสุด (เรียงตาม created_at) */}
+    <h4 className="text-primary text-uppercase mt-4">งบการเงิน</h4>
+    {financialReport && (
+      <div
+        className="data-item d-flex justify-content-between align-items-center"
+        onClick={() =>
+          window.open(financialReport.pdf_url, "_blank", "noopener noreferrer")
+        }
+        style={{
+          cursor: "pointer",
+          padding: "10px",
+          borderRadius: "10px",
+          border: "1px solid #ddd",
+          marginBottom: "10px",
+          backgroundColor: "#f9f9f9",
+        }}
+      >
+        <div>
+          <span className="date text-primary">
+            {new Date(financialReport.created_at).toLocaleDateString("th-TH", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+          </span>
+          <p className="mb-0">{financialReport.quater}</p>
+          <p className="mb-0">{financialReport.title}</p>
+        </div>
+        <button className="btn btn-outline-primary">
+          <i className="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    )}
+
+  {/* คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ */}
+<h4 className="text-primary text-uppercase mt-4">คำอธิบายและการวิเคราะห์ของฝ่ายจัดการ</h4>
+{latestCard && (
+  <div
+    className="data-item d-flex justify-content-between align-items-center"
+    onClick={() => {
+      const pdfUrl = `${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${latestCard.pdf_url}`; // ใช้ latestCard
+      console.log("Opening PDF URL:", pdfUrl); // ตรวจสอบ URL
+      window.open(pdfUrl, "_blank", "noopener noreferrer");
+    }}
+    style={{
+      cursor: "pointer",
+      padding: "10px",
+      borderRadius: "10px",
+      border: "1px solid #ddd",
+      marginBottom: "10px",
+      backgroundColor: "#f9f9f9",
+    }}
+  >
+    <div>
+      <span className="date text-primary">
+        {new Date(latestCard.created_at).toLocaleDateString("th-TH", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })}
+      </span>
+      <p className="mb-0">{latestCard.quater}</p>
+      <p className="mb-0">{latestCard.title}</p>
+    </div>
+    <button className="btn btn-outline-primary">
+      <i className="fas fa-arrow-right"></i>
+    </button>
+  </div>
+)}
+
+{/* แสดงข้อมูลจาก latestAnalysis */}
+<h4 className="text-primary text-uppercase mt-4">เอกสารนำเสนอ</h4>
+      {latestAnalysis && (
+        <div
+          className="data-item d-flex justify-content-between align-items-center"
+          onClick={() => {
+            const pdfUrl = `${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${latestAnalysis.pdf_url}`;
+            console.log("Opening PDF URL:", pdfUrl);
+            window.open(pdfUrl, "_blank", "noopener noreferrer");
+          }}
+          style={{
+            cursor: "pointer",
+            padding: "10px",
+            borderRadius: "10px",
+            border: "1px solid #ddd",
+            marginBottom: "10px",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <div>
+            <span className="date text-primary">
+              {new Date(latestAnalysis.created_at).toLocaleDateString("th-TH", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
+            </span>
+            <p className="mb-0">{latestAnalysis.title}</p>
+          </div>
+          <button className="btn btn-outline-primary">
+            <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      )}
+<h4 className="text-primary text-uppercase mt-4">56-1 One Report</h4>
+      {latestReport && (
+        <div
+          className="data-item d-flex justify-content-between align-items-center"
+          onClick={() => {
+            const pdfUrl = `${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${latestReport.file_path}`;
+            console.log("Opening PDF URL:", pdfUrl);
+            window.open(pdfUrl, "_blank", "noopener noreferrer");
+          }}
+          style={{
+            cursor: "pointer",
+            padding: "10px",
+            borderRadius: "10px",
+            border: "1px solid #ddd",
+            marginBottom: "10px",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <div>
+            <span className="date text-primary">
+              {new Date(latestReport.created_at).toLocaleDateString("th-TH", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })}
+            </span>
+            <p className="mb-0">{latestReport.title}</p>
+          </div>
+          <button className="btn btn-outline-primary">
+            <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      )}
+      
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+
+
 {/* ส่วนที่2 */}
 <div className="container-fluid feature bg-light py-5">
   <div className="container py-5">
@@ -147,7 +374,7 @@ function Index() {
             >
               <div className="mb-3">
                 <a
-                  href={`http://129.200.6.52/laravel_auth_jwt_api_omd/public${news.pdf_url}`} // ใช้ URL PDF จาก API
+                  href={`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${news.pdf_url}`} // ใช้ URL PDF จาก API
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -159,7 +386,10 @@ function Index() {
                   />
                 </a>
               </div>
-              <h4 className="mb-3">{news.title}</h4> {/* แสดงหัวข้อข่าว */}
+              <h4 className="mb-3">
+  {news.title.length > 30 ? news.title.slice(0, 55) + "..." : news.title}
+</h4>
+ {/* แสดงหัวข้อข่าว */}
               <h5
                 className="mb-3"
                 style={{
@@ -184,93 +414,7 @@ function Index() {
 
 
   
-{/* ส่วนที่3 */}
-<div className="container-fluid about overflow-hidden py-5">
-      <div className="container py-5">
-        <div className="row g-5">
-          <div className="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
-            
-              {/* Replace the img tag with DetailSlide component */}
-              <DetailSlide selectedTitle="แบบ 56-1" />
-            
-          </div>
-          <div className="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
-  <div className="about-item">
-    <h4 className="text-primary text-uppercase" style={{ textAlign: "center" }}>Investor Kits</h4>
 
-    {/* แสดงงบการเงินล่าสุด (เรียงตาม created_at) */}
-    <h4 className="text-primary text-uppercase mt-4">งบการเงิน</h4>
-    {financialReport && (
-      <div
-        className="data-item d-flex justify-content-between align-items-center"
-        onClick={() =>
-          window.open(financialReport.pdf_url, "_blank", "noopener noreferrer")
-        }
-        style={{
-          cursor: "pointer",
-          padding: "10px",
-          borderRadius: "10px",
-          border: "1px solid #ddd",
-          marginBottom: "10px",
-          backgroundColor: "#f9f9f9",
-        }}
-      >
-        <div>
-          <span className="date text-primary">
-            {new Date(financialReport.created_at).toLocaleDateString("th-TH", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })}
-          </span>
-          <p className="mb-0">{financialReport.title}</p>
-        </div>
-        <button className="btn btn-outline-primary">
-          <i className="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    )}
-
-    {/* แสดงข่าวแจ้งตลาดหลักทรัพย์ล่าสุด (เรียงตาม date) */}
-    <h4 className="text-primary text-uppercase mt-4">ข่าวแจ้งตลาดหลักทรัพย์</h4>
-    {news.length > 0 && (
-  <div
-    className="data-item d-flex justify-content-between align-items-center"
-    onClick={() => {
-      const pdfUrl = `http://129.200.6.52/laravel_auth_jwt_api_omd/public${news[0].pdf_url}`; // ใช้ news[0] สำหรับรายการแรก
-      console.log("Opening PDF URL:", pdfUrl); // ตรวจสอบ URL
-      window.open(pdfUrl, "_blank", "noopener noreferrer");
-    }}
-    style={{
-      cursor: "pointer",
-      padding: "10px",
-      borderRadius: "10px",
-      border: "1px solid #ddd",
-      marginBottom: "10px",
-      backgroundColor: "#f9f9f9",
-    }}
-  >
-    <div>
-      <span className="date text-primary">
-        {new Date(news[0].created_at).toLocaleDateString("th-TH", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        })}
-      </span>
-      <p className="mb-0">{news[0].title}</p>
-    </div>
-    <button className="btn btn-outline-primary">
-      <i className="fas fa-arrow-right"></i>
-    </button>
-  </div>
-)}
-  </div>
-</div>
-
-        </div>
-      </div>
-    </div>
     
 {/* ส่วนที่5 */}
 <div className="container-fluid service bg-light overflow-hidden py-5">

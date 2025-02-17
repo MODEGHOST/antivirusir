@@ -24,7 +24,7 @@ function Calendar() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/events');
+      const response = await axios.get(process.env.REACT_APP_API_KEY + "/api/events");
       if (response.status === 200) {
         setEvents(response.data.data);
       }

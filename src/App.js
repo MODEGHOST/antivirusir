@@ -9,11 +9,13 @@ import Financial_information3 from './Page/Financial_infor/P3/index';
 import One_report1 from './Page/Onereport/index';
 import Marketmny from './Page/Roomnews/P1/index';
 import NewsPublish from './Page/Roomnews/P2/index';
+import Newselectronic from './Page/Roomnews/P3/index';
 import Analyst from './Page/Analyst/P1/index';
 import Showvideo from './Page/showvideo/P1/index';
 import Governance from './Page/Governance/P1/index'
 import Governance1 from './Page/Governance/P2/index'
 import Governance2 from './Page/Governance/P3/index'
+import Governance3 from './Page/Governance/P4/index'
 import Connak from './Page/Connak/P1/index'
 import Shareholder from './Page/shareholders/P1/index'
 import HolderStructure from './Page/shareholders/P2/index';
@@ -37,11 +39,13 @@ function App() {
         <Route path="/One_report1" element={<One_report1 />} />
         <Route path="/Marketmny" element={<Marketmny />} />
         <Route path="/NewsPublish" element={<NewsPublish />} />
+        <Route path="/Newselectronic" element={<Newselectronic />} />
         <Route path="/Analyst" element={<Analyst />} />
         <Route path="/Showvideo" element={<Showvideo />} />
         <Route path="/Governance" element={<Governance/>} />
         <Route path="/Governance1" element={<Governance1/>} />
         <Route path="/Governance2" element={<Governance2/>} />
+        <Route path="/Governance3" element={<Governance3/>} />
         <Route path="/Connak" element={<Connak />} />
         <Route path="/Shareholder" element={<Shareholder />} />
         <Route path="/holder_Structure" element={<HolderStructure />} />

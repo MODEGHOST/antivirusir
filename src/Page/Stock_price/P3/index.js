@@ -24,7 +24,7 @@ function Index() {
 
   useEffect(() => {
     axios
-      .get('http://129.200.6.52/laravel_auth_jwt_api_omd/public/api/stock-prices') // URL API Laravel
+      .get(process.env.REACT_APP_API_KEY + "/api/stock-prices") // URL API Laravel
       .then((response) => setStockPrices(response.data)) // เก็บข้อมูลจาก API
       .catch((error) => console.error('Error fetching stock prices:', error));
   }, []);
@@ -107,7 +107,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/G.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/17.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '45vh',

@@ -13,32 +13,41 @@ function Index() {
   const fetchCardData = async () => {
     try {
       const response = await axios.get(process.env.REACT_APP_API_KEY + "/api/finan-states");
-      console.log(response.data); // ตรวจสอบข้อมูลที่ดึงมา
-      // จัดเรียงข้อมูลตามปีล่าสุดลงไป
-      const sortedData = response.data.sort((a, b) => b.year - a.year);
-      setCardData(sortedData);
-      setFilteredData(sortedData); // ตั้งค่าข้อมูลเริ่มต้นเป็นข้อมูลที่จัดเรียง
+      console.log(response.data); 
+  
+      // เรียงข้อมูลให้ Quater ล่าสุดมาอยู่ที่ index 0
+      let sortedData = response.data.sort((a, b) => {
+        if (b.year !== a.year) {
+          return b.year - a.year; // เรียงปีใหม่กว่าขึ้นก่อน
+        }
+        return b.quater.localeCompare(a.quater); // เรียง Q1, Q2, Q3 ตามลำดับ
+      });
+  
+      // ทำให้ข้อมูลล่าสุดขึ้นด้านหน้าเสมอ
+      setCardData([...sortedData]); 
+      setFilteredData([...sortedData]); 
+  
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
 
   // ฟังก์ชันกรองข้อมูลตามปี
-  const handleSearch = (event) => {
-    const year = event.target.value; // ปีที่พิมพ์ใน Input
-    setSearchYear(year);
+const handleSearch = (event) => {
+  const year = event.target.value;
+  setSearchYear(year);
 
-    // กรองข้อมูลตามปี
-    if (year.trim() === '') {
-      // ถ้าไม่มีปีที่กรอง แสดงข้อมูลทั้งหมดเรียงจากปีล่าสุด
-      setFilteredData(cardData);
-    } else {
-      const filtered = cardData.filter((card) =>
-        card.year.includes(year) // ตรวจสอบว่าข้อมูลมีปีที่ค้นหา
-      );
-      setFilteredData(filtered.length > 0 ? filtered : cardData); // ถ้าไม่มีผลลัพธ์ให้แสดงข้อมูลทั้งหมด
-    }
-  };
+  if (year.trim() === '') {
+    setFilteredData([...cardData]); // รีเซ็ตข้อมูลตามลำดับใหม่
+  } else {
+    const filtered = cardData.filter((card) =>
+      card.year.includes(year)
+    );
+    setFilteredData(filtered.length > 0 ? [...filtered] : [...cardData]);
+  }
+};
+
 
   // ดึงข้อมูลครั้งแรกเมื่อโหลดหน้า
   useEffect(() => {
@@ -80,7 +89,7 @@ function Index() {
             <input
               type="text"
               className="form-control"
-              placeholder="ค้นหาปี (เช่น 2567)"
+              placeholder="ค้นหาปี"
               value={searchYear}
               maxLength={4} // จำกัดความยาว 4 ตัวอักษร
               onChange={(event) => {
@@ -99,7 +108,7 @@ function Index() {
         <div className="row">
           {filteredData.length > 0 ? (
             filteredData.map((card, index) => (
-              <div key={index} className="col-md-4 col-sm-6 mb-4">
+              <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-4">
                 <div className="card shadow-lg border-0 rounded-3 text-center">
                   <div
                     className="card-body d-flex flex-column align-items-center"
@@ -116,8 +125,8 @@ function Index() {
                     <p className="card-text text-muted mb-3">{card.description}</p>
                     <div className="d-flex justify-content-center">
                 {/* ปุ่มดาวน์โหลดไฟล์ */}
-                    <a
-                      href={`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${card.pdf_url}`}
+                    <a 
+                      href={`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${card.pdf_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-secondary mx-2"

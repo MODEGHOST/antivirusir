@@ -67,17 +67,76 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media (max-width: 1024px) {
     .box-card {
-        width: 100%; /* Make the card full-width on smaller screens */
-        padding: 10px; /* Reduce padding */
+        width: 130%; /* ลดขนาดให้พอดีหน้าจอแท็บเล็ต */
+        padding: 15px; /* ลดระยะ Padding */
     }
 
     .price {
-        font-size: 1.5rem; /* Reduce the font size of price */
+        font-size: 1.8rem; /* ลดขนาดตัวอักษร */
+    }
+
+    .header-row {
+        flex-direction: column; /* วาง header ในแนวตั้ง */
+        align-items: center;
+        gap: 10px; /* เพิ่มระยะห่าง */
+    }
+}
+
+@media (max-width: 768px) {
+    .box-card {
+        width: 90%; /* ขยายให้เกือบเต็มหน้าจอบนอุปกรณ์มือถือ */
+        padding: 10px; /* ลด Padding ให้เล็กลง */
+    }
+
+    .price {
+        font-size: 1.6rem; /* ลดขนาดตัวอักษรเพิ่มเติม */
     }
 
     .change-info, .volume-info {
-        flex-direction: column; /* Stack the change and volume info vertically */
+        flex-direction: column; /* จัดให้อยู่ในแนวตั้ง */
+        align-items: flex-start; /* จัดให้อยู่ซ้าย */
+        gap: 5px; /* เพิ่มระยะห่างระหว่างข้อความ */
+    }
+
+    .box-card-footer {
+        text-align: center; /* จัด Footer ให้อยู่กึ่งกลาง */
+        font-size: 0.8rem; /* ลดขนาดตัวอักษร */
+    }
+}
+
+@media (max-width: 480px) {
+    .box-card {
+        width: 100%; /* ทำให้การ์ดเต็มหน้าจอ */
+        height: auto; /* ปรับความสูงตามเนื้อหา */
+        padding: 5px; /* ลด Padding ให้เล็กลงมาก */
+        font-size: 0.7rem; /* ลดขนาดตัวอักษรทั้งหมดในการ์ด */
+    }
+
+    .price {
+        font-size: 0.8rem; /* ลดขนาดตัวอักษรสำหรับราคา */
+        font-weight: bold;
+    }
+
+    .header-row {
+        text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+        gap: 3px; /* ลดช่องว่างระหว่างแถว */
+    }
+
+    .change-info, .volume-info {
+        flex-direction: column; /* จัดข้อความในแนวตั้ง */
+        align-items: center; /* จัดให้อยู่ตรงกลาง */
+        gap: 2px; /* ลดช่องว่างระหว่างข้อความ */
+    }
+
+    .change {
+        font-size: 0.8rem; /* ลดขนาดตัวอักษรของการเปลี่ยนแปลง */
+    }
+
+    .box-card-footer {
+        font-size: 0.6rem; /* ลดขนาดตัวอักษรในส่วน footer */
+        text-align: center; /* จัดให้อยู่ตรงกลาง */
     }
 }

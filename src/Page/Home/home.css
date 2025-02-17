@@ -82,7 +82,12 @@
     left: 10%; /* Adjust for responsive design */
     z-index: 10; /* Ensure it's in front */
 }
-
+.slider-container {
+    position: absolute;
+    bottom: 10%; /* Adjust for responsive design */
+    left: 10%; /* Adjust for responsive design */
+    z-index: 10; /* Ensure it's in front */
+}
 /*** Responsive Carousel ***/
 @media (max-width: 992px) {
     .carousel .carousel-inner .carousel-item {

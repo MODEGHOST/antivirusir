@@ -37,7 +37,7 @@ function Index() { // เปลี่ยนเป็นตัวอักษร�
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/G.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/17.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '45vh',

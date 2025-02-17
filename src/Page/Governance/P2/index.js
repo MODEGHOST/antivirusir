@@ -11,10 +11,13 @@ function Index() {
   // ใช้ useEffect เพื่อดึงข้อมูลจาก API
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/manuals")
+      .get(process.env.REACT_APP_API_KEY + "/api/manuals")
       .then((response) => {
-        if (response.data) {
-          setManuals(response.data); // บันทึกข้อมูลใน state
+        if (response.data && response.data.length > 0) {
+          const latestManual = response.data.reduce((latest, current) => {
+            return new Date(latest.date) > new Date(current.date) ? latest : current;
+          });
+          setManuals([latestManual]); // เก็บเฉพาะข้อมูลล่าสุด
         } else {
           setError("รูปแบบข้อมูลจาก API ไม่ถูกต้อง");
         }
@@ -45,7 +48,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/15.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "45vh",
@@ -57,163 +60,82 @@ function Index() {
               className="display-3 text-capitalize mb-3"
               style={{ color: "white", marginTop: "30px" }}
             >
-              คู่มือการกำกับดูแลกิจการฯ & ข้อบังคับของบริษัท
+              คู่มือการกำกับดูแลกิจการฯ
             </h1>
           </div>
         </div>
       </div>
 
-      {/* Flip Cards Section */}
+      {/* Hover Card Section */}
       <div
-        className="container-fluid about overflow-hidden py-5 wow fadeInUp"
-        data-wow-delay="0.4s"
-        style={{ backgroundColor: "white" }}
-      >
-<div className="container py-5">
-  <div className="row" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-    {/* ตรวจสอบจำนวนข้อมูล */}
-    {manuals.length === 1 ? (
-      <div className="col-lg-6 col-md-12">
-        <div className="flip-card">
-          <div className="flip-card-inner">
-            {/* ด้านหน้า */}
-            <div
-              className="flip-card-front"
-              style={{
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                borderRadius: "10px",
-                color: "white",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <p style={{ fontSize: "30px", margin: 0 }}>{manuals[0].title}</p>
-            </div>
-            {/* ด้านหลัง */}
-            <div
-              className="flip-card-back"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "20px",
-                height: "100%",
-              }}
-            >
-              {/* ชื่อหรือหัวข้อ */}
-              <div style={{ marginBottom: "auto", textAlign: "center" }}>
-                <p style={{ fontSize: "18px", fontWeight: "bold" }}>{manuals[0].title}</p>
-              </div>
-
-              {/* ปุ่มดาวน์โหลด */}
-              <div style={{ textAlign: "center" }}>
-                <a
-                  href={`http://localhost:8000${manuals[0].pdf_url}`} // URL สำหรับดาวน์โหลดไฟล์ PDF
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn"
-                  style={{
-                    backgroundColor: "#808080", // สีเทา
-                    color: "white", // สีข้อความ
-                    padding: "10px 20px",
-                    borderRadius: "20px",
-                    textDecoration: "none",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    display: "inline-block",
-                  }}
-                >
-                  <i className="fa fa-download"></i> ดาวน์โหลด
-                </a>
-              </div>
-
-              {/* วันที่เผยแพร่ */}
-              <div style={{ marginTop: "auto", fontSize: "14px", color: "gray", textAlign: "center" }}>
-                วันที่เผยแพร่: {manuals[0].date}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    ) : (
-      // วนลูปแสดงข้อมูลปกติเมื่อมีมากกว่า 1 ข้อมูล
-      manuals.map((manual) => (
+  className="container-fluid about overflow-hidden py-5 wow fadeInUp"
+  data-wow-delay="0.4s"
+  style={{ backgroundColor: "white" }}
+>
+  <div className="container py-5">
+    <div
+      className="row"
+      style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}
+    >
+      {manuals.map((manual) => (
         <div className="col-lg-6 col-md-12" key={manual.id}>
-          <div className="flip-card">
-            <div className="flip-card-inner">
-              {/* ด้านหน้า */}
-              <div
-                className="flip-card-front"
-                style={{
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  borderRadius: "10px",
-                  color: "white",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                <p style={{ fontSize: "30px", margin: 0 }}>{manual.title}</p>
-              </div>
-              {/* ด้านหลัง */}
-              <div
-                className="flip-card-back"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "20px",
-                  height: "100%",
-                }}
-              >
-                {/* ชื่อหรือหัวข้อ */}
-                <div style={{ marginBottom: "auto", textAlign: "center" }}>
-                  <p style={{ fontSize: "18px", fontWeight: "bold" }}>{manual.title}</p>
-                </div>
+          {/* Title ที่อยู่นอกกรอบรูป */}
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "30px", // ระยะห่างระหว่าง title กับรูป
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#333",
+            }}
+          >
+            {manual.title}
+          </div>
+          {/* รูปภาพ */}
+          <div
+  className="hover-card"
+  style={{
+    position: "relative",
+    backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/Thairung-Logo.jpg)`,
+    backgroundSize: "contain", // ปรับภาพให้พอดีกับขนาด
+    backgroundRepeat: "no-repeat", // ป้องกันไม่ให้ภาพซ้ำ
+    backgroundPosition: "center", // จัดกึ่งกลางภาพ
+    borderRadius: "10px",
+    color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    height: "250px",
+    cursor: "pointer",
+    transition: "transform 0.3s ease-in-out",
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = "scale(1.05)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = "scale(1)";
+  }}
+  onClick={() => window.open(`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${manual.pdf_url}`, "_blank")}
+/>
 
-                {/* ปุ่มดาวน์โหลด */}
-                <div style={{ textAlign: "center" }}>
-                  <a
-                    href={`http://localhost:8000${manual.pdf_url}`} // URL สำหรับดาวน์โหลดไฟล์ PDF
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn"
-                    style={{
-                      backgroundColor: "#808080", // สีเทา
-                      color: "white", // สีข้อความ
-                      padding: "10px 20px",
-                      borderRadius: "20px",
-                      textDecoration: "none",
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      display: "inline-block",
-                    }}
-                  >
-                    <i className="fa fa-download"></i> ดาวน์โหลด
-                  </a>
-                </div>
-
-                {/* วันที่เผยแพร่ */}
-                <div style={{ marginTop: "auto", fontSize: "14px", color: "gray", textAlign: "center" }}>
-                  วันที่เผยแพร่: {manual.date}
-                </div>
-              </div>
-            </div>
+          {/* วันที่เผยแพร่ */}
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "10px", // ระยะห่างระหว่างรูปกับวันที่
+              fontSize: "14px",
+              color: "gray",
+            }}
+          >
+            วันที่เผยแพร่: {manual.date}
           </div>
         </div>
-      ))
-    )}
+      ))}
+    </div>
   </div>
 </div>
 
-      </div>
     </div>
   );
 }

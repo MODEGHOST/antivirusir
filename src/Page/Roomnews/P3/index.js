@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Menu from "../../../Components/Menu/menu";
-import "./P4.css";
+import "./market11.css";
 
 function Index() {
   const [data, setData] = useState([]); // เก็บข้อมูลที่ดึงจาก API
   const [searchTerm, setSearchTerm] = useState(""); // เก็บค่าการค้นหา
   const [loading, setLoading] = useState(true); // แสดงสถานะการโหลดข้อมูล
-    const currentYear = new Date().getFullYear(); // ปีปัจจุบัน
-    const [yearFilter, setYearFilter] = useState(currentYear.toString()); 
+  const currentYear = new Date().getFullYear(); // ปีปัจจุบัน
+  const [yearFilter, setYearFilter] = useState(currentYear.toString()); // กรองปีเริ่มต้นเป็นปีปัจจุบัน
 
   // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_KEY + "/api/policypayment") // แก้ไข URL ตาม API ของคุณ
+      .get(process.env.REACT_APP_API_KEY + "/api/newselectic") // ใช้ API ของ newselectic
       .then((response) => {
         setData(response.data); // บันทึกข้อมูลใน State
         setLoading(false); // ปิดสถานะการโหลด
@@ -31,7 +31,7 @@ function Index() {
       const matchesSearch =
         item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.date.includes(searchTerm);
-      const matchesYear = yearFilter === "" || itemYear === yearFilter; // กรองตามปี
+      const matchesYear = yearFilter === "" || itemYear === yearFilter;
       return matchesSearch && matchesYear;
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date)); // เรียงลำดับตามวันที่
@@ -44,7 +44,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/14.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/12.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "45vh",
@@ -56,7 +56,7 @@ function Index() {
               className="display-3 text-capitalize mb-3"
               style={{ color: "white", marginTop: "60px" }}
             >
-              นโยบายและการจ่ายเงินปันผล
+              ข่าวจากสื่ออิเล็กทรอนิกส์
             </h1>
           </div>
         </div>
@@ -71,17 +71,6 @@ function Index() {
         }}
       >
         <div className="container">
-          {/* เพิ่มข้อความที่ต้องการ */}
-          <div className="policy-info mb-4">
-            <h3>นโยบายและประวัติการจ่ายเงินปันผลของ TRU</h3>
-            <p>
-              นโยบายการจ่ายเงินปันผลของบริษัทฯ<br />
-              บริษัทมีนโยบายในการจ่ายเงินปันผล ในอัตราประมาณร้อยละ 40 ของกำไรสุทธิหลังหักภาษีในแต่ละปีของงบการเงินรวม
-              โดยจ่ายในปีถัดไป อย่างไรก็ตามการพิจารณาจ่ายเงินปันผลดังกล่าวจะขึ้นอยู่กับกระแสเงินสดและภาระการลงทุนของบริษัทและบริษัทในเครือ
-              รวมถึงความจำเป็นและเหมาะสมอื่น ๆ ในอนาคต
-            </p>
-          </div>
-
           <div className="search-section mb-4 d-flex justify-content-between">
             {/* กล่องค้นหา */}
             <input
@@ -107,6 +96,8 @@ function Index() {
               <option value={currentYear - 1}>{currentYear - 1}</option>
               <option value={currentYear - 2}>{currentYear - 2}</option>
               <option value={currentYear - 3}>{currentYear - 3}</option>
+              <option value={currentYear - 4}>{currentYear - 4}</option>
+              <option value={currentYear - 5}>{currentYear - 5}</option>
             </select>
           </div>
 
@@ -143,8 +134,9 @@ function Index() {
                     }}
                   >
                     <div>
-                      <span className="date text-primary">{item.date}</span>
-                      <p className="mb-0">{item.title}</p>
+                      {/* <span className="date text-primary">{item.date}</span> */}
+                      <p className="mb-0">{`${item.posted_day} ${item.title}`}</p>
+
                     </div>
                     <button className="btn btn-outline-primary">
                       <i className="fas fa-arrow-right"></i>

@@ -7,6 +7,7 @@
     padding: 20px;
     width: 1000px;
     margin: 0 auto;
+    margin-left:25%;
     border-radius: 15px;
   }
   
@@ -105,22 +106,146 @@
     background-color: rgba(255, 255, 255, 0.3);
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
-    .calendar-container {
-      flex-direction: column;
-    }
-  
-    .calendar-section,
-    .event-section {
-      width: 100%;
-    }
-  
-    .event-section {
-      max-height: 300px;
-    }
-  
-    .calendar-cell {
-      height: 50px;
-    }
+/* Event Section */
+.event-section {
+  background-color: #007bff;
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto; /* ยังคงให้เลื่อนได้ */
+  max-height: 600px;
+  width: 800px;
+  margin-left: 20px;
+  scrollbar-width: thin; /* ปรับความบางของ scrollbar สำหรับ Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent; /* กำหนดสี scrollbar สำหรับ Firefox */
+}
+
+/* ซ่อน scrollbar บน Chrome, Edge และ Safari */
+.event-section::-webkit-scrollbar {
+  width: 5px; /* กำหนดความกว้าง scrollbar */
+  background: transparent; /* พื้นหลัง scrollbar */
+}
+
+.event-section::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5); /* สี scrollbar */
+  border-radius: 10px; /* ทำให้ scrollbar เป็นมุมโค้ง */
+}
+
+/* Event Items */
+.event-item {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.event-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-5px); /* เพิ่ม effect การเลื่อนขึ้น */
+}
+
+
+
+/* Responsive Design */
+
+/* ขนาดหน้าจอเล็กกว่า 1024px (แท็บเล็ต) */
+@media (max-width: 1024px) {
+  .calendar-container {
+    flex-direction: column; /* จัด layout ในแนวตั้ง */
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
   }
+
+  .calendar-section,
+  .event-section {
+    width: 100%; /* ปรับให้เต็มหน้าจอ */
+    padding: 15px;
+    height: auto;
+  }
+
+  .calendar-cell {
+    font-size: 0.9rem; /* ลดขนาดตัวอักษร */
+    height: 50px; /* ลดความสูงของแต่ละช่อง */
+  }
+
+  .event-section {
+    max-height: 400px; /* จำกัดความสูงของกิจกรรม */
+  }
+}
+
+/* ขนาดหน้าจอเล็กกว่า 768px (มือถือทั่วไป) */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .calendar-section,
+  .event-section {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+  }
+
+  .calendar-header h2 {
+    font-size: 1.2rem; /* ลดขนาดชื่อเดือน */
+  }
+
+  .nav-button {
+    font-size: 1.2rem; /* ลดขนาดปุ่มนำทาง */
+  }
+
+  .calendar-grid {
+    gap: 5px; /* ลดระยะห่างระหว่างช่อง */
+  }
+
+  .calendar-cell {
+    font-size: 0.8rem;
+    height: 40px; /* ลดขนาดความสูงให้กระชับ */
+    padding: 5px;
+  }
+
+  .event-section {
+    max-height: 300px; /* จำกัดความสูงเพิ่มเติม */
+  }
+
+  .event-item {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+/* ขนาดหน้าจอเล็กกว่า 480px (มือถือเล็ก) */
+@media (max-width: 480px) {
+  .calendar-container {
+    gap: 10px;
+    padding: 5px;
+  }
+
+  .calendar-section,
+  .event-section {
+    padding: 8px;
+  }
+
+  .calendar-header h2 {
+    font-size: 1rem; /* ลดขนาดชื่อเดือนให้เล็กลง */
+  }
+
+  .nav-button {
+    font-size: 1rem; /* ลดขนาดปุ่มนำทาง */
+  }
+
+  .calendar-cell {
+    font-size: 0.7rem;
+    height: 35px; /* ลดความสูงให้กระชับที่สุด */
+    padding: 4px;
+  }
+
+  .event-item {
+    font-size: 0.7rem;
+    padding: 5px;
+  }
+}

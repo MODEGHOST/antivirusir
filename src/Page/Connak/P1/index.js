@@ -42,14 +42,14 @@ function index() {
                 <div className="row text-center mb-4">
                   <div className="col-md-6">
                     <div className="p-3 border rounded shadow-sm" style={{ backgroundColor: '#f8f9fa' }}>
-                      <p className="fw-bold">สำนักงานทะเบียนหุ้นและนักลงทุนสัมพันธ์<br />สำนักกรรมการผู้จัดการ</p>
-                      <p>โทรศัพท์: 0-2420-0076 ext 359<br />โทรสาร: 0-2812-0844<br />อีเมล์: <a href="mailto:omd_ir@thairung.co.th">omd_ir@thairung.co.th</a></p>
+                      <p className="fw-bold">งานทะเบียนหุ้นและนักลงทุนสัมพันธ์<br />สำนักกรรมการผู้จัดการ</p>
+                      <p>โทรศัพท์: 0-2420-0076 ext 359<br />อีเมล์: <a href="mailto:omd_ir@thairung.co.th">omd_ir@thairung.co.th</a></p>
                   </div>
                   </div>
                   <div className="col-md-6">
                     <div className="p-3 border rounded shadow-sm" style={{ backgroundColor: '#f8f9fa' }}>
-                      <p className="fw-bold">คุณนัยนา ประวิตร์ดิลกกุล<br />ผู้จัดการฝ่ายนักลงทุนสัมพันธ์</p>
-                      <p>โทรศัพท์: 0-2420-0076 ext 321<br />โทรสาร: 0-2812-0844<br />อีเมล์: <a href="mailto:naiyana@thairung.co.th">naiyana@thairung.co.th</a></p>
+                      <p className="fw-bold">คุณนัยนา ประโชติรัตนกุล<br />ผู้ช่วยผู้จัดการทั่วไป</p>
+                      <p>โทรศัพท์: 0-2420-0076 ext 321<br />อีเมล์: <a href="mailto:naiyana@thairung.co.th">naiyana@thairung.co.th</a></p>
                     </div>
                   </div>
                 </div>

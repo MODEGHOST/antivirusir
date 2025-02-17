@@ -9,12 +9,13 @@ function Index() {
   const [activeTable, setActiveTable] = useState('table1'); // State สำหรับเลือกตารางที่แสดง
   const [loading, setLoading] = useState(true); // สถานะการโหลดข้อมูล
   const [proposeagendaData, setProposeagendaData] = useState([]); // เก็บข้อมูล proposeagenda
+  
 
   // ดึงข้อมูลเมื่อ Component ถูก Mount
   useEffect(() => {
     if (activeTable === 'table1') {
       axios
-        .get('http://localhost:8000/api/proposeagenda') // ดึงข้อมูล proposeagenda
+        .get(process.env.REACT_APP_API_KEY + "/api/proposeagenda") // ดึงข้อมูล proposeagenda
         .then((response) => {
           setProposeagendaData(response.data); // บันทึกข้อมูลใน State
           setLoading(false); // ปิดสถานะการโหลด
@@ -64,7 +65,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/14.png)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '45vh',
@@ -119,62 +120,97 @@ function Index() {
 
         <div className="container py-5">
         {activeTable === 'table1' && (
-            <div className="container py-5">
-              <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                {loading ? (
-                  <div>Loading...</div>
-                ) : proposeagendaData.length === 1 ? (
-                  <div className="col-lg-6 col-md-12">
-                    <div className="flip-card">
-                      <div className="flip-card-inner">
-                        <div className="flip-card-front" style={{ backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '10px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                          <p style={{ fontSize: '30px', margin: 0 }}>{proposeagendaData[0].title}</p>
-                        </div>
-                        <div className="flip-card-back" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '20px', height: '100%' }}>
-                          <div style={{ marginBottom: 'auto', textAlign: 'center' }}>
-                            <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{proposeagendaData[0].title}</p>
-                          </div>
-                          <div style={{ textAlign: 'center' }}>
-                            <a href={`http://localhost:8000${proposeagendaData[0].pdf_url}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: '#808080', color: 'white', padding: '10px 20px', borderRadius: '20px', textDecoration: 'none', fontSize: '16px', fontWeight: 'bold', display: 'inline-block' }}>
-                              <i className="fa fa-download"></i> ดาวน์โหลด
-                            </a>
-                          </div>
-                          <div style={{ marginTop: 'auto', fontSize: '14px', color: 'gray', textAlign: 'center' }}>
-                            วันที่เผยแพร่: {proposeagendaData[0].date}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  proposeagendaData.map((agenda) => (
-                    <div className="col-lg-6 col-md-12" key={agenda.id}>
-                      <div className="flip-card">
-                        <div className="flip-card-inner">
-                          <div className="flip-card-front" style={{ backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '10px', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-                            <p style={{ fontSize: '30px', margin: 0 }}>{agenda.title}</p>
-                          </div>
-                          <div className="flip-card-back" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '20px', height: '100%' }}>
-                            <div style={{ marginBottom: 'auto', textAlign: 'center' }}>
-                              <p style={{ fontSize: '18px', fontWeight: 'bold' }}>{agenda.title}</p>
-                            </div>
-                            <div style={{ textAlign: 'center' }}>
-                              <a href={`http://localhost:8000${agenda.pdf_url}`} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: '#808080', color: 'white', padding: '10px 20px', borderRadius: '20px', textDecoration: 'none', fontSize: '16px', fontWeight: 'bold', display: 'inline-block' }}>
-                                <i className="fa fa-download"></i> ดาวน์โหลด
-                              </a>
-                            </div>
-                            <div style={{ marginTop: 'auto', fontSize: '14px', color: 'gray', textAlign: 'center' }}>
-                              วันที่เผยแพร่: {agenda.date}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
+  <div className="container py-5">
+    <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      {loading ? (
+        <div>Loading...</div>
+      ) : proposeagendaData.map((agenda) => (
+        <div className="col-lg-6 col-md-6" key={agenda.id}>
+          <div
+            className="card"
+            style={{
+              width: '100%',
+              height: '300px',
+              borderRadius: '10px',
+              overflow: 'hidden',
+              border: '1px solid #ddd',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {/* รูปภาพ */}
+            <div style={{ flex: '1', overflow: 'hidden' }}>
+              <img
+                src={`/assest/img/5.jpg`}
+                alt={agenda.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
             </div>
-          )}
+
+            {/* เนื้อหา */}
+            <div
+              className="card-content"
+              style={{
+                padding: '10px',
+                height: '30%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <p
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  margin: '0',
+                  textAlign: 'center',
+                }}
+              >
+                {agenda.title}
+              </p>
+              <a
+                href={`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${agenda.pdf_url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+                style={{
+                  backgroundColor: '#808080',
+                  color: 'white',
+                  padding: '8px 16px',
+                  borderRadius: '20px',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  display: 'block',
+                  marginTop: '10px',
+                  transition: 'background-color 0.3s',
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#555')}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#808080')}
+              >
+                <i className="fa fa-download"></i> ดาวน์โหลด
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
 
           {activeTable === 'table2' && (
             <>
@@ -186,7 +222,7 @@ function Index() {
                     key={item.id} // ใช้ `id` เป็น key สำหรับแต่ละรายการ
                     className="data-item d-flex justify-content-between align-items-center"
                     onClick={() =>
-                      window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
+                      window.open(`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
                     } // เปิดลิงก์ไปยังไฟล์ PDF
                     style={{
                       cursor: "pointer",
@@ -220,7 +256,7 @@ function Index() {
                    key={item.id} // ใช้ `id` เป็น key สำหรับแต่ละรายการ
                    className="data-item d-flex justify-content-between align-items-center"
                    onClick={() =>
-                     window.open(`http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
+                     window.open(`${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${item.pdf_file}`, "_blank", "noopener noreferrer")
                    } // เปิดลิงก์ไปยังไฟล์ PDF
                    style={{
                      cursor: "pointer",

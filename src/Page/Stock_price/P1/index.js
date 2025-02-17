@@ -11,7 +11,8 @@ function Index() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_KEY+"/api/stock-prices") 
+      // .get(process.env.REACT_APP_API_KEY+"/api/stock-prices") 
+      .get(process.env.REACT_APP_API_KEY + "/api/stock-prices")
       .then((response) => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setStockPrices(sortedData); 
@@ -46,7 +47,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/15.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/17.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '45vh',
@@ -109,40 +110,44 @@ function Index() {
                       <th>ราคาเปิด</th>
                       <th>ราคาสูงสุด</th>
                       <th>ราคาต่ำสุด</th>
-                      <th>ราคาเปิดย้อนหลัง</th>
+                      <th>ราคาปิด</th>
                       <th>การเปลี่ยนแปลง</th>
                       <th>% เปลี่ยนแปลง</th>
-                      <th>มูลค่าการซื้อขาย</th>
+                      <th>ปริมาณซื้อขาย (หุ้น)</th>
+                      <th>มูลค่าการซื้อขาย ('000) บาท</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredPrices.length > 0 ? (
-                      filteredPrices.map((price, index) => (
-                        <tr key={index}>
-                          <td>{price.date}</td>
-                          <td>{price.open_price}</td>
-                          <td>{price.high_price}</td>
-                          <td>{price.low_price}</td>
-                          <td>{price.previous_close_price}</td>
-                          <td>{price.change}</td>
-                          <td
-                            style={{
-                              color: price.changepercent > 0 ? 'blue' : price.changepercent < 0 ? 'red' : 'black',
-                            }}
-                          >
-                            {price.changepercent}
-                          </td>
-                          <td>{price.trading_value}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="7" className="text-center" style={{ borderRadius: '30px', border: '1px solid #ddd' }}>
-                          ไม่พบข้อมูลในช่วงเวลาที่เลือก
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
+  {filteredPrices.length > 0 ? (
+    filteredPrices.map((price, index) => (
+      <tr key={index}>
+        <td className="text-end">{price.date}</td>
+        <td className="text-end">{Number(price.open_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end">{Number(price.high_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end">{Number(price.low_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end">{Number(price.previous_close_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end">{Number(price.change).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end"
+          style={{
+            color: price.changepercent > 0 ? 'blue' : price.changepercent < 0 ? 'red' : 'black',
+          }}
+        >
+          {Number(price.changepercent).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%
+        </td>
+        <td className="text-end">{Number(price.trading_value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="text-end">{Number(price.trade_amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="9" className="text-center">
+        ไม่พบข้อมูลในช่วงเวลาที่เลือก
+      </td>
+    </tr>
+  )}
+</tbody>
+
+
                 </table>
               </div>
             </div>

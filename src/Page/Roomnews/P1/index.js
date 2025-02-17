@@ -7,6 +7,9 @@ function Index() {
   const [data, setData] = useState([]); // เก็บข้อมูลที่ดึงจาก API
   const [searchTerm, setSearchTerm] = useState(''); // เก็บค่าการค้นหา
   const [loading, setLoading] = useState(true); // แสดงสถานะการโหลดข้อมูล
+  const currentYear = new Date().getFullYear(); // ปีปัจจุบัน
+  const [yearFilter, setYearFilter] = useState(currentYear.toString()); // กรองปีเริ่มต้นเป็นปีปัจจุบัน
+  
 
   // ดึงข้อมูลจาก API เมื่อ Component ถูก Mount
   useEffect(() => {
@@ -22,14 +25,17 @@ function Index() {
       });
   }, []);
 
-  // กรองข้อมูลที่ตรงกับการค้นหา
-  const filteredData = data
-  .filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.date.includes(searchTerm)
-  )
-  .sort((a, b) => new Date(b.date) - new Date(a.date)); 
+   // ฟังก์ชันสำหรับกรองข้อมูล
+   const filteredData = data
+   .filter((item) => {
+     const itemYear = new Date(item.date).getFullYear().toString(); // ดึงปีจาก date
+     const matchesSearch =
+       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+       item.date.includes(searchTerm);
+     const matchesYear = yearFilter === "" || itemYear === yearFilter;
+     return matchesSearch && matchesYear;
+   })
+   .sort((a, b) => new Date(b.date) - new Date(a.date)); // เรียงลำดับตามวันที่
   return (
     <div>
       <Menu />
@@ -38,7 +44,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/12.png)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '45vh',
@@ -71,11 +77,28 @@ function Index() {
               type="text"
               placeholder="ค้นหา"
               className="form-control"
-              style={{ width: "300px" }}
+              style={{ width: "300px", marginRight: "10px" }}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+
+            {/* ตัวกรองปี */}
+            <select
+              className="form-select"
+              style={{ width: "150px" }}
+              value={yearFilter}
+              onChange={(e) => setYearFilter(e.target.value)}
+            >
+              <option value="" disabled >เลือกปี </option>
+              <option value={currentYear}>{currentYear}</option>
+              <option value={currentYear - 1}>{currentYear - 1}</option>
+              <option value={currentYear - 2}>{currentYear - 2}</option>
+              <option value={currentYear - 3}>{currentYear - 3}</option>
+              <option value={currentYear - 4}>{currentYear - 4}</option>
+              <option value={currentYear - 5}>{currentYear - 5}</option>
+            </select>
           </div>
+
 
           {/* แสดงสถานะการโหลด */}
           {loading && (
@@ -91,7 +114,7 @@ function Index() {
                 // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
                 const pdfUrl = item.pdf_url.startsWith('http')
                   ? item.pdf_url
-                  : `http://129.200.6.52/laravel_auth_jwt_api_omd/storage/app/public/uploads/pdf_files/${item.pdf_url}`;
+                  : process.env.REACT_APP_PDF_KEY + `/uploads/pdf_files/${item.pdf_url}`;
 
                 return (
                   <div

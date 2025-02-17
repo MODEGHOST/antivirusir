@@ -9,7 +9,7 @@ function Index() {
       <div
         className="container-fluid py-5 sticky-service"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/1.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assest/img/15.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "45vh",
