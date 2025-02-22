@@ -142,7 +142,7 @@ function Index() {
             {/* รูปภาพ */}
             <div style={{ flex: '1', overflow: 'hidden' }}>
               <img
-                src={`/assest/img/5.jpg`}
+                src={`${process.env.PUBLIC_URL}/asset/img/5.jpg`}
                 alt={agenda.title}
                 style={{
                   width: '100%',

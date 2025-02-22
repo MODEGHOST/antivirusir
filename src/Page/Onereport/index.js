@@ -113,7 +113,7 @@ function Index() {
                 // ตรวจสอบว่า pdf_url เป็น URL สมบูรณ์หรือไม่
                 const pdfUrl = item.file_path.startsWith('http')
                   ? item.file_path
-                  : `${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${item.file_path}`;
+                  : process.env.REACT_APP_PDF_KEY+`/uploads/pdf_files/${item.file_path}`;
 
                 return (
                   <div

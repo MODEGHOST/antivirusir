@@ -13,24 +13,31 @@ function Index() {
   const fetchCardData = async () => {
     try {
       const response = await axios.get(process.env.REACT_APP_API_KEY + "/api/detailgenerations");
-      console.log('API Response:', response.data);
+  
+      // ตรวจสอบว่าข้อมูล API ไม่เป็น null หรือ undefined
+      if (!response.data || !Array.isArray(response.data)) {
+        throw new Error("Invalid data received from API");
+      }
   
       // เรียงข้อมูลให้ Quater ล่าสุดมาอยู่ที่ index 0
       let sortedData = response.data.sort((a, b) => {
         if (b.year !== a.year) {
           return b.year - a.year; // เรียงปีใหม่กว่าขึ้นก่อน
         }
-        return b.quater.localeCompare(a.quater); // เรียง Q1, Q2, Q3 ตามลำดับ
+        const quaterA = a.quater ? a.quater : ""; // กำหนดค่าเริ่มต้นหากเป็น null หรือ undefined
+        const quaterB = b.quater ? b.quater : "";
+        return quaterB.localeCompare(quaterA); // เรียง Q1, Q2, Q3 ตามลำดับ
       });
   
       // ทำให้ข้อมูลล่าสุดขึ้นด้านหน้าเสมอ
-      setCardData([...sortedData]); 
-      setFilteredData([...sortedData]); 
+      setCardData([...sortedData]);
+      setFilteredData([...sortedData]);
   
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
+  
   
 
   // ฟังก์ชันกรองข้อมูลตามปี

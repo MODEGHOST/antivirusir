@@ -28,7 +28,7 @@ import PolicyPayment from './Page/shareholders/P4/index'
 
 function App() {
   return (
-    <Router>
+    <Router basename='/thairung/thairungir'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/PriceDataP1" element={<PriceData_P1 />} />

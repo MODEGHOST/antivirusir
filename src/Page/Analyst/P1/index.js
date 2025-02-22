@@ -147,10 +147,19 @@ function Index() {
 
               {!loading && (
                 <div className="data-list">
-                  {filteredData.map((item, index) => (
+                {filteredData.map((item, index) => {
+                  // ตรวจสอบว่า file_path เป็น URL สมบูรณ์หรือไม่
+                  const pdfUrl = item.pdf_url.startsWith("http")
+                    ? item.pdf_url
+                    : `${process.env.REACT_APP_PDF_KEY}/uploads/pdf_files/${item.pdf_url}`;
+              
+                  return (
                     <div
                       key={index}
                       className="data-item d-flex justify-content-between align-items-center"
+                      onClick={() =>
+                        window.open(pdfUrl, "_blank", "noopener noreferrer")
+                      }
                       style={{
                         cursor: "pointer",
                         padding: "10px",
@@ -164,9 +173,20 @@ function Index() {
                         <span className="date text-primary">{item.date}</span>
                         <p className="mb-0">{item.title}</p>
                       </div>
+                      <button className="btn btn-outline-primary">
+                        <i className="fas fa-file-pdf"></i>
+                      </button>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
+              
+                {/* แสดงข้อความเมื่อไม่มีข้อมูล */}
+                {filteredData.length === 0 && (
+                  <div className="text-center py-3">
+                    <p>ไม่พบข้อมูลที่ตรงกับการค้นหา</p>
+                  </div>
+                )}
+              </div>
               )}
             </div>
           )}

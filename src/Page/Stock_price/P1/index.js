@@ -8,10 +8,10 @@ function Index() {
   const [filteredPrices, setFilteredPrices] = useState([]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [rowsToShow, setRowsToShow] = useState(25); // state สำหรับจำนวนแถวที่จะแสดง
 
   useEffect(() => {
     axios
-      // .get(process.env.REACT_APP_API_KEY+"/api/stock-prices") 
       .get(process.env.REACT_APP_API_KEY + "/api/stock-prices")
       .then((response) => {
         const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -19,7 +19,7 @@ function Index() {
         setFilteredPrices(sortedData);
       })
       .catch((error) => {
-        console.error('Error fetching stock prices:', error); // แสดง error ในกรณีดึงข้อมูลไม่สำเร็จ
+        console.error('Error fetching stock prices:', error);
       });
   }, []);
   
@@ -29,20 +29,19 @@ function Index() {
         const priceDate = new Date(price.date);
         const start = new Date(startDate);
         const end = new Date(endDate);
-  
         return priceDate >= start && priceDate <= end;
       });
-      const sortedFiltered = filtered.sort((a, b) => new Date(b.date) - new Date(a.date)); // เรียงลำดับจากใหม่ไปเก่า
+      const sortedFiltered = filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
       setFilteredPrices(sortedFiltered);
     } else {
-      setFilteredPrices(stockPrices); // หากไม่ได้เลือกช่วงเวลา ให้แสดงข้อมูลทั้งหมด
+      setFilteredPrices(stockPrices);
     }
   };
-  
 
   return (
     <div>
       <Menu />
+      
       {/* Hero Section */}
       <div
         className="container-fluid py-5 sticky-service"
@@ -62,43 +61,42 @@ function Index() {
         </div>
       </div>
 
-
-
       {/* Table */}
       <div className="container-fluid py-5" style={{ backgroundColor: 'white' }}>
-      <div className="container py-3">
-        <div className="row mb-3">
-          <div className="col-md-4" style={{ width: '15%' }}>
-            <label htmlFor="start-date" className="form-label">
-              วันที่เริ่มต้น:
-            </label>
-            <input
-              type="date"
-              id="start-date"
-              className="form-control"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4" style={{ width: '15%' }}>
-            <label htmlFor="end-date" className="form-label">
-              วันที่สิ้นสุด:
-            </label>
-            <input
-              type="date"
-              id="end-date"
-              className="form-control"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </div>
-          <div className="col-md-4 d-flex align-items-end" style={{ width: '15%'}}>
-            <button className="btn btn-primary w-100" onClick={handleFilter}>
-              กรองข้อมูล
-            </button>
+        <div className="container py-3">
+          <div className="row mb-3">
+            <div className="col-md-4" style={{ width: '15%' }}>
+              <label htmlFor="start-date" className="form-label">
+                วันที่เริ่มต้น:
+              </label>
+              <input
+                type="date"
+                id="start-date"
+                className="form-control"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className="col-md-4" style={{ width: '15%' }}>
+              <label htmlFor="end-date" className="form-label">
+                วันที่สิ้นสุด:
+              </label>
+              <input
+                type="date"
+                id="end-date"
+                className="form-control"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+            <div className="col-md-4 d-flex align-items-end" style={{ width: '15%'}}>
+              <button className="btn btn-primary w-100" onClick={handleFilter}>
+                กรองข้อมูล
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+
         <div className="container py-5">
           <div className="row">
             <div className="col-12 wow fadeInUp" data-wow-delay="0.2s">
@@ -118,39 +116,49 @@ function Index() {
                     </tr>
                   </thead>
                   <tbody>
-  {filteredPrices.length > 0 ? (
-    filteredPrices.map((price, index) => (
-      <tr key={index}>
-        <td className="text-end">{price.date}</td>
-        <td className="text-end">{Number(price.open_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end">{Number(price.high_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end">{Number(price.low_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end">{Number(price.previous_close_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end">{Number(price.change).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end"
-          style={{
-            color: price.changepercent > 0 ? 'blue' : price.changepercent < 0 ? 'red' : 'black',
-          }}
-        >
-          {Number(price.changepercent).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%
-        </td>
-        <td className="text-end">{Number(price.trading_value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        <td className="text-end">{Number(price.trade_amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="9" className="text-center">
-        ไม่พบข้อมูลในช่วงเวลาที่เลือก
-      </td>
-    </tr>
-  )}
-</tbody>
-
-
+                    {filteredPrices.length > 0 ? (
+                      filteredPrices.slice(0, rowsToShow).map((price, index) => (
+                        <tr key={index}>
+                          <td className="text-end">{price.date}</td>
+                          <td className="text-end">{Number(price.open_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end">{Number(price.high_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end">{Number(price.low_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end">{Number(price.previous_close_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end">{Number(price.change).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end" style={{ color: price.changepercent > 0 ? 'blue' : price.changepercent < 0 ? 'red' : 'black' }}>
+                            {Number(price.changepercent).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%
+                          </td>
+                          <td className="text-end">{Number(price.trading_value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                          <td className="text-end">{Number(price.trade_amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="9" className="text-center">
+                          ไม่พบข้อมูลในช่วงเวลาที่เลือก
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
                 </table>
               </div>
             </div>
+          </div>
+
+          {/* Dropdown สำหรับเลือกจำนวนข้อมูล */}
+          <div className="d-flex justify-content-end mt-3">
+            <label className="me-2">แสดงข้อมูล:</label>
+            <select
+              className="form-select w-auto"
+              value={rowsToShow}
+              onChange={(e) => setRowsToShow(Number(e.target.value))}
+            >
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="150">150</option>
+              <option value="200">200</option>
+            </select>
           </div>
         </div>
       </div>
