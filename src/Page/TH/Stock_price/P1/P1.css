@@ -1,0 +1,52 @@
+.sticky-service {
+    position: sticky;
+    top: 0; /* ปรับค่านี้ได้ตามต้องการ */
+    z-index: -1; /* ทำให้มันอยู่เหนือส่วนก่อนหน้า */
+  }
+
+  .Table-1{
+    background-color: rgb(255, 255, 255);
+  }
+
+  .custom-table {
+    border-collapse: separate; /* ใช้ separate เพื่อให้ border-radius ทำงาน */
+    border-spacing: 0; /* ลบช่องว่างระหว่างเซลล์ */
+    border: 1px solid #ddd; /* เส้นขอบรอบนอกตาราง */
+    border-radius: 10px; /* กำหนดมุมโค้ง */
+    overflow: hidden; /* ป้องกันการล้นของเนื้อหา */
+  }
+  
+  .custom-table th {
+    background-color: #343a40; /* พื้นหลังหัวตาราง */
+    color: white; /* สีตัวอักษร */
+    text-align: center; /* จัดตำแหน่งตรงกลาง */
+    padding: 10px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .custom-table th:last-child {
+    border-right: none; /* ลบเส้นขอบเซลล์สุดท้าย */
+  }
+  
+  .custom-table td {
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .custom-table td:last-child {
+    border-right: none;
+  }
+  
+  .custom-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px; /* มุมโค้งด้านล่างซ้าย */
+  }
+  
+  .custom-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px; /* มุมโค้งด้านล่างขวา */
+  }
+  
+
+
+
+  

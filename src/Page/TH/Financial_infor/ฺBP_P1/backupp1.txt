@@ -1,0 +1,396 @@
+<tbody>
+{/* กลุ่ม 1: ผลการดำเนินงาน */}
+<tr className="table-info">
+  <td colSpan="4" className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+    ผลการดำเนินงาน (ล้านบาท)
+  </td>
+</tr>
+<tr>
+<td className="text-start">{comments?.sales_and_services_income}</td>
+  <td className="text-end">{threeyear[0]?.sales_and_services_income}</td>
+  <td className="text-end">{threeyear[1]?.sales_and_services_income}</td>
+  <td className="text-end">{threeyear[2]?.sales_and_services_income}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.total_income}</td>
+  <td className="text-end">{threeyear[0]?.total_income}</td>
+  <td className="text-end">{threeyear[1]?.total_income}</td>
+  <td className="text-end">{threeyear[2]?.total_income}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.gross_profit}</td>
+  <td className="text-end">{threeyear[0]?.gross_profit}</td>
+  <td className="text-end">{threeyear[1]?.gross_profit}</td>
+  <td className="text-end">{threeyear[2]?.gross_profit}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.ebitda}</td>
+  <td className="text-end">{threeyear[0]?.ebitda}</td>
+  <td className="text-end">{threeyear[1]?.ebitda}</td>
+  <td className="text-end">{threeyear[2]?.ebitda}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.ebit}</td>
+  <td className="text-end">{threeyear[0]?.ebit}</td>
+  <td className="text-end">{threeyear[1]?.ebit}</td>
+  <td className="text-end">{threeyear[2]?.ebit}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.net_profit_loss}</td>
+  <td className="text-end">{threeyear[0]?.net_profit_loss}</td>
+  <td className="text-end">{threeyear[1]?.net_profit_loss}</td>
+  <td className="text-end">{threeyear[2]?.net_profit_loss}</td>
+</tr>
+{/* กลุ่ม 2: ฐานะทางการเงิน */}
+<tr className="table-info">
+  <td colSpan="4" className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+    ฐานะทางการเงิน (ล้านบาท)
+  </td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.total_assets}</td>
+  <td className="text-end">{threeyear[0]?.total_assets}</td>
+  <td className="text-end">{threeyear[1]?.total_assets}</td>
+  <td className="text-end">{threeyear[2]?.total_assets}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.total_liabilities}</td>
+  <td className="text-end">{threeyear[0]?.total_liabilities}</td>
+  <td className="text-end">{threeyear[1]?.total_liabilities}</td>
+  <td className="text-end">{threeyear[2]?.total_liabilities}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.shareholders_equity}</td>
+  <td className="text-end">{threeyear[0]?.shareholders_equity}</td>
+  <td className="text-end">{threeyear[1]?.shareholders_equity}</td>
+  <td className="text-end">{threeyear[2]?.shareholders_equity}</td>
+</tr>
+{/* กลุ่ม 3: อัตราส่วนทางการเงิน */}
+<tr className="table-info">
+  <td colSpan="4" className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+    อัตราส่วนทางการเงิน
+  </td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.gross_profit_margin}</td>
+  <td className="text-end">{threeyear[0]?.gross_profit_margin}%</td>
+  <td className="text-end">{threeyear[1]?.gross_profit_margin}%</td>
+  <td className="text-end">{threeyear[2]?.gross_profit_margin}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.ebitda_margin}</td>
+  <td className="text-end">{threeyear[0]?.ebitda_margin}%</td>
+  <td className="text-end">{threeyear[1]?.ebitda_margin}%</td>
+  <td className="text-end">{threeyear[2]?.ebitda_margin}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.net_profit_margin}</td>
+  <td className="text-end">{threeyear[0]?.net_profit_margin}%</td>
+  <td className="text-end">{threeyear[1]?.net_profit_margin}%</td>
+  <td className="text-end">{threeyear[2]?.net_profit_margin}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.return_on_assets}</td>
+  <td className="text-end">{threeyear[0]?.return_on_assets}%</td>
+  <td className="text-end">{threeyear[1]?.return_on_assets}%</td>
+  <td className="text-end">{threeyear[2]?.return_on_assets}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.return_on_equity}</td>
+  <td className="text-end">{threeyear[0]?.return_on_equity}%</td>
+  <td className="text-end">{threeyear[1]?.return_on_equity}%</td>
+  <td className="text-end">{threeyear[2]?.return_on_equity}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.dividend_payout_ratio}</td>
+  <td className="text-end">{threeyear[0]?.dividend_payout_ratio}%</td>
+  <td className="text-end">{threeyear[1]?.dividend_payout_ratio}%</td>
+  <td className="text-end">{threeyear[2]?.dividend_payout_ratio}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.dividend_yield}</td>
+  <td className="text-end">{threeyear[0]?.dividend_yield}%</td>
+  <td className="text-end">{threeyear[1]?.dividend_yield}%</td>
+  <td className="text-end">{threeyear[2]?.dividend_yield}%</td>
+</tr>
+
+{/* กลุ่ม 4: ข้อมูลต่อหุ้น */}
+<tr className="table-info">
+  <td colSpan="4" className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+    ข้อมูลต่อหุ้น (บาท)
+  </td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.current_ratio}</td>
+  <td className="text-end">{threeyear[0]?.current_ratio}</td>
+  <td className="text-end">{threeyear[1]?.current_ratio}</td>
+  <td className="text-end">{threeyear[2]?.current_ratio}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.debt_to_equity_ratio}</td>
+  <td className="text-end">{threeyear[0]?.debt_to_equity_ratio}</td>
+  <td className="text-end">{threeyear[1]?.debt_to_equity_ratio}</td>
+  <td className="text-end">{threeyear[2]?.debt_to_equity_ratio}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.par_value}</td>
+  <td className="text-end">{threeyear[0]?.par_value}</td>
+  <td className="text-end">{threeyear[1]?.par_value}</td>
+  <td className="text-end">{threeyear[2]?.par_value}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.book_value_per_share}</td>
+  <td className="text-end">{threeyear[0]?.book_value_per_share}</td>
+  <td className="text-end">{threeyear[1]?.book_value_per_share}</td>
+  <td className="text-end">{threeyear[2]?.book_value_per_share}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.net_profit_per_share}</td>
+  <td className="text-end">{threeyear[0]?.net_profit_per_share}%</td>
+  <td className="text-end">{threeyear[1]?.net_profit_per_share}%</td>
+  <td className="text-end">{threeyear[2]?.net_profit_per_share}%</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.dividend_per_share}</td>
+  <td className="text-end">{threeyear[0]?.dividend_per_share}%</td>
+  <td className="text-end">{threeyear[1]?.dividend_per_share}%</td>
+  <td className="text-end">{threeyear[2]?.dividend_per_share}%</td>
+</tr>
+<tr className="table-info">
+  <td colSpan="4" className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+    ข้อมูลหุ้นของบริษัท (ล้านหุ้น)
+  </td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.registered_common_shares}</td>
+  <td className="text-end">{threeyear[0]?.registered_common_shares}</td>
+  <td className="text-end">{threeyear[1]?.registered_common_shares}</td>
+  <td className="text-end">{threeyear[2]?.registered_common_shares}</td>
+</tr>
+<tr>
+  <td className="text-start">{comments?.paid_common_shares}</td>
+  <td className="text-end">{threeyear[0]?.paid_common_shares}</td>
+  <td className="text-end">{threeyear[1]?.paid_common_shares}</td>
+  <td className="text-end">{threeyear[2]?.paid_common_shares}</td>
+</tr>
+</tbody>
+
+
+
+
+
+
+{activeTable === 'table2' && (
+    <div className="col-12">
+      <div className="table-responsive">
+        <table className="table custom-table">
+          <thead className="table-dark">
+            <tr>
+              <th>เปรียบเทียบไตรมาส</th>
+              {quarterlyData.map((quarter, index) => (
+                <th key={index}>{quarter.quarter}</th>
+              ))}
+              <th>QoQ % เปลี่ยนแปลง</th>
+              <th>YoY % เปลี่ยนแปลง</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* กลุ่ม 1: ผลการดำเนินงาน */}
+            <tr className="table-info">
+              <td colSpan={quarterlyData.length + 3} className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+                ผลการดำเนินงาน (ล้านบาท)
+              </td>
+            </tr>
+            <tr>
+              <td className="text-start">รายได้จากการขายและบริการ</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.sales_and_services_income}</td>
+              ))}
+              <td className="text-end">{quarandyearData[0]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[0]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">รายได้รวม1</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.total_income}</td>
+              ))}
+              <td className="text-end">{quarandyearData[1]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[1]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไร (ขาดทุน) ขั้นต้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.gross_profit}</td>
+              ))}
+              <td className="text-end">{quarandyearData[2]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[2]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อมราคาและ ค่าตัดจำหน่าย</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.ebitda}</td>
+              ))}
+              <td className="text-end">{quarandyearData[3]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[3]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไรก่อนดอกเบี้ยและภาษี</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.ebit}</td>
+              ))}
+              <td className="text-end">{quarandyearData[4]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[4]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไร (ขาดทุน) สุทธิ</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.net_profit_loss}</td>
+              ))}
+              <td className="text-end">{quarandyearData[5]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[5]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr className="table-info">
+              <td colSpan={quarterlyData.length + 3} className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+              ฐานะทางการเงิน (ล้านบาท)
+              </td>
+            </tr>
+            <tr>
+              <td className="text-start">สินทรัพย์รวม</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.total_assets}</td>
+              ))}
+              <td className="text-end">{quarandyearData[6]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[6]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">หนี้สินรวม</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.total_liabilities}</td>
+              ))}
+              <td className="text-end">{quarandyearData[7]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[7]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">ส่วนของผู้ถือหุ้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.shareholders_equity}</td>
+              ))}
+              <td className="text-end">{quarandyearData[8]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[8]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr className="table-info">
+              <td colSpan={quarterlyData.length + 3} className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+              อัตราส่วนทางการเงิน
+              </td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตรากำไรขั้นต้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.gross_profit_margin}%</td>
+              ))}
+              <td className="text-end">{quarandyearData[9]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[9]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อมราคาและ ค่าตัดจำหน่าย</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.ebitda_margin}%</td>
+              ))}
+              <td className="text-end">{quarandyearData[10]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[10]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตรากำไรสุทธิ</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.net_profit_margin}%</td>
+              ))}
+              <td className="text-end">{quarandyearData[11]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[11]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตราผลตอบแทนจากสินทรัพย์รวม</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.return_on_assets}%</td>
+              ))}
+              <td className="text-end">{quarandyearData[12]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[12]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตราผลตอบแทนจากส่วนของผู้ถือหุ้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.return_on_equity}%</td>
+              ))}
+              <td className="text-end">{quarandyearData[13]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[13]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตราส่วนเงินทุนหมุนเวียน</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.current_ratio}</td>
+              ))}
+              <td className="text-end">{quarandyearData[14]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[14]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">อัตราส่วนหนี้สินต่อส่วนของผู้ถือหุ้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.debt_to_equity_ratio}</td>
+              ))}
+              <td className="text-end">{quarandyearData[15]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[15]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr className="table-info">
+              <td colSpan={quarterlyData.length + 3} className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+              ข้อมูลต่อหุ้น (บาท)
+              </td>
+            </tr>
+            <tr>
+              <td className="text-start">มูลค่าที่ตราไว้</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.par_value}</td>
+              ))}
+              <td className="text-end">{quarandyearData[16]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[16]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">มูลค่าทางบัญชีต่อหุ้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.book_value_per_share}</td>
+              ))}
+              <td className="text-end">{quarandyearData[17]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[17]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">กำไรสุทธิต่อหุ้น</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.net_profit_per_share}</td>
+              ))}
+              <td className="text-end">{quarandyearData[18]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[18]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr className="table-info">
+              <td colSpan={quarterlyData.length + 3} className="text-start" style={{ borderRadius: "30px", border: "1px solid #ddd" }}>
+              ข้อมูลหุ้นของบริษัท (ล้านหุ้น)
+              </td>
+            </tr>
+            <tr>
+              <td className="text-start">จำนวนหุ้นสามัญจดทะเบียน</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.registered_common_shares}</td>
+              ))}
+              <td className="text-end">{quarandyearData[19]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[19]?.Ypercent || '-'}%</td>
+            </tr>
+            <tr>
+              <td className="text-start">จำนวนหุ้นสามัญชำระแล้ว</td>
+              {quarterlyData.map((quarter, index) => (
+                <td key={index} className="text-end">{quarter.paid_common_shares}</td>
+              ))}
+              <td className="text-end">{quarandyearData[20]?.Qpercent || '-'}%</td>
+              <td className="text-end">{quarandyearData[20]?.Ypercent || '-'}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}

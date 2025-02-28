@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/autoplay"; // นำเข้า CSS สำหรับ autoplay
-import { Autoplay } from "swiper/modules"; // ✅ ใช้โมดูล Autoplay ที่ถูกต้อง
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
 
 const StockPricesSlide = () => {
   const [stockData, setStockData] = useState([]);
@@ -17,8 +17,7 @@ const StockPricesSlide = () => {
         const data = await response.json();
 
         if (Array.isArray(data) && data.length > 0) {
-          const latestStock = [data[data.length - 1]]; // ดึงรายการล่าสุด
-          setStockData(latestStock);
+          setStockData([data[data.length - 1]]);
         } else {
           setStockData([]);
         }
@@ -33,81 +32,60 @@ const StockPricesSlide = () => {
   }, []);
 
   if (loading) {
-    return <p style={{ textAlign: "center" }}>กำลังโหลดข้อมูล...</p>;
+    return <p style={{ textAlign: "center", fontSize: "12px" }}>กำลังโหลดข้อมูล...</p>;
   }
 
   if (stockData.length === 0) {
-    return <p style={{ textAlign: "center" }}>ไม่มีข้อมูลสำหรับแสดง</p>;
+    return <p style={{ textAlign: "center", fontSize: "12px" }}>ไม่มีข้อมูลสำหรับแสดง</p>;
   }
 
   return (
     <div
       style={{
-        fontSize: "20px",
-        maxWidth: "1350px",
+        fontSize: "12px",
+        maxWidth: "720px",
         margin: "auto",
         backgroundColor: "#ffffff",
-        borderRadius: "10px",
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        padding: "5px",
+        borderRadius: "8px",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        padding: "8px",
       }}
     >
       <Swiper
-        modules={[Autoplay]} // ✅ เพิ่ม Autoplay เข้าไปใน modules
-        spaceBetween={30}
+        modules={[Autoplay]}
+        spaceBetween={10}
         slidesPerView={1}
-        loop={true} // ✅ ให้เลื่อนต่อเนื่อง
+        loop={true}
         autoplay={{
-          delay: 3000, // ✅ เลื่อนอัตโนมัติทุก 3 วินาที
-          disableOnInteraction: false, // ✅ ไม่ให้หยุด autoplay แม้ผู้ใช้จะกดเลื่อน
+          delay: 3000,
+          disableOnInteraction: false,
         }}
       >
         {stockData.map((stock, index) => (
           <SwiperSlide key={index}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", lineHeight: "1.4" }}>
               <p>
-                <span style={{ fontWeight: "bold",  color: "#020485" }}>ปรับปรุงเมื่อ </span>
-                <span> : {new Date(stock.created_at).toLocaleDateString("th-TH", {
+                <span style={{ fontWeight: "bold", color: "#020485" }}>ปรับปรุงเมื่อ</span> :
+                {new Date(stock.created_at).toLocaleDateString("th-TH", {
                   day: "2-digit",
                   month: "2-digit",
                   year: "numeric",
-                })}</span>
+                })}
               </p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ color: "#020485" }}>เปิด:</span> <span style={{ color: "#868686" }}>{stock.open_price}</span></p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ color: "#020485" }}>สูงสุด:</span> <span style={{ color: "#868686" }}>{stock.high_price}</span></p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ color: "#020485" }}>ต่ำสุด:</span> <span style={{ color: "#868686" }}>{stock.low_price}</span></p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ color: "#020485" }}>ปิด:</span> <span style={{ color: "#868686" }}>{stock.previous_close_price}</span></p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ fontWeight: "bold", color: "#020485" }}>เปลี่ยนแปลง:</span> <span style={{ color: "#d32f2f" }}>{stock.change}</span></p>
+              <p><span style={{ color: "#9696976c" }}>|</span> <span style={{ fontWeight: "bold", color: "#020485" }}> % เปลี่ยนแปลง:</span> <span style={{ color: "#d32f2f" }}>{stock.changepercent}</span></p>
               <p>
-              <span style={{ color: "#9696976c" }}>|</span>
-                <span style={{ color: "#020485" }}> ราคาเปิด : </span>
-                <span style={{ color: "#868686" }}>{stock.open_price} </span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>|</span>
-                <span style={{  color: "#020485" }}> สูงสุด : </span>
-                <span style={{ color: "#868686" }}>{stock.high_price}</span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>|</span>
-                <span style={{  color: "#020485" }}> ต่ำสุด : </span>
-                <span style={{ color: "#868686" }}>{stock.low_price}</span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>|</span>
-                <span style={{ color: "#020485" }}> ราคาปิด : </span>
-                <span style={{ color: "#868686" }}>{stock.previous_close_price}</span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>| </span>
-                <span style={{ fontWeight: "bold", color: "#020485" }}>เปลี่ยนแปลง : </span>
-                <span style={{ color: "#d32f2f" }}>{stock.change}</span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>| </span>
-                <span style={{ fontWeight: "bold", color: "#020485" }}> % เปลี่ยนแปลง: </span>
-                <span style={{ color: "#d32f2f" }}>{stock.changepercent}</span>
-              </p>
-              <p>
-              <span style={{ color: "#9696976c" }}>|</span>
-                <span style={{  color: "#020485" }}> ปริมาณซื้อขาย: </span>
-                <span style={{ color: "#868686" }}>{stock.trading_value}</span>
-              </p>
+  <span style={{ color: "#9696976c" }}>|</span> 
+  <span style={{ color: "#020485" }}>ปริมาณ:</span> 
+  <span style={{ color: "#868686" }}>
+    {parseInt(stock.trading_value, 10).toLocaleString("en-US")}
+  </span>
+</p>
+
             </div>
           </SwiperSlide>
         ))}

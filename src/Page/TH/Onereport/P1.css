@@ -1,0 +1,33 @@
+.sticky-service {
+  position: sticky;
+  top: 0; /* ปรับค่านี้ได้ตามต้องการ */
+  z-index: -3; /* ทำให้มันอยู่เหนือส่วนก่อนหน้า */
+}
+
+.search-section input,
+.search-section select {
+margin-bottom: 10px;
+}
+
+.data-item {
+border-radius: 10px;
+background-color: #f8f9fa;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ddd;
+transition: all 0.3s ease; /* ทำให้ smooth เวลามีการเปลี่ยน */
+}
+
+.data-item .date {
+font-weight: bold;
+color: #007bff;
+}
+
+.data-item:hover {
+background-color: #e9ecef; /* เปลี่ยนสีพื้นหลัง */
+transform: scale(1.02); /* ขยายขนาดเล็กน้อย */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+border-color: #007bff; /* เปลี่ยนสีกรอบ */
+transition: all 0.3s ease; /* เพิ่มความนุ่มนวลในการเปลี่ยน */
+}
+

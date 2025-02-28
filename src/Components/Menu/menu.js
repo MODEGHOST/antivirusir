@@ -16,9 +16,7 @@ const CustomNavbar = () => {
 
   return (
     <nav className="navbar-custom">
-      <button className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-        ☰ เมนู
-      </button>
+      
       <ul className={`navbar-container ${isMenuOpen ? 'active' : ''}`}>
 
       <li className="nav-center" style={{
